@@ -13,12 +13,12 @@ This roadmap delivers a React Native showcase app where every screen proves a Fu
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [x] **Phase 1: Project Foundation** - Expo monorepo scaffolding, basic Supabase cloud setup with auth enabled, NativeWind, Expo Router, .gitignore
-- [ ] **Phase 2: Component Library** - All reusable UI components with react-hook-form integration for form controls, and MUI-style live playground screen built alongside components
-- [ ] **Phase 3: Authentication** - Magic link login, session persistence, logout, protected routes
-- [ ] **Phase 4: Dashboard + About** - Navigation hub with rich cards, persistent header, about screen with checklist and cover letter
-- [ ] **Phase 5: Data Fetching + State Management** - Demo screens for TanStack Query, mutations, cache viewer, toast and modal systems
-- [ ] **Phase 6: Testing + CI/CD + Deployment** - Automated tests, GitHub Actions pipeline, Resend custom email domain (info@vecotech.io), Vercel deploy, READMEs
+- **Phase 1: Project Foundation** - Expo monorepo scaffolding, basic Supabase cloud setup with auth enabled, NativeWind, Expo Router, .gitignore
+- **Phase 2: Component Library** - All reusable UI components with react-hook-form integration for form controls, and MUI-style live playground screen built alongside components
+- **Phase 3: Authentication** - Magic link login, session persistence, logout, protected routes
+- **Phase 4: Dashboard + About** - Navigation hub with rich cards, persistent header, about screen with checklist and cover letter
+- **Phase 5: Data Fetching + State Management** - Demo screens for TanStack Query, mutations, cache viewer, toast and modal systems
+- **Phase 6: Testing + CI/CD + Deployment** - Automated tests, GitHub Actions pipeline, Resend custom email domain ([info@vecotech.io](mailto:info@vecotech.io)), Vercel deploy, READMEs
 
 ## Phase Details
 
@@ -34,12 +34,12 @@ Decimal phases appear between their surrounding integers in numeric order.
 3. Expo Router navigates between at least two placeholder routes (auth group and dashboard group)
 4. Supabase cloud project exists with auth enabled; magic link login works with default Supabase email in dev
 5. .gitignore correctly excludes node_modules, .env files, and .claude while including .planning
-   **Plans**: 2 plans
+  **Plans**: 2 plans
 
 Plans:
 
-- [x] 01-01-PLAN.md -- Scaffold monorepo, install deps, configure NativeWind/Metro/Babel/Tailwind, ESLint/Prettier/Husky, navigation skeleton with placeholder screens
-- [x] 01-02-PLAN.md -- Supabase cloud integration, auth context, magic link login flow, route protection
+- 01-01-PLAN.md -- Scaffold monorepo, install deps, configure NativeWind/Metro/Babel/Tailwind, ESLint/Prettier/Husky, navigation skeleton with placeholder screens
+- 01-02-PLAN.md -- Supabase cloud integration, auth context, magic link login flow, route protection
 
 ### Phase 2: Component Library
 
@@ -53,16 +53,16 @@ Plans:
 3. The playground screen at `app/(dashboard)/components` is built alongside the components (not after), so each component can be visually verified as it is developed
 4. The playground screen displays all components grouped by section (Core UI, Form Controls, Feedback, Layout) in an MUI-style interactive layout where users can toggle component variants
 5. Components use consistent NativeWind theming and are visually polished on both mobile and desktop viewport widths
-   **Plans**: 6 plans
+  **Plans**: 6 plans
 
 Plans:
 
-- [ ] 02-00-PLAN.md -- Wave 0: Install test infrastructure (jest-expo, @testing-library/react-native), create jest.config.js, shared test setup, stub test files
-- [ ] 02-01-PLAN.md -- Install deps, core UI components (Typography, Button, Card, Badge, Avatar, Divider) + playground Core UI section
-- [ ] 02-02-PLAN.md -- Data display + layout components (Table, List, Tabs, Accordion, Skeleton) + playground Layout section
-- [ ] 02-03-PLAN.md -- Feedback components (Modal, Alert/Toast, Dropdown) + playground Feedback section
-- [ ] 02-04-PLAN.md -- Form controls (TextField, Select, MultiSelect, Toggle, Checkbox) with react-hook-form + playground Form Controls section + mini form demo
-- [ ] 02-05-PLAN.md -- Master barrel export, playground polish, visual verification checkpoint
+- 02-00-PLAN.md -- Wave 0: Install test infrastructure (jest-expo, @testing-library/react-native), create jest.config.js, shared test setup, stub test files
+- 02-01-PLAN.md -- Install deps, core UI components (Typography, Button, Card, Badge, Avatar, Divider) + playground Core UI section
+- 02-02-PLAN.md -- Data display + layout components (Table, List, Tabs, Accordion, Skeleton) + playground Layout section
+- 02-03-PLAN.md -- Feedback components (Modal, Alert/Toast, Dropdown) + playground Feedback section
+- 02-04-PLAN.md -- Form controls (TextField, Select, MultiSelect, Toggle, Checkbox) with react-hook-form + playground Form Controls section + mini form demo
+- 02-05-PLAN.md -- Master barrel export, playground polish, visual verification checkpoint
 
 ### Phase 3: Authentication
 
@@ -75,12 +75,12 @@ Plans:
 2. User closes the browser tab, reopens the app URL, and is still logged in (session persists)
 3. User can log out from any screen and is returned to the login screen
 4. Visiting any dashboard/demo URL while logged out redirects to the login screen
-   **Plans**: 2 plans
+  **Plans**: 2 plans
 
 Plans:
 
-- [ ] 03-01-PLAN.md -- Auth test infrastructure (Supabase mock, AuthProvider unit tests), signIn enhancement with emailRedirectTo, login screen upgrade to component library (TextField, Button, Alert, zod + react-hook-form)
-- [ ] 03-02-PLAN.md -- Dashboard header logout button, profile screen component library upgrade, end-to-end auth flow verification checkpoint
+- 03-01-PLAN.md -- Auth test infrastructure (Supabase mock, AuthProvider unit tests), signIn enhancement with emailRedirectTo, login screen upgrade to component library (TextField, Button, Alert, yup + react-hook-form)
+- 03-02-PLAN.md -- Profile screen sign out, E2E auth flow verification, Fueled branding overhaul, header nav, card animations
 
 ### Phase 4: Dashboard + About
 
@@ -94,12 +94,12 @@ Plans:
 3. A persistent header with logo and logout button is visible on every screen inside the app
 4. About screen shows a visual checklist mapping each Fueled requirement to where it is demonstrated in the app
 5. About screen includes author section with mini cover letter, tech stack rationale, and links to GitHub/portfolio/email
-   **Plans**: TBD
+  **Plans**: 2 plans
 
 Plans:
 
-- [ ] 04-01: TBD
-- [ ] 04-02: TBD
+- [x] 04-01-PLAN.md -- Dashboard welcome greeting (DASH-02), dashboard screen tests (DASH-01/02/03 validation)
+- [ ] 04-02-PLAN.md -- Data constants (requirements, tech stack, author), full About screen build (ABUT-01/02/03/04), About screen tests
 
 ### Phase 5: Data Fetching + State Management
 
@@ -113,17 +113,17 @@ Plans:
 3. User can create, update, and delete items via Supabase with optimistic updates (UI updates before server confirms) and cache invalidation
 4. Loading states show skeleton loaders, errors display with retry buttons, and error boundaries catch failures gracefully
 5. State Management screen displays a live TanStack Query cache viewer showing styled JSON of current app state, and users can trigger toasts and modals programmatically
-   **Plans**: TBD
+  **Plans**: TBD
 
 Plans:
 
-- [ ] 05-01: TBD
-- [ ] 05-02: TBD
-- [ ] 05-03: TBD
+- 05-01: TBD
+- 05-02: TBD
+- 05-03: TBD
 
 ### Phase 6: Testing + CI/CD + Deployment
 
-**Goal**: The app is thoroughly tested, production email configured via Resend, deployed to a live Vercel URL, and documented with READMEs -- reviewers receive a link with magic link emails from info@vecotech.io and can explore immediately
+**Goal**: The app is thoroughly tested, production email configured via Resend, deployed to a live Vercel URL, and documented with READMEs -- reviewers receive a link with magic link emails from [info@vecotech.io](mailto:info@vecotech.io) and can explore immediately
 **Depends on**: Phase 2, Phase 3, Phase 4, Phase 5
 **Requirements**: TEST-01, TEST-02, TEST-03, INFR-02, INFR-03, INFR-04, INFR-06
 **Success Criteria** (what must be TRUE):
@@ -131,17 +131,17 @@ Plans:
 1. Jest + RNTL test suite passes with tests covering UI components (rendering, variants, interactions) and custom hooks (TanStack Query hooks, context hooks)
 2. Test fixtures and Supabase mocks exist and are used across the test suite
 3. GitHub Actions pipeline runs lint, test, and build on every push, and deploys to Vercel on merge to master only when tests pass
-4. Resend is configured as the custom email provider with info@vecotech.io as the sender -- magic link emails arrive from this address in production
+4. Resend is configured as the custom email provider with [info@vecotech.io](mailto:info@vecotech.io) as the sender -- magic link emails arrive from this address in production
 5. The app is live and accessible at a Vercel URL -- a reviewer can click the link and use the full app
 6. Three READMEs exist (root overview, apps/mobile setup guide, infra/supabase guide) with clear setup and architecture documentation
 7. Final audit of package.json dependencies (used vs unused), .gitignore files (no duplication, correct scope), and READMEs (accurate after all phases)
-   **Plans**: TBD
+  **Plans**: TBD
 
 Plans:
 
-- [ ] 06-01: TBD
-- [ ] 06-02: TBD
-- [ ] 06-03: TBD
+- 06-01: TBD
+- 06-02: TBD
+- 06-03: TBD
 
 ## Progress
 
@@ -149,11 +149,13 @@ Plans:
 Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 (Phases 2 and 3 could run in parallel; Phases 4 and 5 depend on both.)
 
-| Phase                               | Plans Complete | Status      | Completed |
-| ----------------------------------- | -------------- | ----------- | --------- |
+
+| Phase                               | Plans Complete | Status      | Completed  |
+| ----------------------------------- | -------------- | ----------- | ---------- |
 | 1. Project Foundation               | 2/2            | Complete    | 2026-03-10 |
-| 2. Component Library                | 5/6 | In Progress|  |
-| 3. Authentication                   | 0/2            | Not started | -         |
-| 4. Dashboard + About                | 0/2            | Not started | -         |
-| 5. Data Fetching + State Management | 0/3            | Not started | -         |
-| 6. Testing + CI/CD + Deployment     | 0/3            | Not started | -         |
+| 2. Component Library                | 5/6            | In Progress |            |
+| 3. Authentication                   | 2/2            | Complete    | 2026-03-10 |
+| 4. Dashboard + About                | 0/2            | Not started | -          |
+| 5. Data Fetching + State Management | 0/3            | Not started | -          |
+| 6. Testing + CI/CD + Deployment     | 0/3            | Not started | -          |
+
