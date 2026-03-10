@@ -113,13 +113,14 @@ Plans:
 3. User can create, update, and delete items via Supabase with optimistic updates (UI updates before server confirms) and cache invalidation
 4. Loading states show skeleton loaders, errors display with retry buttons, and error boundaries catch failures gracefully
 5. State Management screen displays a live TanStack Query cache viewer showing styled JSON of current app state, and users can trigger toasts and modals programmatically
-  **Plans**: TBD
+  **Plans**: 4 plans
 
 Plans:
 
-- 05-01: TBD
-- 05-02: TBD
-- 05-03: TBD
+- [ ] 05-01-PLAN.md -- Install TanStack Query, QueryClient config, database types, Supabase migration (items table + RLS + trigger), Toast context, Modal context, provider wiring
+- [ ] 05-02-PLAN.md -- UX polish: Meet Jim count-up animation, Showcase accordion overflow fix, tech stack subtitle wrapping
+- [ ] 05-03-PLAN.md -- Data fetching hooks (useItems, CRUD mutations), full Data Fetching screen with search/filter/pagination/CRUD
+- [ ] 05-04-PLAN.md -- State Management cache viewer screen, component playground toast/modal interactive demos
 
 ### Phase 6: Testing + CI/CD + Deployment
 
@@ -156,6 +157,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 | 2. Component Library                | 5/6            | In Progress |            |
 | 3. Authentication                   | 2/2            | Complete    | 2026-03-10 |
 | 4. Dashboard + About                | 0/2            | Not started | -          |
-| 5. Data Fetching + State Management | 0/3            | Not started | -          |
+| 5. Data Fetching + State Management | 0/4            | Not started | -          |
 | 6. Testing + CI/CD + Deployment     | 0/3            | Not started | -          |
-
