@@ -129,7 +129,7 @@ export default function LoginScreen() {
 
         <Button
           variant="contained"
-          label={isSubmitting ? 'SENDING...' : 'SEND MAGIC LINK'}
+          label={isSubmitting ? 'Sending...' : 'Send Magic Link'}
           loading={isSubmitting}
           onPress={handleSubmit(onSubmit)}
         />

@@ -34,7 +34,7 @@ export default function ProfileScreen() {
       <Button
         variant="outlined"
         color="error"
-        label="SIGN OUT"
+        label="Sign Out"
         icon="logout"
         onPress={signOut}
         className="mb-8"

@@ -17,7 +17,7 @@ const variantClasses: Record<TypographyVariant, string> = {
   body: 'text-base font-body text-neutral-300',
   caption: 'text-sm font-body text-neutral-400',
   label: 'text-sm font-body-semibold text-neutral-300 uppercase tracking-wider',
-  button: 'text-base font-body-semibold uppercase tracking-wider',
+  button: 'text-base font-body-semibold tracking-wide',
 };
 
 export default function Typography({
