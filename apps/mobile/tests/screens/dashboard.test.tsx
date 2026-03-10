@@ -63,12 +63,12 @@ describe('DashboardScreen', () => {
     const { getByText } = renderDashboard();
 
     await waitFor(() => {
-      expect(getByText('Data Fetching')).toBeTruthy();
+      expect(getByText(/Meet Jim/)).toBeTruthy();
     });
-    expect(getByText('State Management')).toBeTruthy();
-    expect(getByText('Component Library')).toBeTruthy();
-    expect(getByText('About Me')).toBeTruthy();
-    expect(getByText('About This App')).toBeTruthy();
+    expect(getByText(/The Showcase/)).toBeTruthy();
+    expect(getByText(/Data Fetching/)).toBeTruthy();
+    expect(getByText(/State Management/)).toBeTruthy();
+    expect(getByText(/Component Library/)).toBeTruthy();
   });
 
   // DASH-01: Renders Explore text on each card

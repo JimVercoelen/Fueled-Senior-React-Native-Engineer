@@ -22,8 +22,8 @@ function getScreenTitle(pathname: string): string | null {
     'data-fetching': 'Data Fetching',
     'state-management': 'State Management',
     components: 'Components',
-    'about-me': 'About Me',
-    'about-app': 'About App',
+    'about-me': 'Meet Jim',
+    'about-app': 'The Showcase',
     profile: 'Profile',
   };
 
@@ -38,7 +38,7 @@ function useDocumentTitle(screenTitle: string | null) {
 }
 
 const DISCLAIMER_TEXT =
-  "DISCLAIMER: This app was built under time constraints as a showcase \u2014 sign in and explore the flow. Given more time, there's always room for improvement!";
+  "DISCLAIMER: This app was built under time constraints as a showcase. Just login using your email and check out the app! It should cover all parts you'd expect from a React (Native) developer.";
 
 function DisclaimerBanner() {
   const translateX = useSharedValue(0);
@@ -75,10 +75,11 @@ function DisclaimerBanner() {
     letterSpacing: 0.5,
   };
 
-  const spacer = '          '; // spacing between repeated text
+  const spacer =
+    '                                                                                                    '; // large spacing so marquee doesn't repeat too fast
 
   return (
-    <View style={{ backgroundColor: '#dc2626', overflow: 'hidden', paddingVertical: 6 }}>
+    <View style={{ backgroundColor: '#dc2626', overflow: 'hidden', paddingVertical: 10 }}>
       <Animated.View style={[{ flexDirection: 'row' }, animatedStyle]}>
         <Text style={textStyle} onLayout={onTextLayout} numberOfLines={1}>
           {DISCLAIMER_TEXT}

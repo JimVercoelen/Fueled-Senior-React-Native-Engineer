@@ -60,9 +60,7 @@ describe('AboutMeScreen', () => {
     it('calls Linking.openURL for GitHub link', () => {
       const { getByText } = renderAboutMe();
       fireEvent.press(getByText('GitHub'));
-      expect(Linking.openURL).toHaveBeenCalledWith(
-        'https://github.com/JimVercoelen/Fueled-Senior-React-Native-Engineer',
-      );
+      expect(Linking.openURL).toHaveBeenCalledWith('https://github.com/JimVercoelen');
     });
   });
 });

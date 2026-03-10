@@ -8,10 +8,9 @@ export type AuthorInfo = {
 
 export const AUTHOR: AuthorInfo = {
   name: 'Jim Vercoelen',
-  title:
-    'Senior Full Stack Engineer · 8+ years experience · 6+ years full-time remote for international companies',
+  title: 'Senior Full Stack Engineer · 8+ years (international) experience · 6+ years full-time',
   coverLetter:
-    'I am a senior full stack engineer with over 8 years of international experience building scalable web platforms and production-grade systems. My core stack includes TypeScript, React (Native), Node.js/Next.js, and Python (Django/FastAPI), alongside strong experience with SQL and NoSQL databases. Over the past 6+ years, I have worked full-time with international teams in remote environments, owning features end-to-end - from architecture and implementation to production deployment. I am comfortable operating across the full stack, translating complex product requirements into clean, maintainable, and scalable solutions. In addition to technical execution, I value clear communication, ownership, and thoughtful trade-offs. I work well in ambitious teams that prioritize quality, speed, and collaboration.',
+    'I am a senior full stack engineer with over 8 years of international experience building scalable web platforms and production-grade systems.\n\nMy core stack includes TypeScript, React (Native), Node.js/Next.js, and Python (Django/FastAPI), alongside strong experience with SQL and NoSQL databases. Over the past 6+ years, I have worked full-time with international teams in remote environments, owning features end-to-end - from architecture and implementation to production deployment. \n\nI am comfortable operating across the full stack, translating complex product requirements into clean, maintainable, and scalable solutions. In addition to technical execution, I value clear communication, ownership, and thoughtful trade-offs. \n\n I work well in ambitious teams that prioritize quality, speed, and collaboration.',
   techTags: [
     'TypeScript',
     'React',
@@ -28,7 +27,7 @@ export const AUTHOR: AuthorInfo = {
     { label: 'Email', url: 'mailto:jim@vecotech.io', icon: 'email' },
     {
       label: 'GitHub',
-      url: 'https://github.com/JimVercoelen/Fueled-Senior-React-Native-Engineer',
+      url: 'https://github.com/JimVercoelen',
       icon: 'code',
     },
   ],

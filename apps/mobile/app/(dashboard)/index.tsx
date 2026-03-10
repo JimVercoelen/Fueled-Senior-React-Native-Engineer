@@ -25,19 +25,19 @@ type DemoCard = {
 
 const DEMO_CARDS: DemoCard[] = [
   {
-    title: 'About Me',
+    title: 'Meet Jim',
     subtitle:
       'Meet the engineer behind this showcase. 8+ years of full stack experience across TypeScript, React, Node.js, and Python.',
     tags: ['Cover Letter', 'Contact', 'Portfolio'],
     route: '/(dashboard)/about-me',
-    image: require('../../assets/images/cards/about.jpg'),
+    image: require('../../assets/images/cards/meet-jim.jpg'),
   },
   {
-    title: 'About This App',
+    title: 'The Showcase',
     subtitle: 'Fueled requirements checklist and tech stack rationale. See what was built and why.',
     tags: ['Requirements', 'Tech Stack', 'Checklist'],
     route: '/(dashboard)/about-app',
-    image: require('../../assets/images/cards/about.jpg'),
+    image: require('../../assets/images/cards/the-showcase.jpg'),
   },
   {
     title: 'Data Fetching',
@@ -124,24 +124,8 @@ function DashboardCard({ card, index }: { card: DemoCard; index: number }) {
           locations={[0, 0.4, 1]}
           style={{ flex: 1, borderRadius: 16, justifyContent: 'flex-end', padding: 24 }}
         >
-          <View className="flex-row items-center mb-3">
-            <View
-              style={{
-                width: 28,
-                height: 28,
-                borderRadius: 14,
-                backgroundColor: 'rgba(255,255,255,0.2)',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <Typography variant="caption" className="text-white font-semibold">
-                {index + 1}
-              </Typography>
-            </View>
-          </View>
           <Typography variant="h2" className="mb-2">
-            {card.title}
+            {index + 1}. {card.title}
           </Typography>
           <Typography variant="body" className="text-white/80 mb-4">
             {card.subtitle}

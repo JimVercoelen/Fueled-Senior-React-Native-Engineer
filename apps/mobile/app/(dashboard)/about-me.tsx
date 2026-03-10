@@ -21,7 +21,7 @@ export default function AboutMeScreen() {
         {/* Page header */}
         <View>
           <Typography variant="h2" className="text-white">
-            About Me
+            Meet Jim
           </Typography>
           <Typography variant="body" className="text-white/60 mt-1">
             Get to know the engineer behind this showcase.
@@ -36,7 +36,7 @@ export default function AboutMeScreen() {
               <Typography variant="h3" className="text-white">
                 {AUTHOR.name}
               </Typography>
-              <Typography variant="caption" className="text-white/60">
+              <Typography variant="caption" className="text-white/60 whitespace">
                 {AUTHOR.title}
               </Typography>
             </View>

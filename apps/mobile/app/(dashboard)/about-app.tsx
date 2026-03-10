@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
-import { View, ScrollView, ScrollView as RNScrollView } from 'react-native';
+import { View, ScrollView, ScrollView as RNScrollView, Linking } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { Typography, Accordion, AccordionItem, ScrollToTop } from '@/components';
+import { Typography, Accordion, AccordionItem, Button, ScrollToTop } from '@/components';
 import { REQUIREMENTS } from '@/constants/requirements';
 import { TECH_STACK } from '@/constants/tech-stack';
 
@@ -22,12 +22,24 @@ export default function AboutAppScreen() {
         {/* Page header */}
         <View>
           <Typography variant="h2" className="text-white">
-            About This App
+            The Showcase
           </Typography>
           <Typography variant="body" className="text-white/60 mt-1">
             A purpose-built technical showcase demonstrating production-quality React Native
             engineering.
           </Typography>
+          <View className="mt-3">
+            <Button
+              variant="outlined"
+              icon={'code' as keyof typeof MaterialIcons.glyphMap}
+              label="Source Code"
+              onPress={() =>
+                Linking.openURL(
+                  'https://github.com/JimVercoelen/Fueled-Senior-React-Native-Engineer',
+                )
+              }
+            />
+          </View>
         </View>
 
         {/* Requirements checklist */}
