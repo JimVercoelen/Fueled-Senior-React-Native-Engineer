@@ -2,7 +2,10 @@ import { View, Text } from 'react-native';
 
 export default function AboutScreen() {
   return (
-    <View className="flex-1 bg-black items-center justify-center px-6 max-w-3xl mx-auto w-full">
+    <View
+      className="flex-1 items-center justify-center px-6 max-w-3xl mx-auto w-full"
+      style={{ backgroundColor: 'transparent' }}
+    >
       <Text
         className="text-white text-2xl tracking-wider uppercase mb-3 text-center"
         style={{ fontFamily: 'Inter_600SemiBold' }}

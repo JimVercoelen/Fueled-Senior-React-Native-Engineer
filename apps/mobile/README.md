@@ -6,6 +6,7 @@ Expo React Native app with NativeWind styling and Expo Router navigation.
 
 ```bash
 cd apps/mobile
+nvm use
 npm install
 
 # Create environment file

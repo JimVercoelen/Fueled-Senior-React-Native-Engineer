@@ -115,7 +115,8 @@ export default function ComponentsScreen() {
 
   return (
     <ScrollView
-      className="flex-1 bg-black"
+      className="flex-1"
+      style={{ backgroundColor: 'transparent' }}
       contentContainerClassName="px-4 py-6 pb-20 max-w-3xl mx-auto w-full"
     >
       <Typography variant="h1">Component Library</Typography>

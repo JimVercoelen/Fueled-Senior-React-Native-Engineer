@@ -1,7 +1,16 @@
-import { View, Pressable, ScrollView, ImageBackground, ImageSourcePropType } from 'react-native';
+import { useState } from 'react';
+import {
+  View,
+  Pressable,
+  ScrollView,
+  ImageBackground,
+  ImageSourcePropType,
+  Platform,
+} from 'react-native';
 import { useRouter } from 'expo-router';
 import { MaterialIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
+import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { Typography } from '@/components';
 
 type DemoCard = {
@@ -19,46 +28,75 @@ const DEMO_CARDS: DemoCard[] = [
       'TanStack Query, pagination, search, filter, and mutations with real API integration.',
     tags: ['TanStack Query', 'API', 'Pagination'],
     route: '/(dashboard)/data-fetching',
-    image: require('../../../assets/images/cards/data-fetching.jpg'),
+    image: require('../../assets/images/cards/data-fetching.jpg'),
   },
   {
     title: 'State Management',
     subtitle: 'Cache viewer, toast notifications, and modal system powered by Context API.',
     tags: ['Context API', 'Cache', 'Toasts'],
     route: '/(dashboard)/state-management',
-    image: require('../../../assets/images/cards/state-management.jpg'),
+    image: require('../../assets/images/cards/state-management.jpg'),
   },
   {
     title: 'Component Library',
     subtitle: 'Interactive playground showcasing all UI components with live demos.',
     tags: ['NativeWind', 'Reanimated', 'Forms'],
     route: '/(dashboard)/components',
-    image: require('../../../assets/images/cards/component-library.jpg'),
+    image: require('../../assets/images/cards/component-library.jpg'),
   },
   {
     title: 'About',
     subtitle: 'Fueled requirements checklist, author section, and cover letter.',
     tags: ['Requirements', 'Author', 'Portfolio'],
     route: '/(dashboard)/about',
-    image: require('../../../assets/images/cards/about.jpg'),
+    image: require('../../assets/images/cards/about.jpg'),
   },
 ];
 
-export default function DashboardScreen() {
+function DashboardCard({ card }: { card: DemoCard }) {
   const router = useRouter();
+  const scale = useSharedValue(1);
+  const imageScale = useSharedValue(1);
+  const [hovered, setHovered] = useState(false);
+
+  const cardStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: scale.value }],
+  }));
+
+  const imageStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: imageScale.value }],
+  }));
+
+  const handleHoverIn = () => {
+    setHovered(true);
+    imageScale.value = withTiming(1.05, { duration: 400 });
+  };
+
+  const handleHoverOut = () => {
+    setHovered(false);
+    imageScale.value = withTiming(1, { duration: 400 });
+  };
+
+  const handlePressIn = () => {
+    scale.value = withTiming(0.97, { duration: 100 });
+  };
+
+  const handlePressOut = () => {
+    scale.value = withTiming(1, { duration: 200 });
+  };
 
   return (
-    <ScrollView
-      className="flex-1 bg-black"
-      contentContainerClassName="p-4 pb-8 max-w-3xl mx-auto w-full gap-4"
-    >
-      {DEMO_CARDS.map((card) => (
-        <Pressable
-          key={card.route}
-          onPress={() => router.push(card.route as never)}
-          className="rounded-2xl overflow-hidden active:opacity-90"
-          style={{ height: 320 }}
-        >
+    <Animated.View style={cardStyle}>
+      <Pressable
+        onPress={() => router.push(card.route as never)}
+        onPressIn={handlePressIn}
+        onPressOut={handlePressOut}
+        onHoverIn={handleHoverIn}
+        onHoverOut={handleHoverOut}
+        className="rounded-2xl overflow-hidden"
+        style={[{ height: 320 }, Platform.OS === 'web' ? { cursor: 'pointer' } : {}]}
+      >
+        <Animated.View style={[{ flex: 1 }, imageStyle]}>
           <ImageBackground
             source={card.image}
             style={{ flex: 1 }}
@@ -98,7 +136,21 @@ export default function DashboardScreen() {
               </View>
             </LinearGradient>
           </ImageBackground>
-        </Pressable>
+        </Animated.View>
+      </Pressable>
+    </Animated.View>
+  );
+}
+
+export default function DashboardScreen() {
+  return (
+    <ScrollView
+      className="flex-1"
+      contentContainerClassName="p-4 pb-8 max-w-3xl mx-auto w-full gap-4"
+      style={{ backgroundColor: 'transparent' }}
+    >
+      {DEMO_CARDS.map((card) => (
+        <DashboardCard key={card.route} card={card} />
       ))}
     </ScrollView>
   );
