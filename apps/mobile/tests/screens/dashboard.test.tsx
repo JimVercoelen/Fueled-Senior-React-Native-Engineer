@@ -68,7 +68,7 @@ describe('DashboardScreen', () => {
     expect(getByText('State Management')).toBeTruthy();
     expect(getByText('Component Library')).toBeTruthy();
     expect(getByText('About Me')).toBeTruthy();
-    expect(getByText('About App')).toBeTruthy();
+    expect(getByText('About This App')).toBeTruthy();
   });
 
   // DASH-01: Renders Explore text on each card
