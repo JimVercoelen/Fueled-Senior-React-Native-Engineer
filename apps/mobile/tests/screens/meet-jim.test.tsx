@@ -35,14 +35,32 @@ describe('AboutMeScreen', () => {
     });
   });
 
-  // ABUT-04: External links (LinkedIn, Portfolio, Email, GitHub)
+  // Stats grid with count-up animation
+  describe('Stats grid', () => {
+    it('renders stat labels for all author stats', () => {
+      const { getByText } = renderAboutMe();
+      expect(getByText('Projects shipped')).toBeTruthy();
+      expect(getByText('Teams joined')).toBeTruthy();
+      expect(getByText('Countries')).toBeTruthy();
+      expect(getByText('Years experience')).toBeTruthy();
+      expect(getByText('Startups supported')).toBeTruthy();
+    });
+
+    it('renders stat values starting at 0 (count-up animation initial state)', () => {
+      const { getAllByText } = renderAboutMe();
+      // In test env, rAF does not run so CountUp stays at initial value 0
+      const zeros = getAllByText('0');
+      expect(zeros.length).toBeGreaterThanOrEqual(5);
+    });
+  });
+
+  // ABUT-04: External links (LinkedIn, Portfolio, Email)
   describe('ABUT-04: External links', () => {
-    it('renders LinkedIn, Portfolio, Email, and GitHub buttons', () => {
+    it('renders LinkedIn, Portfolio, and Email buttons', () => {
       const { getByText } = renderAboutMe();
       expect(getByText('LinkedIn')).toBeTruthy();
       expect(getByText('Portfolio')).toBeTruthy();
       expect(getByText('Email')).toBeTruthy();
-      expect(getByText('GitHub')).toBeTruthy();
     });
 
     it('calls Linking.openURL when LinkedIn pressed', () => {
@@ -57,10 +75,10 @@ describe('AboutMeScreen', () => {
       expect(Linking.openURL).toHaveBeenCalledWith('mailto:jim@vecotech.io');
     });
 
-    it('calls Linking.openURL for GitHub link', () => {
+    it('calls Linking.openURL for "Let\'s talk" CTA', () => {
       const { getByText } = renderAboutMe();
-      fireEvent.press(getByText('GitHub'));
-      expect(Linking.openURL).toHaveBeenCalledWith('https://github.com/JimVercoelen');
+      fireEvent.press(getByText("Let's talk"));
+      expect(Linking.openURL).toHaveBeenCalledWith('mailto:jim@vecotech.io');
     });
   });
 });
