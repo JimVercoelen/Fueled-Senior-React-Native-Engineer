@@ -33,7 +33,12 @@ export function AuthProvider({ children }: PropsWithChildren) {
   }, []);
 
   const signIn = async (email: string) => {
-    const { error } = await supabase.auth.signInWithOtp({ email });
+    const emailRedirectTo =
+      typeof window !== 'undefined' && window.location ? window.location.origin : undefined;
+    const { error } = await supabase.auth.signInWithOtp({
+      email,
+      options: { emailRedirectTo },
+    });
     return { error };
   };
 

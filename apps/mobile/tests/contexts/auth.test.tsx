@@ -45,6 +45,14 @@ beforeEach(() => {
 describe('AuthProvider', () => {
   // AUTH-01: signIn calls supabase.auth.signInWithOtp with email and emailRedirectTo
   it('signIn calls signInWithOtp with email and emailRedirectTo', async () => {
+    // Set up window.location for this test to simulate web environment
+    const originalLocation = window.location;
+    Object.defineProperty(window, 'location', {
+      value: { origin: 'http://localhost:8081' },
+      writable: true,
+      configurable: true,
+    });
+
     const { getByTestId } = renderWithProvider();
 
     await waitFor(() => {
@@ -58,8 +66,15 @@ describe('AuthProvider', () => {
     expect(mockSupabase.auth.signInWithOtp).toHaveBeenCalledWith({
       email: 'user@example.com',
       options: expect.objectContaining({
-        emailRedirectTo: expect.any(String),
+        emailRedirectTo: 'http://localhost:8081',
       }),
+    });
+
+    // Restore original
+    Object.defineProperty(window, 'location', {
+      value: originalLocation,
+      writable: true,
+      configurable: true,
     });
   });
 
