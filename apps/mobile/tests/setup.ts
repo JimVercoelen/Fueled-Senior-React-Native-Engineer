@@ -21,5 +21,10 @@ jest.mock('@expo/vector-icons', () => {
   };
 });
 
-// Silence the Animated warning in tests
-jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
+// Silence console warnings in tests
+const originalWarn = console.warn;
+console.warn = (...args: unknown[]) => {
+  const message = typeof args[0] === 'string' ? args[0] : '';
+  if (message.includes('Animated')) return;
+  originalWarn(...args);
+};
