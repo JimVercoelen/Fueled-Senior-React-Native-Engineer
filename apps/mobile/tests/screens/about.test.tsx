@@ -42,13 +42,13 @@ describe('AboutScreen', () => {
       const { getByText } = renderAbout();
 
       expect(getByText('Jim Vercoelen')).toBeTruthy();
-      expect(getByText('Senior React Native Engineer')).toBeTruthy();
+      expect(getByText(/Senior Full Stack Engineer/)).toBeTruthy();
     });
 
     it('renders cover letter content', () => {
       const { getByText } = renderAbout();
 
-      expect(getByText(/purpose-built for Fueled/)).toBeTruthy();
+      expect(getByText(/senior full stack engineer with over 8 years/)).toBeTruthy();
     });
   });
 
@@ -75,9 +75,10 @@ describe('AboutScreen', () => {
     it('renders link buttons', () => {
       const { getByText } = renderAbout();
 
-      expect(getByText('GitHub')).toBeTruthy();
+      expect(getByText('LinkedIn')).toBeTruthy();
       expect(getByText('Portfolio')).toBeTruthy();
       expect(getByText('Email')).toBeTruthy();
+      expect(getByText('GitHub')).toBeTruthy();
     });
 
     it('calls Linking.openURL when GitHub link pressed', () => {
@@ -85,7 +86,9 @@ describe('AboutScreen', () => {
 
       fireEvent.press(getByText('GitHub'));
 
-      expect(Linking.openURL).toHaveBeenCalledWith('https://github.com/jimvercoelen');
+      expect(Linking.openURL).toHaveBeenCalledWith(
+        'https://github.com/JimVercoelen/Fueled-Senior-React-Native-Engineer',
+      );
     });
 
     it('calls Linking.openURL with mailto for email', () => {

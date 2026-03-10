@@ -1,8 +1,6 @@
 import React from 'react';
 import { View, Image, Text } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 import clsx from 'clsx';
-import { Gradients } from '../../constants/colors';
 
 type AvatarSize = 'sm' | 'md' | 'lg';
 
@@ -58,16 +56,14 @@ export default function Avatar({ name, imageUri, size = 'md', className }: Avata
 
   return (
     <View className={className}>
-      <LinearGradient
-        colors={[...Gradients.primary]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
+      <View
         style={{
           width: dim,
           height: dim,
           borderRadius: dim / 2,
           alignItems: 'center',
           justifyContent: 'center',
+          backgroundColor: '#6652FF',
         }}
       >
         <Text
@@ -80,7 +76,7 @@ export default function Avatar({ name, imageUri, size = 'md', className }: Avata
         >
           {initials}
         </Text>
-      </LinearGradient>
+      </View>
     </View>
   );
 }
