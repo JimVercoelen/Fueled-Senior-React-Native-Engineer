@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { View, Text, Image, Pressable } from 'react-native';
+import { useEffect, useState } from 'react';
+import { View, Text, Image, Pressable, LayoutChangeEvent } from 'react-native';
 import { Stack, usePathname, useRouter } from 'expo-router';
 import { MaterialIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -34,6 +34,66 @@ function useDocumentTitle(screenTitle: string | null) {
   if (typeof document !== 'undefined') {
     document.title = title;
   }
+}
+
+const DISCLAIMER_TEXT =
+  "DISCLAIMER: This app was built under time constraints as a showcase \u2014 sign in and explore the flow. Given more time, there's always room for improvement!";
+
+function DisclaimerBanner() {
+  const translateX = useSharedValue(0);
+  const [textWidth, setTextWidth] = useState(0);
+
+  const onTextLayout = (e: LayoutChangeEvent) => {
+    const w = e.nativeEvent.layout.width;
+    if (w > 0 && textWidth === 0) {
+      setTextWidth(w);
+    }
+  };
+
+  useEffect(() => {
+    if (textWidth === 0) return;
+    // Scroll one full copy width then reset, creating seamless loop
+    translateX.value = 0;
+    translateX.value = withRepeat(
+      withTiming(-textWidth, {
+        duration: textWidth * 20, // ~20ms per pixel for readable speed
+        easing: Easing.linear,
+      }),
+      -1,
+    );
+  }, [textWidth, translateX]);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ translateX: translateX.value }],
+  }));
+
+  const textStyle = {
+    color: '#ffffff',
+    fontSize: 13,
+    fontFamily: 'Inter_600SemiBold',
+    letterSpacing: 0.5,
+  };
+
+  const spacer = '          '; // spacing between repeated text
+
+  return (
+    <View style={{ backgroundColor: '#dc2626', overflow: 'hidden', paddingVertical: 6 }}>
+      <Animated.View style={[{ flexDirection: 'row' }, animatedStyle]}>
+        <Text style={textStyle} onLayout={onTextLayout} numberOfLines={1}>
+          {DISCLAIMER_TEXT}
+          {spacer}
+        </Text>
+        <Text style={textStyle} numberOfLines={1}>
+          {DISCLAIMER_TEXT}
+          {spacer}
+        </Text>
+        <Text style={textStyle} numberOfLines={1}>
+          {DISCLAIMER_TEXT}
+          {spacer}
+        </Text>
+      </Animated.View>
+    </View>
+  );
 }
 
 function DashboardHeader() {
@@ -119,6 +179,7 @@ export default function DashboardLayout() {
   return (
     <View className="flex-1" style={{ backgroundColor: '#000000' }}>
       <AnimatedBackground />
+      <DisclaimerBanner />
       <DashboardHeader />
       <Stack
         screenOptions={{
