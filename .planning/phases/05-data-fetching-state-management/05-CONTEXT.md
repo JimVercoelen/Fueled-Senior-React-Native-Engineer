@@ -6,7 +6,7 @@
 <domain>
 ## Phase Boundary
 
-Two demo screens that showcase production-quality React patterns: (1) a Data Fetching screen with paginated list, server-side search/filter, and CRUD mutations via TanStack Query + Supabase, and (2) a State Management screen with a read-only live TanStack Query cache viewer. Toast and modal Context API providers are wired app-wide and integrated into data fetching (CRUD feedback, delete confirmation) and the component playground (interactive demos).
+Two demo screens that showcase production-quality React patterns: (1) a Data Fetching screen with paginated list, server-side search/filter, and CRUD mutations via TanStack Query + Supabase, and (2) a State Management screen with a read-only live TanStack Query cache viewer. Toast and modal Context API providers are wired app-wide and integrated into data fetching (CRUD feedback, delete confirmation) and the component playground (interactive demos). Also includes UX polish fixes for existing screens (Meet Jim, The Showcase).
 
 </domain>
 
@@ -53,6 +53,11 @@ Two demo screens that showcase production-quality React patterns: (1) a Data Fet
 - Interactive demo on component playground — confirmation modal and other variants
 - Simplified version of logbook's modal types — this showcase only needs generic/confirmation modals
 
+### UX polish (existing screens)
+- **Meet Jim — animated stat counters**: Stats numbers should animate from 0 to their actual value on screen load (count-up animation)
+- **The Showcase — accordion content truncated**: Requirements accordion sections are cut off (e.g., Component Library has 17 items but only 7 visible). Accordion must expand to fit all content, no hidden overflow.
+- **The Showcase — tech stack card subtitle wrapping**: Subtitle text on tech stack cards doesn't wrap on small screens — it gets clipped horizontally. Subtitles must wrap to the next line on narrow viewports.
+
 ### Claude's Discretion
 - Entity type for Supabase table (projects, tasks, contacts — whatever demonstrates patterns best)
 - Data fetching screen layout structure (tabs, single-page, or modal-based CRUD)
@@ -60,6 +65,7 @@ Two demo screens that showcase production-quality React patterns: (1) a Data Fet
 - Toast position on screen
 - Exact Supabase DB trigger implementation for per-user seed data
 - TanStack Query configuration (stale time, cache time, retry policies)
+- Count-up animation approach (reanimated, JS interval, or library)
 
 </decisions>
 
