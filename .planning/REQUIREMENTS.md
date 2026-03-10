@@ -28,8 +28,8 @@
 ### State Management
 
 - [ ] **STAT-01**: TanStack Query cache viewer displaying live app state as styled JSON
-- [ ] **STAT-02**: Toast system via Context API -- trigger toasts that render Alert components
-- [ ] **STAT-03**: Modal system via Context API -- show/hide modal popups programmatically
+- [x] **STAT-02**: Toast system via Context API -- trigger toasts that render Alert components
+- [x] **STAT-03**: Modal system via Context API -- show/hide modal popups programmatically
 
 ### Component Library
 
@@ -111,8 +111,8 @@
 | DATA-03     | Phase 5 | Pending  |
 | DATA-04     | Phase 5 | Pending  |
 | STAT-01     | Phase 5 | Pending  |
-| STAT-02     | Phase 5 | Pending  |
-| STAT-03     | Phase 5 | Pending  |
+| STAT-02     | Phase 5 | Complete |
+| STAT-03     | Phase 5 | Complete |
 | COMP-01     | Phase 2 | Complete |
 | COMP-02     | Phase 2 | Complete |
 | COMP-03     | Phase 2 | Complete |
