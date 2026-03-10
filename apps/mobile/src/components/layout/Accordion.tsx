@@ -13,6 +13,7 @@ interface AccordionItemProps {
 
 export function AccordionItem({ title, children, defaultOpen = false }: AccordionItemProps) {
   const [open, setOpen] = useState(defaultOpen);
+  const [contentHeight, setContentHeight] = useState(0);
   const height = useSharedValue(defaultOpen ? 1 : 0);
   const rotation = useSharedValue(defaultOpen ? 180 : 0);
 
@@ -24,7 +25,7 @@ export function AccordionItem({ title, children, defaultOpen = false }: Accordio
   };
 
   const bodyStyle = useAnimatedStyle(() => ({
-    maxHeight: height.value * 500,
+    maxHeight: height.value * (contentHeight || 2000),
     opacity: height.value,
     overflow: 'hidden' as const,
   }));
@@ -44,7 +45,9 @@ export function AccordionItem({ title, children, defaultOpen = false }: Accordio
         </Animated.View>
       </Pressable>
       <Animated.View style={bodyStyle}>
-        <View className="px-4 pb-3">{children}</View>
+        <View className="px-4 pb-3" onLayout={(e) => setContentHeight(e.nativeEvent.layout.height)}>
+          {children}
+        </View>
       </Animated.View>
     </View>
   );
