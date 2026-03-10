@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Pressable, ActivityIndicator, View, Platform } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import clsx from 'clsx';
@@ -42,14 +41,11 @@ const iconSizes: Record<ButtonSize, number> = {
   lg: 24,
 };
 
-const colorMap: Record<
-  ButtonColor,
-  { gradient: readonly [string, string]; solid: string; text: string }
-> = {
-  primary: { gradient: ['#6652FF', '#000000'], solid: '#6E5BFF', text: '#8b7fff' },
-  secondary: { gradient: ['#6E5BFF', '#4d38ec'], solid: '#4d38ec', text: '#8b7fff' },
-  success: { gradient: ['#008831', '#22c55e'], solid: '#008831', text: '#22c55e' },
-  error: { gradient: ['#c70000', '#f97316'], solid: '#c70000', text: '#ef4444' },
+const colorMap: Record<ButtonColor, { solid: string; hover: string; text: string }> = {
+  primary: { solid: '#6E5BFF', hover: '#4d38ec', text: '#8b7fff' },
+  secondary: { solid: '#4d38ec', hover: '#442fe2', text: '#8b7fff' },
+  success: { solid: '#008831', hover: '#006b27', text: '#22c55e' },
+  error: { solid: '#c70000', hover: '#a00000', text: '#ef4444' },
 };
 
 const webStyles =
@@ -128,28 +124,27 @@ export default function Button({
     </View>
   );
 
-  const hoverOpacity = hovered && !isDisabled ? 0.85 : 1;
-
   const renderContainedButton = () => (
-    <LinearGradient
-      colors={[...colors.gradient]}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
+    <View
       style={[
-        { borderRadius: 12, opacity: hoverOpacity },
+        {
+          borderRadius: 8,
+          backgroundColor: hovered && !isDisabled ? colors.hover : colors.solid,
+        },
         isIconOnly ? iconOnlySizeStyles[size] : sizeStyles[size],
       ]}
     >
       {renderContent()}
-    </LinearGradient>
+    </View>
   );
 
   const renderStyledButton = () => (
     <View
-      className={clsx('rounded-xl', variant === 'outlined' && 'border')}
       style={[
+        { borderRadius: 8 },
         isIconOnly ? iconOnlySizeStyles[size] : sizeStyles[size],
         variant === 'outlined' && {
+          borderWidth: 1,
           borderColor: hovered && !isDisabled ? colors.text : colors.text + '40',
         },
         variant === 'text' &&
