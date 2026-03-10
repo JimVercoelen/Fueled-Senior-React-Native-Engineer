@@ -75,12 +75,12 @@ Plans:
 2. User closes the browser tab, reopens the app URL, and is still logged in (session persists)
 3. User can log out from any screen and is returned to the login screen
 4. Visiting any dashboard/demo URL while logged out redirects to the login screen
-   **Plans**: TBD
+   **Plans**: 2 plans
 
 Plans:
 
-- [ ] 03-01: TBD
-- [ ] 03-02: TBD
+- [ ] 03-01-PLAN.md -- Auth test infrastructure (Supabase mock, AuthProvider unit tests), signIn enhancement with emailRedirectTo, login screen upgrade to component library (TextField, Button, Alert, zod + react-hook-form)
+- [ ] 03-02-PLAN.md -- Dashboard header logout button, profile screen component library upgrade, end-to-end auth flow verification checkpoint
 
 ### Phase 4: Dashboard + About
 
