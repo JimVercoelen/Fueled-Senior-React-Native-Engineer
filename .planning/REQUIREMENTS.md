@@ -14,9 +14,9 @@
 
 ### Dashboard
 
-- [ ] **DASH-01**: Dashboard displays 4 rich cards (icon, title, description, tech tags) linking to demo screens
-- [ ] **DASH-02**: Dashboard shows welcome greeting with user email/name from auth
-- [ ] **DASH-03**: Persistent app header with logo + logout across all screens
+- [x] **DASH-01**: Dashboard displays 4 rich cards (icon, title, description, tech tags) linking to demo screens
+- [x] **DASH-02**: Dashboard shows welcome greeting with user email/name from auth
+- [x] **DASH-03**: Persistent app header with logo + logout across all screens
 
 ### Data Fetching
 
@@ -103,9 +103,9 @@
 | AUTH-02     | Phase 3 | Complete |
 | AUTH-03     | Phase 3 | Complete |
 | AUTH-04     | Phase 3 | Pending  |
-| DASH-01     | Phase 4 | Pending  |
-| DASH-02     | Phase 4 | Pending  |
-| DASH-03     | Phase 4 | Pending  |
+| DASH-01     | Phase 4 | Complete |
+| DASH-02     | Phase 4 | Complete |
+| DASH-03     | Phase 4 | Complete |
 | DATA-01     | Phase 5 | Pending  |
 | DATA-02     | Phase 5 | Pending  |
 | DATA-03     | Phase 5 | Pending  |
