@@ -64,7 +64,7 @@
 - [ ] **INFR-02**: Expo web build deployed on Vercel
 - [ ] **INFR-03**: GitHub Actions CI/CD -- lint + test + build on push, deploy on merge to master (tests must pass)
 - [ ] **INFR-04**: 3 READMEs (root, apps/mobile, infra/supabase)
-- [ ] **INFR-05**: Proper .gitignore (include .planning, exclude .claude, node_modules, env files)
+- [x] **INFR-05**: Proper .gitignore (include .planning, exclude .claude, node_modules, env files)
 - [ ] **INFR-06**: Resend custom email domain configured for production (info@vecotech.io sender address)
 
 ### Testing
@@ -87,68 +87,70 @@
 
 ## Out of Scope
 
-| Feature | Reason |
-|---------|--------|
-| Native iOS/Android builds | Web-only deployment -- mobile-friendly styling sufficient |
-| E2E testing (Detox/Maestro) | Jest + RNTL sufficient for demonstrating testing competency |
-| Real business logic / backend | Demo data and public APIs sufficient for showcase |
-| App Store submission | Vercel web deploy only |
-| Real-time features | Not needed for a showcase app |
+| Feature                       | Reason                                                      |
+| ----------------------------- | ----------------------------------------------------------- |
+| Native iOS/Android builds     | Web-only deployment -- mobile-friendly styling sufficient   |
+| E2E testing (Detox/Maestro)   | Jest + RNTL sufficient for demonstrating testing competency |
+| Real business logic / backend | Demo data and public APIs sufficient for showcase           |
+| App Store submission          | Vercel web deploy only                                      |
+| Real-time features            | Not needed for a showcase app                               |
 
 ## Traceability
 
-| Requirement | Phase | Status |
-|-------------|-------|--------|
-| AUTH-01 | Phase 3 | Pending |
-| AUTH-02 | Phase 3 | Pending |
-| AUTH-03 | Phase 3 | Pending |
-| AUTH-04 | Phase 3 | Pending |
-| DASH-01 | Phase 4 | Pending |
-| DASH-02 | Phase 4 | Pending |
-| DASH-03 | Phase 4 | Pending |
-| DATA-01 | Phase 5 | Pending |
-| DATA-02 | Phase 5 | Pending |
-| DATA-03 | Phase 5 | Pending |
-| DATA-04 | Phase 5 | Pending |
-| STAT-01 | Phase 5 | Pending |
-| STAT-02 | Phase 5 | Pending |
-| STAT-03 | Phase 5 | Pending |
-| COMP-01 | Phase 2 | Pending |
-| COMP-02 | Phase 2 | Pending |
-| COMP-03 | Phase 2 | Pending |
-| COMP-04 | Phase 2 | Pending |
-| COMP-05 | Phase 2 | Pending |
-| COMP-06 | Phase 2 | Pending |
-| COMP-07 | Phase 2 | Pending |
-| COMP-08 | Phase 2 | Pending |
-| COMP-09 | Phase 2 | Pending |
-| COMP-10 | Phase 2 | Pending |
-| COMP-11 | Phase 2 | Pending |
-| COMP-12 | Phase 2 | Pending |
-| COMP-13 | Phase 2 | Pending |
-| COMP-14 | Phase 2 | Pending |
-| COMP-15 | Phase 2 | Pending |
-| COMP-16 | Phase 2 | Pending |
-| COMP-17 | Phase 2 | Pending |
-| ABUT-01 | Phase 4 | Pending |
-| ABUT-02 | Phase 4 | Pending |
-| ABUT-03 | Phase 4 | Pending |
-| ABUT-04 | Phase 4 | Pending |
-| INFR-01 | Phase 1 | Pending |
-| INFR-02 | Phase 6 | Pending |
-| INFR-03 | Phase 6 | Pending |
-| INFR-04 | Phase 6 | Pending |
-| INFR-05 | Phase 1 | Pending |
-| INFR-06 | Phase 6 | Pending |
-| TEST-01 | Phase 6 | Pending |
-| TEST-02 | Phase 6 | Pending |
-| TEST-03 | Phase 6 | Pending |
+| Requirement | Phase   | Status   |
+| ----------- | ------- | -------- |
+| AUTH-01     | Phase 3 | Pending  |
+| AUTH-02     | Phase 3 | Pending  |
+| AUTH-03     | Phase 3 | Pending  |
+| AUTH-04     | Phase 3 | Pending  |
+| DASH-01     | Phase 4 | Pending  |
+| DASH-02     | Phase 4 | Pending  |
+| DASH-03     | Phase 4 | Pending  |
+| DATA-01     | Phase 5 | Pending  |
+| DATA-02     | Phase 5 | Pending  |
+| DATA-03     | Phase 5 | Pending  |
+| DATA-04     | Phase 5 | Pending  |
+| STAT-01     | Phase 5 | Pending  |
+| STAT-02     | Phase 5 | Pending  |
+| STAT-03     | Phase 5 | Pending  |
+| COMP-01     | Phase 2 | Pending  |
+| COMP-02     | Phase 2 | Pending  |
+| COMP-03     | Phase 2 | Pending  |
+| COMP-04     | Phase 2 | Pending  |
+| COMP-05     | Phase 2 | Pending  |
+| COMP-06     | Phase 2 | Pending  |
+| COMP-07     | Phase 2 | Pending  |
+| COMP-08     | Phase 2 | Pending  |
+| COMP-09     | Phase 2 | Pending  |
+| COMP-10     | Phase 2 | Pending  |
+| COMP-11     | Phase 2 | Pending  |
+| COMP-12     | Phase 2 | Pending  |
+| COMP-13     | Phase 2 | Pending  |
+| COMP-14     | Phase 2 | Pending  |
+| COMP-15     | Phase 2 | Pending  |
+| COMP-16     | Phase 2 | Pending  |
+| COMP-17     | Phase 2 | Pending  |
+| ABUT-01     | Phase 4 | Pending  |
+| ABUT-02     | Phase 4 | Pending  |
+| ABUT-03     | Phase 4 | Pending  |
+| ABUT-04     | Phase 4 | Pending  |
+| INFR-01     | Phase 1 | Pending  |
+| INFR-02     | Phase 6 | Pending  |
+| INFR-03     | Phase 6 | Pending  |
+| INFR-04     | Phase 6 | Pending  |
+| INFR-05     | Phase 1 | Complete |
+| INFR-06     | Phase 6 | Pending  |
+| TEST-01     | Phase 6 | Pending  |
+| TEST-02     | Phase 6 | Pending  |
+| TEST-03     | Phase 6 | Pending  |
 
 **Coverage:**
+
 - v1 requirements: 44 total
 - Mapped to phases: 44
 - Unmapped: 0
 
 ---
-*Requirements defined: 2026-03-10*
-*Last updated: 2026-03-10 after roadmap revision (INFR-01 split, INFR-06 created, react-hook-form added to COMP-09/10/11/12)*
+
+_Requirements defined: 2026-03-10_
+_Last updated: 2026-03-10 after roadmap revision (INFR-01 split, INFR-06 created, react-hook-form added to COMP-09/10/11/12)_
