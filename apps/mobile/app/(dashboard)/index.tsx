@@ -46,10 +46,17 @@ const DEMO_CARDS: DemoCard[] = [
     image: require('../../assets/images/cards/component-library.jpg'),
   },
   {
-    title: 'About',
-    subtitle: 'Fueled requirements checklist, author section, and cover letter.',
-    tags: ['Requirements', 'Author', 'Portfolio'],
-    route: '/(dashboard)/about',
+    title: 'About Me',
+    subtitle: 'Author introduction, cover letter, tech expertise, and contact links.',
+    tags: ['Author', 'Portfolio', 'Contact'],
+    route: '/(dashboard)/about-me',
+    image: require('../../assets/images/cards/about.jpg'),
+  },
+  {
+    title: 'About App',
+    subtitle: 'Fueled requirements checklist and tech stack rationale.',
+    tags: ['Requirements', 'Tech Stack', 'Checklist'],
+    route: '/(dashboard)/about-app',
     image: require('../../assets/images/cards/about.jpg'),
   },
 ];

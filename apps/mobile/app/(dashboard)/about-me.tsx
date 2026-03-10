@@ -49,9 +49,7 @@ export default function AboutMeScreen() {
           {/* Tech tags */}
           <View className="flex-row flex-wrap gap-2 mt-4">
             {AUTHOR.techTags.map((tag) => (
-              <Badge key={tag} variant="default">
-                {tag}
-              </Badge>
+              <Badge key={tag} type="info" label={tag} />
             ))}
           </View>
 

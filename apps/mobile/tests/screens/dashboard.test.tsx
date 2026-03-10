@@ -58,8 +58,8 @@ describe('DashboardScreen', () => {
     expect(queryByText('test@example.com')).toBeNull();
   });
 
-  // DASH-01: Renders all 4 demo card titles
-  it('renders all 4 demo card titles', async () => {
+  // DASH-01: Renders all 5 demo card titles
+  it('renders all 5 demo card titles', async () => {
     const { getByText } = renderDashboard();
 
     await waitFor(() => {
@@ -67,7 +67,8 @@ describe('DashboardScreen', () => {
     });
     expect(getByText('State Management')).toBeTruthy();
     expect(getByText('Component Library')).toBeTruthy();
-    expect(getByText('About')).toBeTruthy();
+    expect(getByText('About Me')).toBeTruthy();
+    expect(getByText('About App')).toBeTruthy();
   });
 
   // DASH-01: Renders Explore text on each card
@@ -76,7 +77,7 @@ describe('DashboardScreen', () => {
 
     await waitFor(() => {
       const exploreTexts = getAllByText('Explore');
-      expect(exploreTexts).toHaveLength(4);
+      expect(exploreTexts).toHaveLength(5);
     });
   });
 });

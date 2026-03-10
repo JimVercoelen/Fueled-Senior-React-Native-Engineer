@@ -22,7 +22,8 @@ function getScreenTitle(pathname: string): string | null {
     'data-fetching': 'Data Fetching',
     'state-management': 'State Management',
     components: 'Components',
-    about: 'About',
+    'about-me': 'About Me',
+    'about-app': 'About App',
     profile: 'Profile',
   };
 
@@ -192,7 +193,8 @@ export default function DashboardLayout() {
         <Stack.Screen name="data-fetching" />
         <Stack.Screen name="state-management" />
         <Stack.Screen name="components" />
-        <Stack.Screen name="about" />
+        <Stack.Screen name="about-me" />
+        <Stack.Screen name="about-app" />
       </Stack>
     </View>
   );
