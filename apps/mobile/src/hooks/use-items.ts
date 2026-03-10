@@ -26,33 +26,33 @@ export function useItems({ page, search, category, priority, status }: UseItemsP
       const from = (page - 1) * PAGE_SIZE;
       const to = from + PAGE_SIZE - 1;
 
-      let query = supabase
-        .from('items')
-        .select('*', { count: 'exact' })
-        .order('created_at', { ascending: false })
-        .range(from, to);
+      const buildQuery = (rangeFrom: number, rangeTo: number) => {
+        let q = supabase
+          .from('items')
+          .select('*', { count: 'exact' })
+          .order('created_at', { ascending: false })
+          .range(rangeFrom, rangeTo);
 
-      if (search) {
-        query = query.ilike('title', `%${search}%`);
-      }
-      if (category) {
-        query = query.eq('category', category);
-      }
-      if (priority) {
-        query = query.eq('priority', priority);
-      }
-      if (status) {
-        query = query.eq('status', status);
-      }
+        if (search) q = q.ilike('title', `%${search}%`);
+        if (category) q = q.eq('category', category);
+        if (priority) q = q.eq('priority', priority);
+        if (status) q = q.eq('status', status);
+        return q;
+      };
 
-      const { data, error, count } = await query;
+      let { data, error, count } = await buildQuery(from, to);
+
+      // If offset exceeds row count, re-fetch from page 1
+      if (error && error.code === 'PGRST103') {
+        ({ data, error, count } = await buildQuery(0, PAGE_SIZE - 1));
+      }
       if (error) throw error;
 
       return {
         items: (data as Item[]) ?? [],
         totalCount: count ?? 0,
         totalPages: Math.max(1, Math.ceil((count ?? 0) / PAGE_SIZE)),
-        currentPage: page,
+        currentPage: count !== null && from >= count ? 1 : page,
       };
     },
   });
@@ -63,7 +63,15 @@ export function useCreateItem() {
 
   return useMutation({
     mutationFn: async (input: CreateItemInput) => {
-      const { data, error } = await supabase.from('items').insert(input).select().single();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (!user) throw new Error('Not authenticated');
+      const { data, error } = await supabase
+        .from('items')
+        .insert({ ...input, user_id: user.id })
+        .select()
+        .single();
       if (error) throw error;
       return data as Item;
     },

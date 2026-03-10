@@ -27,28 +27,28 @@ const ALERT_CONFIG: Record<
   }
 > = {
   success: {
-    bg: 'bg-green-500/10',
+    bg: 'bg-[#0a1f0a]',
     border: 'border-green-500/30',
     icon: 'check-circle',
     iconColor: '#4ade80',
     textColor: 'text-green-400',
   },
   info: {
-    bg: 'bg-blue-500/10',
+    bg: 'bg-[#0a0f1f]',
     border: 'border-blue-500/30',
     icon: 'info',
     iconColor: '#60a5fa',
     textColor: 'text-blue-400',
   },
   warning: {
-    bg: 'bg-yellow-500/10',
+    bg: 'bg-[#1f1a0a]',
     border: 'border-yellow-500/30',
     icon: 'warning',
     iconColor: '#facc15',
     textColor: 'text-yellow-400',
   },
   error: {
-    bg: 'bg-red-500/10',
+    bg: 'bg-[#1f0a0a]',
     border: 'border-red-500/30',
     icon: 'error',
     iconColor: '#f87171',

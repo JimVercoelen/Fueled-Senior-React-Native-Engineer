@@ -53,23 +53,23 @@ const taskSchema = yup.object({
 type TaskFormValues = yup.InferType<typeof taskSchema>;
 
 // -- Badge type mapping --
-const categoryBadgeType: Record<string, 'info' | 'success' | 'warning' | 'error'> = {
-  frontend: 'info',
-  backend: 'success',
-  design: 'warning',
-  devops: 'error',
+const categoryBadgeType: Record<string, string> = {
+  frontend: 'neutral',
+  backend: 'neutral',
+  design: 'neutral',
+  devops: 'neutral',
 };
 
-const priorityBadgeType: Record<string, 'error' | 'warning' | 'info'> = {
+const priorityBadgeType: Record<string, string> = {
   high: 'error',
   medium: 'warning',
   low: 'info',
 };
 
-const statusBadgeType: Record<string, 'success' | 'info' | 'warning'> = {
-  active: 'info',
+const statusBadgeType: Record<string, string> = {
+  active: 'cyan',
   completed: 'success',
-  archived: 'warning',
+  archived: 'neutral',
 };
 
 // -- Web-only styles (cast needed for RN type compat) --
@@ -105,7 +105,19 @@ function FilterSelect({
         <Typography variant="caption" className={value ? 'text-white' : 'text-neutral-400'}>
           {selected?.label ?? `All ${label}`}
         </Typography>
-        <MaterialIcons name="expand-more" size={18} color="rgba(255,255,255,0.5)" />
+        {value ? (
+          <Pressable
+            onPress={(e) => {
+              e.stopPropagation();
+              onChange('');
+            }}
+            hitSlop={8}
+          >
+            <MaterialIcons name="close" size={16} color="rgba(255,255,255,0.5)" />
+          </Pressable>
+        ) : (
+          <MaterialIcons name="expand-more" size={18} color="rgba(255,255,255,0.5)" />
+        )}
       </Pressable>
       <RNModal
         transparent
@@ -274,6 +286,7 @@ function TaskFormModal({
   });
 
   useEffect(() => {
+    if (!visible) return;
     if (editItem) {
       reset({
         title: editItem.title,
@@ -286,12 +299,12 @@ function TaskFormModal({
       reset({
         title: '',
         description: null,
-        category: 'frontend',
-        priority: 'medium',
-        status: 'active',
+        category: '' as any,
+        priority: '' as any,
+        status: '' as any,
       });
     }
-  }, [editItem, reset]);
+  }, [visible, editItem, reset]);
 
   const onSubmit = useCallback(
     (values: TaskFormValues) => {
@@ -473,7 +486,8 @@ function DataFetchingContent() {
 
   const handleCloseForm = useCallback(() => {
     setFormVisible(false);
-    setEditItem(null);
+    // Delay clearing editItem so modal close animation isn't jarring
+    setTimeout(() => setEditItem(null), 200);
   }, []);
 
   const handleDelete = useCallback(
@@ -631,9 +645,18 @@ function DataFetchingContent() {
                   </View>
                 </View>
                 <View className="flex-row flex-wrap gap-1.5">
-                  <Badge type={categoryBadgeType[item.category] ?? 'info'} label={item.category} />
-                  <Badge type={priorityBadgeType[item.priority] ?? 'info'} label={item.priority} />
-                  <Badge type={statusBadgeType[item.status] ?? 'info'} label={item.status} />
+                  <Badge
+                    type={(categoryBadgeType[item.category] ?? 'neutral') as any}
+                    label={item.category}
+                  />
+                  <Badge
+                    type={(priorityBadgeType[item.priority] ?? 'info') as any}
+                    label={item.priority}
+                  />
+                  <Badge
+                    type={(statusBadgeType[item.status] ?? 'neutral') as any}
+                    label={item.status}
+                  />
                 </View>
               </View>
             ))

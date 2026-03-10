@@ -3,7 +3,7 @@ import { View, Platform } from 'react-native';
 import clsx from 'clsx';
 import Typography from './Typography';
 
-type BadgeType = 'success' | 'info' | 'warning' | 'error';
+type BadgeType = 'success' | 'info' | 'warning' | 'error' | 'purple' | 'cyan' | 'neutral' | 'pink';
 
 interface BadgeProps {
   type: BadgeType;
@@ -31,6 +31,26 @@ const colorMap: Record<BadgeType, { bg: string; border: string; text: string }> 
     bg: 'bg-red-500/10',
     border: 'border-red-500/30',
     text: 'text-red-400',
+  },
+  purple: {
+    bg: 'bg-purple-500/10',
+    border: 'border-purple-500/30',
+    text: 'text-purple-400',
+  },
+  cyan: {
+    bg: 'bg-cyan-500/10',
+    border: 'border-cyan-500/30',
+    text: 'text-cyan-400',
+  },
+  neutral: {
+    bg: 'bg-white/5',
+    border: 'border-white/20',
+    text: 'text-neutral-400',
+  },
+  pink: {
+    bg: 'bg-pink-500/10',
+    border: 'border-pink-500/30',
+    text: 'text-pink-400',
   },
 };
 

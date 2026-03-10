@@ -104,10 +104,16 @@ function DashboardHeader() {
   const screenTitle = getScreenTitle(pathname);
   useDocumentTitle(screenTitle);
   const isProfile = pathname.includes('profile');
+  const isSubPage = screenTitle !== null;
 
   return (
     <View className="bg-black border-b border-white/15 px-4 py-3">
       <View className="flex-row items-center h-11 max-w-3xl mx-auto w-full">
+        {isSubPage && (
+          <Pressable onPress={() => router.push('/(dashboard)')} className="mr-2 p-1">
+            <MaterialIcons name="arrow-back" size={20} color="rgba(255,255,255,0.6)" />
+          </Pressable>
+        )}
         <Pressable onPress={() => router.push('/(dashboard)')}>
           <Image
             source={require('../../assets/images/fueled-logo.png')}

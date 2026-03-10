@@ -22,7 +22,7 @@ export default function ModalContent({
   return (
     <View
       className={clsx(
-        'bg-[#0a0a0a] border border-white/15 rounded-2xl w-full max-w-md overflow-hidden',
+        'bg-[#0a0a0a] border border-white/15 rounded-2xl w-full max-w-2xl overflow-hidden',
         className,
       )}
     >

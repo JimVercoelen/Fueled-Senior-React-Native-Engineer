@@ -12,7 +12,9 @@ export default function Modal({ visible, onClose, children, animationType = 'fad
   return (
     <RNModal transparent visible={visible} animationType={animationType} onRequestClose={onClose}>
       <Pressable onPress={onClose} className="flex-1 items-center justify-center bg-black/60 px-4">
-        <Pressable onPress={(e) => e.stopPropagation()}>{children}</Pressable>
+        <Pressable onPress={(e) => e.stopPropagation()} className="w-full max-w-lg">
+          {children}
+        </Pressable>
       </Pressable>
     </RNModal>
   );
