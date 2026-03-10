@@ -8,7 +8,7 @@ export const TECH_STACK: TechStackItem[] = [
   {
     name: 'React Native (Expo SDK 55)',
     category: 'Framework',
-    rationale: 'Cross-platform with web deployment -- reviewers click a URL, no build required',
+    rationale: 'Cross-platform with web deployment. Reviewers click a URL, no build required',
   },
   {
     name: 'TypeScript',
@@ -18,7 +18,7 @@ export const TECH_STACK: TechStackItem[] = [
   {
     name: 'NativeWind v4',
     category: 'Styling',
-    rationale: 'Tailwind utility classes for React Native -- rapid, consistent styling',
+    rationale: 'Tailwind utility classes for React Native. Rapid, consistent styling',
   },
   {
     name: 'Expo Router v5',
@@ -28,7 +28,7 @@ export const TECH_STACK: TechStackItem[] = [
   {
     name: 'Supabase',
     category: 'Backend',
-    rationale: 'Auth, database, and real-time in one hosted service -- no backend to deploy',
+    rationale: 'Auth, database, and real-time in one hosted service. No backend to deploy',
   },
   {
     name: 'TanStack Query',

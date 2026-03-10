@@ -15,7 +15,7 @@ export default function AboutScreen() {
       {/* Page header */}
       <View>
         <Typography variant="h2" className="text-white">
-          About This App
+          About this app
         </Typography>
         <Typography variant="body" className="text-white/60 mt-1">
           A purpose-built technical showcase for Fueled, demonstrating production-quality React

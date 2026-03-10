@@ -9,7 +9,7 @@ export const AUTHOR: AuthorInfo = {
   name: 'Jim Vercoelen',
   title: 'Senior React Native Engineer',
   coverLetter:
-    'This showcase app was purpose-built for Fueled -- every screen demonstrates a specific competency, from component architecture to data fetching patterns. Rather than extracts from NDA projects, this is a clean-room demonstration of production-quality React Native engineering.',
+    'This showcase app was purpose-built for Fueled. Every screen demonstrates a specific competency, from component architecture to data fetching patterns. Rather than extracts from NDA projects, this is a clean-room demonstration of production-quality React Native engineering.',
   links: [
     { label: 'GitHub', url: 'https://github.com/jimvercoelen', icon: 'code' },
     { label: 'Portfolio', url: 'https://vecotech.io', icon: 'language' },
