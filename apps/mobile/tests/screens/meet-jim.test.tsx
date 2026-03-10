@@ -24,7 +24,7 @@ describe('AboutMeScreen', () => {
 
     it('renders cover letter content', () => {
       const { getByText } = renderAboutMe();
-      expect(getByText(/senior full stack engineer with over 8 years/)).toBeTruthy();
+      expect(getByText(/senior full stack engineer with over 10 years/)).toBeTruthy();
     });
 
     it('renders tech tags', () => {

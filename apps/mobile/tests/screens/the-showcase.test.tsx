@@ -10,12 +10,12 @@ describe('AboutAppScreen', () => {
   // ABUT-01: Requirements checklist
   describe('ABUT-01: Requirements checklist', () => {
     it('renders requirement category headings', () => {
-      const { getByText, getAllByText } = renderAboutApp();
-      expect(getByText('Authentication')).toBeTruthy();
-      expect(getAllByText('Dashboard').length).toBeGreaterThanOrEqual(1);
-      expect(getByText('Component Library')).toBeTruthy();
-      expect(getByText('Data Fetching')).toBeTruthy();
-      expect(getByText('State Management')).toBeTruthy();
+      const { getByText } = renderAboutApp();
+      expect(getByText(/Authentication\s+·/)).toBeTruthy();
+      expect(getByText(/Dashboard\s+·/)).toBeTruthy();
+      expect(getByText(/Component Library\s+·/)).toBeTruthy();
+      expect(getByText(/Data Fetching\s+·/)).toBeTruthy();
+      expect(getByText(/State Management\s+·/)).toBeTruthy();
     });
 
     it('renders requirement IDs', () => {

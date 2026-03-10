@@ -7,7 +7,7 @@ import ScrollToTop from '@/components/ui/ScrollToTop';
 import { useCacheEntries } from '@/hooks/use-cache-entries';
 import type { CacheEntry } from '@/hooks/use-cache-entries';
 
-function formatQueryKey(queryKey: unknown[]): string {
+function formatQueryKey(queryKey: readonly unknown[]): string {
   return queryKey
     .map((part) => {
       if (typeof part === 'string') return part;
@@ -30,11 +30,9 @@ function formatRelativeTime(timestamp: number): string {
   return `${Math.floor(diff / 3600)}h ago`;
 }
 
-function truncateJson(data: unknown): string {
+function stringifyJson(data: unknown): string {
   if (data === undefined) return 'undefined';
-  const json = JSON.stringify(data, null, 2);
-  if (json.length > 500) return json.slice(0, 500) + '\n...';
-  return json;
+  return JSON.stringify(data, null, 2);
 }
 
 function statusBadgeType(status: string): 'success' | 'info' | 'error' {
@@ -104,20 +102,15 @@ function CacheEntryCard({ entry }: { entry: CacheEntry }) {
         Last updated: {formatRelativeTime(entry.dataUpdatedAt)}
       </Typography>
 
-      {/* Data preview */}
-      <View
-        className="bg-black/50 border border-white/10 rounded-xl p-3"
-        style={{ maxHeight: 200, overflow: 'hidden' }}
-      >
-        <ScrollView nestedScrollEnabled style={{ maxHeight: 180 }}>
-          <Typography
-            variant="caption"
-            className="text-neutral-400"
-            style={{ fontFamily: 'monospace' }}
-          >
-            {truncateJson(entry.data)}
-          </Typography>
-        </ScrollView>
+      {/* Data preview - full content, no clipping; main ScrollView scrolls everything */}
+      <View className="bg-black/50 border border-white/10 rounded-xl p-3">
+        <Typography
+          variant="caption"
+          className="text-neutral-400"
+          style={{ fontFamily: 'monospace' }}
+        >
+          {stringifyJson(entry.data)}
+        </Typography>
       </View>
     </View>
   );
@@ -141,7 +134,7 @@ export default function StateManagementScreen() {
         {/* Title */}
         <Typography variant="h2">State Management</Typography>
         <Typography variant="body" className="text-neutral-400 mt-2 mb-6">
-          Live TanStack Query cache viewer -- read-only snapshot of current app state
+          Live TanStack Query cache viewer. Read-only snapshot of current app state
         </Typography>
 
         {entries.length > 0 ? (

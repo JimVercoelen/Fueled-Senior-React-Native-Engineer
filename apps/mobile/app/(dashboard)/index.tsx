@@ -27,7 +27,7 @@ const DEMO_CARDS: DemoCard[] = [
   {
     title: 'Meet Jim',
     subtitle:
-      'Meet the engineer behind this showcase. 8+ years of full stack experience across TypeScript, React, Node.js, and Python.',
+      'Meet the engineer behind this showcase. 10+ years of full stack experience across TypeScript, React, Node.js, and Python.',
     tags: ['Cover Letter', 'Contact', 'Portfolio'],
     route: '/(dashboard)/meet-jim',
     image: require('../../assets/images/cards/meet-jim.jpg'),

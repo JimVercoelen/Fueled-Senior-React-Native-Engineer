@@ -14,10 +14,11 @@ export function useCacheEntries(): CacheEntry[] {
   const [entries, setEntries] = useState<CacheEntry[]>([]);
 
   useEffect(() => {
-    const update = () => {
-      const all = queryClient.getQueryCache().getAll();
-      setEntries(
-        all.map((query) => ({
+    const readSnapshot = (): CacheEntry[] =>
+      queryClient
+        .getQueryCache()
+        .getAll()
+        .map((query) => ({
           queryKey: query.queryKey,
           status: query.state.status,
           dataUpdatedAt: query.state.dataUpdatedAt,
@@ -25,12 +26,16 @@ export function useCacheEntries(): CacheEntry[] {
           dataLength: Array.isArray((query.state.data as any)?.items)
             ? (query.state.data as any).items.length
             : null,
-        })),
-      );
-    };
+        }));
 
-    update(); // initial read
-    const unsubscribe = queryClient.getQueryCache().subscribe(update);
+    setEntries(readSnapshot());
+
+    const unsubscribe = queryClient.getQueryCache().subscribe(() => {
+      // Defer setState so we never update during another component's render.
+      // TanStack Query can notify subscribers synchronously when the cache
+      // changes during render (e.g. when DataFetchingContent mounts/queries).
+      queueMicrotask(() => setEntries(readSnapshot()));
+    });
     return unsubscribe;
   }, [queryClient]);
 
