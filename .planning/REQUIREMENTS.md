@@ -60,7 +60,7 @@
 
 ### Infrastructure
 
-- [ ] **INFR-01**: Supabase cloud project with auth enabled (magic link works with default Supabase email in dev)
+- [x] **INFR-01**: Supabase cloud project with auth enabled (magic link works with default Supabase email in dev)
 - [ ] **INFR-02**: Expo web build deployed on Vercel
 - [ ] **INFR-03**: GitHub Actions CI/CD -- lint + test + build on push, deploy on merge to master (tests must pass)
 - [ ] **INFR-04**: 3 READMEs (root, apps/mobile, infra/supabase)
@@ -134,7 +134,7 @@
 | ABUT-02     | Phase 4 | Pending  |
 | ABUT-03     | Phase 4 | Pending  |
 | ABUT-04     | Phase 4 | Pending  |
-| INFR-01     | Phase 1 | Pending  |
+| INFR-01     | Phase 1 | Complete |
 | INFR-02     | Phase 6 | Pending  |
 | INFR-03     | Phase 6 | Pending  |
 | INFR-04     | Phase 6 | Pending  |
