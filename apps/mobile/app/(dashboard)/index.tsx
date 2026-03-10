@@ -12,6 +12,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { Typography } from '@/components';
+import { useSession } from '@/contexts/auth';
 
 type DemoCard = {
   title: string;
@@ -147,12 +148,22 @@ function DashboardCard({ card }: { card: DemoCard }) {
 }
 
 export default function DashboardScreen() {
+  const { session } = useSession();
+
   return (
     <ScrollView
       className="flex-1"
       contentContainerClassName="p-4 pb-8 max-w-3xl mx-auto w-full gap-4"
       style={{ backgroundColor: 'transparent' }}
     >
+      <View className="mb-2">
+        <Typography variant="h2">Welcome back</Typography>
+        {session?.user?.email && (
+          <Typography variant="body" className="text-white/60 mt-1">
+            {session.user.email}
+          </Typography>
+        )}
+      </View>
       {DEMO_CARDS.map((card) => (
         <DashboardCard key={card.route} card={card} />
       ))}
