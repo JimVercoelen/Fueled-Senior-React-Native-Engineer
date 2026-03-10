@@ -1,18 +1,10 @@
 # Dependencies
 node_modules/
 
-# Expo
-.expo/
-dist/
-web-build/
-
 # Environment
 .env
 .env.local
 .env.*.local
-
-# Claude
-.claude/
 
 # IDE
 .vscode/
@@ -22,8 +14,8 @@ web-build/
 .DS_Store
 Thumbs.db
 
-# Supabase local
-infra/supabase/.temp/
+# Claude
+.claude/
 
 # Include planning
 !.planning/

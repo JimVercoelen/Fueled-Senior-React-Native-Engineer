@@ -131,6 +131,7 @@ Plans:
 4. Resend is configured as the custom email provider with info@vecotech.io as the sender -- magic link emails arrive from this address in production
 5. The app is live and accessible at a Vercel URL -- a reviewer can click the link and use the full app
 6. Three READMEs exist (root overview, apps/mobile setup guide, infra/supabase guide) with clear setup and architecture documentation
+7. Final audit of package.json dependencies (used vs unused), .gitignore files (no duplication, correct scope), and READMEs (accurate after all phases)
    **Plans**: TBD
 
 Plans:
