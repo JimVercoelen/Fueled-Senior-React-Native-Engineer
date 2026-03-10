@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Pressable } from 'react-native';
+import { View, Pressable, Platform } from 'react-native';
 import clsx from 'clsx';
 import Typography from '../ui/Typography';
 
@@ -15,6 +15,9 @@ interface TabsProps {
   className?: string;
 }
 
+const webStyles =
+  Platform.OS === 'web' ? { outlineStyle: 'none' as const, userSelect: 'none' as const } : {};
+
 export default function Tabs({ tabs, activeTab, onTabChange, className }: TabsProps) {
   return (
     <View className={clsx('flex-row border-b border-white/10', className)}>
@@ -25,6 +28,7 @@ export default function Tabs({ tabs, activeTab, onTabChange, className }: TabsPr
             key={tab.key}
             onPress={() => onTabChange(tab.key)}
             className={clsx('px-4 py-3', isActive && 'border-b-2 border-primary')}
+            style={webStyles}
           >
             <Typography variant="body" className={isActive ? 'text-white' : 'text-white/50'}>
               {tab.label}

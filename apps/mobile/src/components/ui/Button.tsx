@@ -1,15 +1,14 @@
-import React from 'react';
-import { Pressable, ActivityIndicator, View } from 'react-native';
+import React, { useState } from 'react';
+import { Pressable, ActivityIndicator, View, Platform } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import clsx from 'clsx';
 import Typography from './Typography';
-import { Gradients } from '../../constants/colors';
 
-type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'text';
-type ButtonSize = 'sm' | 'md';
-type ButtonColor = 'primary' | 'danger';
+type ButtonVariant = 'text' | 'contained' | 'outlined';
+type ButtonSize = 'sm' | 'md' | 'lg';
+type ButtonColor = 'primary' | 'secondary' | 'success' | 'error';
 
 interface ButtonProps {
   variant?: ButtonVariant;
@@ -17,7 +16,8 @@ interface ButtonProps {
   color?: ButtonColor;
   disabled?: boolean;
   loading?: boolean;
-  label: string;
+  link?: boolean;
+  label?: string;
   icon?: keyof typeof MaterialIcons.glyphMap;
   iconSize?: number;
   onPress?: () => void;
@@ -25,21 +25,43 @@ interface ButtonProps {
 }
 
 const sizeStyles: Record<ButtonSize, { paddingVertical: number; paddingHorizontal: number }> = {
-  sm: { paddingVertical: 8, paddingHorizontal: 16 },
-  md: { paddingVertical: 12, paddingHorizontal: 24 },
+  sm: { paddingVertical: 6, paddingHorizontal: 14 },
+  md: { paddingVertical: 10, paddingHorizontal: 20 },
+  lg: { paddingVertical: 14, paddingHorizontal: 28 },
+};
+
+const iconOnlySizeStyles: Record<ButtonSize, { padding: number }> = {
+  sm: { padding: 6 },
+  md: { padding: 10 },
+  lg: { padding: 14 },
 };
 
 const iconSizes: Record<ButtonSize, number> = {
   sm: 16,
   md: 20,
+  lg: 24,
 };
 
+const colorMap: Record<
+  ButtonColor,
+  { gradient: readonly [string, string]; solid: string; text: string }
+> = {
+  primary: { gradient: ['#2563eb', '#06b6d4'], solid: '#2563eb', text: '#3b82f6' },
+  secondary: { gradient: ['#7c3aed', '#8b5cf6'], solid: '#7c3aed', text: '#8b5cf6' },
+  success: { gradient: ['#16a34a', '#22c55e'], solid: '#16a34a', text: '#22c55e' },
+  error: { gradient: ['#ef4444', '#f97316'], solid: '#ef4444', text: '#ef4444' },
+};
+
+const webStyles =
+  Platform.OS === 'web' ? { userSelect: 'none' as const, outlineStyle: 'none' as const } : {};
+
 export default function Button({
-  variant = 'primary',
+  variant = 'contained',
   size = 'md',
   color = 'primary',
   disabled = false,
   loading = false,
+  link = false,
   label,
   icon,
   iconSize,
@@ -47,6 +69,7 @@ export default function Button({
   className,
 }: ButtonProps) {
   const scale = useSharedValue(1);
+  const [hovered, setHovered] = useState(false);
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ scale: scale.value }],
@@ -65,32 +88,56 @@ export default function Button({
   };
 
   const resolvedIconSize = iconSize ?? iconSizes[size];
-  const gradientColors = color === 'danger' ? Gradients.danger : Gradients.primary;
   const isDisabled = disabled || loading;
+  const isIconOnly = !label && !!icon;
+  const colors = colorMap[color];
+
+  const getTextColor = () => {
+    if (variant === 'contained') return '#ffffff';
+    return colors.text;
+  };
+
+  const getIconColor = () => {
+    if (variant === 'contained') return '#ffffff';
+    return colors.text;
+  };
+
+  const getLoaderColor = () => {
+    if (variant === 'contained') return '#ffffff';
+    return colors.text;
+  };
+
+  const textColor = getTextColor();
 
   const renderContent = () => (
     <View className="flex-row items-center justify-center gap-2">
       {loading ? (
-        <ActivityIndicator size="small" color="#ffffff" />
+        <ActivityIndicator size="small" color={getLoaderColor()} />
       ) : icon ? (
-        <MaterialIcons name={icon} size={resolvedIconSize} color="#ffffff" />
+        <MaterialIcons name={icon} size={resolvedIconSize} color={getIconColor()} />
       ) : null}
-      <Typography variant="button" className={clsx('text-white', size === 'sm' && 'text-sm')}>
-        {label}
-      </Typography>
+      {label && (
+        <Typography
+          variant="button"
+          className={clsx(size === 'sm' && 'text-sm', size === 'lg' && 'text-base')}
+          style={{ color: textColor }}
+        >
+          {label}
+        </Typography>
+      )}
     </View>
   );
 
-  const renderGradientButton = () => (
+  const hoverOpacity = hovered && !isDisabled ? 0.85 : 1;
+
+  const renderContainedButton = () => (
     <LinearGradient
-      colors={[...gradientColors]}
+      colors={[...colors.gradient]}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={[
-        {
-          borderRadius: 12,
-          ...sizeStyles[size],
-        },
+        { borderRadius: 12, opacity: hoverOpacity },
+        isIconOnly ? iconOnlySizeStyles[size] : sizeStyles[size],
       ]}
     >
       {renderContent()}
@@ -99,13 +146,18 @@ export default function Button({
 
   const renderStyledButton = () => (
     <View
-      className={clsx(
-        'rounded-xl',
-        variant === 'secondary' && 'bg-white/5 border border-white/15',
-        variant === 'outline' && 'border border-white/20',
-        variant === 'text' && '',
-      )}
-      style={sizeStyles[size]}
+      className={clsx('rounded-xl', variant === 'outlined' && 'border')}
+      style={[
+        isIconOnly ? iconOnlySizeStyles[size] : sizeStyles[size],
+        variant === 'outlined' && {
+          borderColor: hovered && !isDisabled ? colors.text : colors.text + '40',
+        },
+        variant === 'text' &&
+          hovered &&
+          !isDisabled && {
+            backgroundColor: 'rgba(255,255,255,0.05)',
+          },
+      ]}
     >
       {renderContent()}
     </View>
@@ -117,10 +169,13 @@ export default function Button({
         onPress={isDisabled ? undefined : onPress}
         onPressIn={isDisabled ? undefined : handlePressIn}
         onPressOut={isDisabled ? undefined : handlePressOut}
+        onHoverIn={() => setHovered(true)}
+        onHoverOut={() => setHovered(false)}
         className={clsx(isDisabled && 'opacity-40')}
         disabled={isDisabled}
+        style={[webStyles, isDisabled && Platform.OS === 'web' ? { cursor: 'not-allowed' } : {}]}
       >
-        {variant === 'primary' ? renderGradientButton() : renderStyledButton()}
+        {variant === 'contained' ? renderContainedButton() : renderStyledButton()}
       </Pressable>
     </Animated.View>
   );

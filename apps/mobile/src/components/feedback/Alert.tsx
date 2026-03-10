@@ -68,7 +68,7 @@ function AlertContent({
   return (
     <View
       className={clsx(
-        'flex-row items-start px-4 py-3 rounded-xl border',
+        'flex-row items-center px-4 py-3 rounded-xl border',
         config.bg,
         config.border,
         className,

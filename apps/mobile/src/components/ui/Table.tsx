@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Platform } from 'react-native';
 import clsx from 'clsx';
 import Typography from './Typography';
 
@@ -9,9 +9,14 @@ interface TableProps {
   className?: string;
 }
 
+const webStyles = Platform.OS === 'web' ? { userSelect: 'none' as const } : {};
+
 export default function Table({ headers, rows, className }: TableProps) {
   return (
-    <View className={clsx('border border-white/15 rounded-2xl overflow-hidden', className)}>
+    <View
+      className={clsx('border border-white/15 rounded-2xl overflow-hidden', className)}
+      style={webStyles}
+    >
       {/* Header row */}
       <View className="flex-row bg-white/5 px-4 py-3 border-b border-white/15">
         {headers.map((header, index) => (

@@ -1,5 +1,5 @@
 import React, { useRef, useState, useCallback } from 'react';
-import { Modal, Pressable, View } from 'react-native';
+import { Modal, Pressable, View, Platform } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import clsx from 'clsx';
 import Typography from '../ui/Typography';
@@ -13,7 +13,7 @@ interface DropdownItem {
 }
 
 interface DropdownProps {
-  trigger: React.ReactNode;
+  trigger: React.ReactElement;
   items: DropdownItem[];
   className?: string;
 }
@@ -24,6 +24,9 @@ interface TriggerPosition {
   width: number;
   height: number;
 }
+
+const webStyles =
+  Platform.OS === 'web' ? { outlineStyle: 'none' as const, userSelect: 'none' as const } : {};
 
 export default function Dropdown({ trigger, items, className }: DropdownProps) {
   const [open, setOpen] = useState(false);
@@ -38,7 +41,6 @@ export default function Dropdown({ trigger, items, className }: DropdownProps) {
   const handleOpen = useCallback(() => {
     if (!triggerRef.current) return;
 
-    // Web: use getBoundingClientRect
     const element = triggerRef.current as any;
     if (typeof element.getBoundingClientRect === 'function') {
       const rect = element.getBoundingClientRect();
@@ -50,7 +52,6 @@ export default function Dropdown({ trigger, items, className }: DropdownProps) {
       });
       setOpen(true);
     } else {
-      // Native: measureInWindow
       element.measureInWindow((x: number, y: number, width: number, height: number) => {
         setPosition({ x, y, width, height });
         setOpen(true);
@@ -66,7 +67,7 @@ export default function Dropdown({ trigger, items, className }: DropdownProps) {
   return (
     <View className={className}>
       <View ref={triggerRef} collapsable={false}>
-        <Pressable onPress={handleOpen}>{trigger}</Pressable>
+        {React.cloneElement(trigger, { onPress: handleOpen })}
       </View>
 
       <Modal transparent visible={open} animationType="fade" onRequestClose={() => setOpen(false)}>
@@ -85,7 +86,8 @@ export default function Dropdown({ trigger, items, className }: DropdownProps) {
                 {index > 0 && <View className="h-px bg-white/10" />}
                 <Pressable
                   onPress={() => handleItemPress(item)}
-                  className="flex-row items-center px-4 py-3 hover:bg-white/5"
+                  className="flex-row items-center px-4 py-3"
+                  style={webStyles}
                 >
                   {item.icon && (
                     <MaterialIcons

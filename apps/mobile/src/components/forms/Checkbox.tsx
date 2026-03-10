@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, View } from 'react-native';
+import { Pressable, View, Platform } from 'react-native';
 import { Controller, Control, FieldPath, FieldValues } from 'react-hook-form';
 import { MaterialIcons } from '@expo/vector-icons';
 import clsx from 'clsx';
@@ -14,6 +14,9 @@ interface CheckboxProps<T extends FieldValues> {
   disabled?: boolean;
   className?: string;
 }
+
+const webStyles =
+  Platform.OS === 'web' ? { outlineStyle: 'none' as const, userSelect: 'none' as const } : {};
 
 export default function Checkbox<T extends FieldValues>({
   control,
@@ -38,6 +41,8 @@ export default function Checkbox<T extends FieldValues>({
           <Pressable
             onPress={disabled ? undefined : () => onChange(!value)}
             className="flex-row items-center gap-3"
+            disabled={disabled}
+            style={[webStyles, disabled && Platform.OS === 'web' ? { cursor: 'not-allowed' } : {}]}
           >
             <View
               className={clsx(

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Platform } from 'react-native';
 import clsx from 'clsx';
 import Typography from './Typography';
 
@@ -34,11 +34,16 @@ const colorMap: Record<BadgeType, { bg: string; border: string; text: string }> 
   },
 };
 
+const webStyles = Platform.OS === 'web' ? { userSelect: 'none' as const } : {};
+
 export default function Badge({ type, label, className }: BadgeProps) {
   const colors = colorMap[type];
 
   return (
-    <View className={clsx('px-3 py-1 rounded-lg border', colors.bg, colors.border, className)}>
+    <View
+      className={clsx('px-3 py-1 rounded-lg border', colors.bg, colors.border, className)}
+      style={webStyles}
+    >
       <Typography variant="caption" className={clsx('uppercase', colors.text)}>
         {label}
       </Typography>

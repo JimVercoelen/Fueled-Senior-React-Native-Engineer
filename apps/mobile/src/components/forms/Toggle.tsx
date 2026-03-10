@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, View } from 'react-native';
+import { Pressable, View, Platform } from 'react-native';
 import { Controller, Control, FieldPath, FieldValues } from 'react-hook-form';
 import Animated, { useAnimatedStyle, withTiming, useDerivedValue } from 'react-native-reanimated';
 import clsx from 'clsx';
@@ -14,6 +14,9 @@ interface ToggleProps<T extends FieldValues> {
   disabled?: boolean;
   className?: string;
 }
+
+const webStyles =
+  Platform.OS === 'web' ? { outlineStyle: 'none' as const, userSelect: 'none' as const } : {};
 
 export default function Toggle<T extends FieldValues>({
   control,
@@ -75,7 +78,11 @@ function ToggleInner({
       disabled={disabled}
       className={className}
     >
-      <Pressable onPress={disabled ? undefined : onToggle}>
+      <Pressable
+        onPress={disabled ? undefined : onToggle}
+        disabled={disabled}
+        style={[webStyles, disabled && Platform.OS === 'web' ? { cursor: 'not-allowed' } : {}]}
+      >
         <View className="flex-row items-center justify-between">
           {label != null && (
             <Typography variant="body" className="flex-1 mr-3 text-white">

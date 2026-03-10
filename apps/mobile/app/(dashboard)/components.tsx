@@ -23,8 +23,6 @@ import {
   Modal,
   ModalContent,
   Alert,
-  SkeletonLine,
-  SkeletonCard,
   // Layout
   List,
   Tabs,
@@ -91,9 +89,9 @@ function CodeSnippet({ code }: { code: string }) {
 
 function SectionHeading({ children }: { children: string }) {
   return (
-    <View className="mt-10 mb-4">
+    <View className="mt-16 mb-4">
       <Divider />
-      <Typography variant="h2" className="mt-4">
+      <Typography variant="h1" className="mt-6">
         {children}
       </Typography>
     </View>
@@ -102,8 +100,8 @@ function SectionHeading({ children }: { children: string }) {
 
 function SubSection({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <View className="mt-6">
-      <Typography variant="label" className="mb-3 text-white/50">
+    <View className="mt-10">
+      <Typography variant="label" className="mb-4 text-white/50">
         {label}
       </Typography>
       {children}
@@ -186,30 +184,128 @@ export default function ComponentsScreen() {
 
       {/* Button */}
       <SubSection label="Button">
-        <View className="gap-4">
-          <View className="flex-row flex-wrap gap-3 items-center">
-            <Button variant="primary" label="Primary" onPress={() => {}} />
-            <Button variant="secondary" label="Secondary" onPress={() => {}} />
-            <Button variant="outline" label="Outline" onPress={() => {}} />
-            <Button variant="primary" label="Disabled" disabled />
+        <View className="gap-6">
+          {/* Basic Variants */}
+          <View>
+            <Typography variant="caption" className="mb-2 text-white/40">
+              Variants
+            </Typography>
+            <View className="flex-row flex-wrap gap-3 items-center">
+              <Button variant="text" label="Text" onPress={() => {}} />
+              <Button variant="contained" label="Contained" onPress={() => {}} />
+              <Button variant="outlined" label="Outlined" onPress={() => {}} />
+            </View>
           </View>
-          <View className="flex-row flex-wrap gap-3 items-center">
-            <Button variant="primary" size="sm" label="Small" onPress={() => {}} />
-            <Button variant="primary" label="With Icon" icon="add" onPress={() => {}} />
-            <Button variant="primary" label="Loading" loading />
+
+          {/* Text Variant States */}
+          <View>
+            <Typography variant="caption" className="mb-2 text-white/40">
+              Text
+            </Typography>
+            <View className="flex-row flex-wrap gap-3 items-center">
+              <Button variant="text" label="Primary" onPress={() => {}} />
+              <Button variant="text" label="Disabled" disabled />
+              <Button variant="text" label="Link" link onPress={() => {}} />
+              <Button variant="text" label="Loading" loading />
+            </View>
           </View>
-          <View className="flex-row flex-wrap gap-3 items-center">
-            <Button
-              variant="primary"
-              color="danger"
-              label="Danger"
-              icon="delete"
-              onPress={() => {}}
-            />
+
+          {/* Contained Variant States */}
+          <View>
+            <Typography variant="caption" className="mb-2 text-white/40">
+              Contained
+            </Typography>
+            <View className="flex-row flex-wrap gap-3 items-center">
+              <Button variant="contained" label="Contained" onPress={() => {}} />
+              <Button variant="contained" label="Disabled" disabled />
+              <Button variant="contained" label="Link" link onPress={() => {}} />
+              <Button variant="contained" label="Loading" loading />
+            </View>
+          </View>
+
+          {/* Outlined Variant States */}
+          <View>
+            <Typography variant="caption" className="mb-2 text-white/40">
+              Outlined
+            </Typography>
+            <View className="flex-row flex-wrap gap-3 items-center">
+              <Button variant="outlined" label="Outlined" onPress={() => {}} />
+              <Button variant="outlined" label="Disabled" disabled />
+              <Button variant="outlined" label="Link" link onPress={() => {}} />
+              <Button variant="outlined" label="Loading" loading />
+            </View>
+          </View>
+
+          {/* Colors */}
+          <View>
+            <Typography variant="caption" className="mb-2 text-white/40">
+              Colors
+            </Typography>
+            <View className="flex-row flex-wrap gap-3 items-center">
+              <Button variant="contained" color="primary" label="Primary" onPress={() => {}} />
+              <Button variant="contained" color="secondary" label="Secondary" onPress={() => {}} />
+              <Button variant="contained" color="success" label="Success" onPress={() => {}} />
+              <Button variant="contained" color="error" label="Error" onPress={() => {}} />
+            </View>
+          </View>
+
+          {/* Sizes */}
+          <View>
+            <Typography variant="caption" className="mb-2 text-white/40">
+              Sizes
+            </Typography>
+            <View className="gap-3">
+              <View className="flex-row flex-wrap gap-3 items-center">
+                <Button variant="text" size="sm" label="Small" onPress={() => {}} />
+                <Button variant="text" size="md" label="Medium" onPress={() => {}} />
+                <Button variant="text" size="lg" label="Large" onPress={() => {}} />
+              </View>
+              <View className="flex-row flex-wrap gap-3 items-center">
+                <Button variant="outlined" size="sm" label="Small" onPress={() => {}} />
+                <Button variant="outlined" size="md" label="Medium" onPress={() => {}} />
+                <Button variant="outlined" size="lg" label="Large" onPress={() => {}} />
+              </View>
+              <View className="flex-row flex-wrap gap-3 items-center">
+                <Button variant="contained" size="sm" label="Small" onPress={() => {}} />
+                <Button variant="contained" size="md" label="Medium" onPress={() => {}} />
+                <Button variant="contained" size="lg" label="Large" onPress={() => {}} />
+              </View>
+            </View>
+          </View>
+
+          {/* With Icons */}
+          <View>
+            <Typography variant="caption" className="mb-2 text-white/40">
+              With Icons
+            </Typography>
+            <View className="flex-row flex-wrap gap-3 items-center">
+              <Button variant="contained" label="Add" icon="add" onPress={() => {}} />
+              <Button variant="outlined" label="Edit" icon="edit" onPress={() => {}} />
+              <Button
+                variant="text"
+                label="Delete"
+                icon="delete"
+                color="error"
+                onPress={() => {}}
+              />
+            </View>
+          </View>
+
+          {/* Icon Button */}
+          <View>
+            <Typography variant="caption" className="mb-2 text-white/40">
+              Icon Button
+            </Typography>
+            <View className="flex-row flex-wrap gap-3 items-center">
+              <Button variant="contained" icon="add" onPress={() => {}} />
+              <Button variant="outlined" icon="edit" onPress={() => {}} />
+              <Button variant="text" icon="delete" color="error" onPress={() => {}} />
+              <Button variant="contained" icon="search" color="secondary" onPress={() => {}} />
+            </View>
           </View>
         </View>
         <CodeSnippet
-          code={`<Button variant="primary" label="Save" onPress={handleSave} />\n<Button variant="outline" label="Cancel" onPress={handleCancel} />\n<Button variant="primary" color="danger" label="Delete" icon="delete" />`}
+          code={`<Button variant="contained" label="Save" onPress={handleSave} />\n<Button variant="outlined" label="Cancel" onPress={handleCancel} />\n<Button variant="text" label="Link" link onPress={handleLink} />\n<Button variant="contained" icon="add" /> {/* icon-only */}`}
         />
       </SubSection>
 
@@ -219,21 +315,20 @@ export default function ComponentsScreen() {
           <Card
             header={<Typography variant="h3">Card Title</Typography>}
             footer={
-              <View className="flex-row justify-end">
-                <Button variant="text" size="sm" label="Action" onPress={() => {}} />
+              <View className="flex-row justify-end gap-3">
+                <Button variant="text" size="sm" label="Cancel" onPress={() => {}} />
+                <Button variant="contained" size="sm" label="Confirm" onPress={() => {}} />
               </View>
             }
           >
-            <Typography variant="body">
-              Card body content with header and footer slots. Cards use subtle borders for
-              definition.
+            <Typography variant="body" className="text-neutral-300">
+              This is the card body. It supports any content between the header and footer slots.
             </Typography>
           </Card>
 
           <Card onPress={() => {}}>
-            <Typography variant="body">
-              Pressable card - tap to see scale animation. Useful for navigation items and
-              interactive lists.
+            <Typography variant="body" className="text-white">
+              Pressable card — tap to see scale animation.
             </Typography>
           </Card>
         </View>
@@ -295,7 +390,7 @@ export default function ComponentsScreen() {
       <SubSection label="Modal">
         <View className="gap-4">
           <Button
-            variant="outline"
+            variant="outlined"
             label="Open Modal"
             icon="open-in-new"
             onPress={() => setModalVisible(true)}
@@ -307,13 +402,13 @@ export default function ComponentsScreen() {
               footer={
                 <View className="flex-row justify-end gap-3">
                   <Button
-                    variant="outline"
+                    variant="outlined"
                     size="sm"
                     label="Cancel"
                     onPress={() => setModalVisible(false)}
                   />
                   <Button
-                    variant="primary"
+                    variant="contained"
                     size="sm"
                     label="Confirm"
                     onPress={() => setModalVisible(false)}
@@ -359,49 +454,6 @@ export default function ComponentsScreen() {
         />
       </SubSection>
 
-      {/* Skeleton */}
-      <SubSection label="Skeleton">
-        <View className="gap-4">
-          <View className="gap-3">
-            <Typography variant="caption" className="text-white/40">
-              SkeletonLine widths
-            </Typography>
-            <SkeletonLine width="100%" />
-            <SkeletonLine width="75%" />
-            <SkeletonLine width="50%" />
-          </View>
-
-          <View>
-            <Typography variant="caption" className="text-white/40 mb-3">
-              SkeletonCard
-            </Typography>
-            <SkeletonCard lines={3} />
-          </View>
-
-          <View>
-            <Typography variant="caption" className="text-white/40 mb-3">
-              Skeleton vs Loaded
-            </Typography>
-            <View className="flex-row gap-3">
-              <View className="flex-1">
-                <SkeletonCard lines={3} />
-              </View>
-              <View className="flex-1">
-                <Card>
-                  <Typography variant="body" className="text-white">
-                    Loaded content
-                  </Typography>
-                  <Typography variant="caption" className="mt-1">
-                    Data has finished loading and is now visible to the user.
-                  </Typography>
-                </Card>
-              </View>
-            </View>
-          </View>
-        </View>
-        <CodeSnippet code={`<SkeletonLine width="75%" />\n<SkeletonCard lines={3} />`} />
-      </SubSection>
-
       {/* ===== LAYOUT SECTION ===== */}
       <SectionHeading>Layout</SectionHeading>
 
@@ -410,14 +462,14 @@ export default function ComponentsScreen() {
         <Table
           headers={['Name', 'Role', 'Status']}
           rows={[
-            ['Alice Johnson', 'Engineer', <Badge key="s1" type="success" label="Active" />],
-            ['Bob Smith', 'Designer', <Badge key="s2" type="info" label="Remote" />],
-            ['Carol White', 'PM', <Badge key="s3" type="warning" label="Away" />],
-            ['Dave Brown', 'QA', <Badge key="s4" type="error" label="Offline" />],
+            ['Alice Johnson', 'Engineer', 'Active'],
+            ['Bob Smith', 'Designer', 'Remote'],
+            ['Carol White', 'PM', 'Away'],
+            ['Dave Brown', 'QA', 'Offline'],
           ]}
         />
         <CodeSnippet
-          code={`<Table\n  headers={['Name', 'Role', 'Status']}\n  rows={[\n    ['Alice', 'Engineer', <Badge type="success" label="Active" />],\n    ['Bob', 'Designer', <Badge type="info" label="Remote" />],\n  ]}\n/>`}
+          code={`<Table\n  headers={['Name', 'Role', 'Status']}\n  rows={[\n    ['Alice', 'Engineer', 'Active'],\n    ['Bob', 'Designer', 'Remote'],\n  ]}\n/>`}
         />
       </SubSection>
 
@@ -443,9 +495,7 @@ export default function ComponentsScreen() {
       {/* Dropdown */}
       <SubSection label="Dropdown">
         <Dropdown
-          trigger={
-            <Button variant="secondary" label="Actions" icon="more-vert" onPress={() => {}} />
-          }
+          trigger={<Button variant="outlined" label="Actions" icon="more-vert" />}
           items={[
             { key: 'edit', label: 'Edit', icon: 'edit', onPress: () => {} },
             { key: 'duplicate', label: 'Duplicate', icon: 'content-copy', onPress: () => {} },
@@ -666,26 +716,17 @@ function ToggleDemos() {
   const { control } = useForm({
     defaultValues: {
       emailNotifications: false,
-      darkMode: true,
     },
   });
 
   return (
     <SubSection label="Toggle">
-      <View className="gap-4">
-        <Toggle
-          control={control}
-          name="emailNotifications"
-          label="Email Notifications"
-          helperText="Receive email updates about your account"
-        />
-        <Toggle
-          control={control}
-          name="darkMode"
-          label="Dark Mode"
-          helperText="Use dark color scheme throughout the app"
-        />
-      </View>
+      <Toggle
+        control={control}
+        name="emailNotifications"
+        label="Email Notifications"
+        helperText="Receive email updates about your account"
+      />
       <CodeSnippet
         code={`<Toggle\n  control={control}\n  name="notifications"\n  label="Email Notifications"\n/>`}
       />
@@ -734,7 +775,7 @@ function MiniFormDemo() {
   };
 
   return (
-    <SubSection label="Mini Form Demo">
+    <SubSection label="Demo">
       <View className="bg-white/5 border border-white/15 rounded-2xl p-4 gap-4">
         <Typography variant="caption" className="text-white/40">
           Complete form with zod validation -- submit to see error states
@@ -760,9 +801,9 @@ function MiniFormDemo() {
         <Checkbox control={control} name="terms" label="I accept the terms and conditions" />
 
         <View className="flex-row gap-3 mt-2">
-          <Button variant="primary" label="Submit" onPress={handleSubmit(onSubmit)} />
+          <Button variant="contained" label="Submit" onPress={handleSubmit(onSubmit)} />
           <Button
-            variant="outline"
+            variant="outlined"
             label="Reset"
             onPress={() => {
               reset();

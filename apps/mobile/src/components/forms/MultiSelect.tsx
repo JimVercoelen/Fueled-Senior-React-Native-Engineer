@@ -1,5 +1,5 @@
 import React, { useRef, useState, useCallback } from 'react';
-import { Modal, Pressable, ScrollView, View } from 'react-native';
+import { Modal, Pressable, ScrollView, View, Platform } from 'react-native';
 import { Controller, Control, FieldPath, FieldValues } from 'react-hook-form';
 import { MaterialIcons } from '@expo/vector-icons';
 import clsx from 'clsx';
@@ -30,6 +30,9 @@ interface TriggerPosition {
   height: number;
 }
 
+const webStyles =
+  Platform.OS === 'web' ? { outlineStyle: 'none' as const, userSelect: 'none' as const } : {};
+
 export default function MultiSelect<T extends FieldValues>({
   control,
   name,
@@ -41,6 +44,7 @@ export default function MultiSelect<T extends FieldValues>({
   className,
 }: MultiSelectProps<T>) {
   const [open, setOpen] = useState(false);
+  const [hovered, setHovered] = useState(false);
   const [position, setPosition] = useState<TriggerPosition>({ x: 0, y: 0, width: 0, height: 0 });
   const triggerRef = useRef<View>(null);
 
@@ -58,6 +62,13 @@ export default function MultiSelect<T extends FieldValues>({
       });
     }
   }, [disabled]);
+
+  const getBorderColor = (hasError: boolean) => {
+    if (hasError) return '#ef4444';
+    if (open) return '#2563eb';
+    if (hovered && !disabled) return 'rgba(59, 130, 246, 0.5)';
+    return 'rgba(255, 255, 255, 0.15)';
+  };
 
   return (
     <Controller
@@ -88,10 +99,15 @@ export default function MultiSelect<T extends FieldValues>({
             <View ref={triggerRef} collapsable={false}>
               <Pressable
                 onPress={handleOpen}
-                className={clsx(
-                  'bg-white/5 border rounded-xl px-4 py-3 flex-row items-center justify-between',
-                  error ? 'border-red-500' : 'border-white/15',
-                )}
+                onHoverIn={() => setHovered(true)}
+                onHoverOut={() => setHovered(false)}
+                className="bg-white/5 border rounded-xl px-4 py-3 flex-row items-center justify-between"
+                style={[
+                  { borderColor: getBorderColor(!!error) },
+                  webStyles,
+                  disabled && Platform.OS === 'web' ? { cursor: 'not-allowed' } : {},
+                ]}
+                disabled={disabled}
               >
                 <View className="flex-1 flex-row flex-wrap gap-1.5">
                   {selectedValues.length > 0 ? (
@@ -158,6 +174,7 @@ export default function MultiSelect<T extends FieldValues>({
                           <Pressable
                             onPress={() => handleToggle(option.value)}
                             className="flex-row items-center px-4 py-3"
+                            style={webStyles}
                           >
                             <View
                               className={clsx(
@@ -187,7 +204,7 @@ export default function MultiSelect<T extends FieldValues>({
                   </ScrollView>
                   <View className="px-4 py-3 border-t border-white/10">
                     <Button
-                      variant="primary"
+                      variant="contained"
                       size="sm"
                       label="Done"
                       onPress={() => setOpen(false)}

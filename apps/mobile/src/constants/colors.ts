@@ -1,6 +1,10 @@
 export const Colors = {
   primary: '#2563eb',
   accent: '#06b6d4',
+  secondary: '#7c3aed',
+  secondaryLight: '#8b5cf6',
+  success: '#16a34a',
+  successLight: '#22c55e',
   danger: '#ef4444',
   dangerOrange: '#f97316',
   gray500: '#6b7280',
@@ -15,6 +19,8 @@ export const Colors = {
 
 export const Gradients = {
   primary: ['#2563eb', '#06b6d4'] as const,
+  secondary: ['#7c3aed', '#8b5cf6'] as const,
+  success: ['#16a34a', '#22c55e'] as const,
   danger: ['#ef4444', '#f97316'] as const,
   primaryButton: {
     colors: ['#2563eb', '#06b6d4'] as const,

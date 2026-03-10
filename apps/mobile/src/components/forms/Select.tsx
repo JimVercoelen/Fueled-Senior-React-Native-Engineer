@@ -1,8 +1,7 @@
 import React, { useRef, useState, useCallback } from 'react';
-import { Modal, Pressable, ScrollView, View } from 'react-native';
+import { Modal, Pressable, ScrollView, View, Platform } from 'react-native';
 import { Controller, Control, FieldPath, FieldValues } from 'react-hook-form';
 import { MaterialIcons } from '@expo/vector-icons';
-import clsx from 'clsx';
 import Typography from '../ui/Typography';
 import Field from './Field';
 
@@ -29,6 +28,9 @@ interface TriggerPosition {
   height: number;
 }
 
+const webStyles =
+  Platform.OS === 'web' ? { outlineStyle: 'none' as const, userSelect: 'none' as const } : {};
+
 export default function Select<T extends FieldValues>({
   control,
   name,
@@ -40,6 +42,7 @@ export default function Select<T extends FieldValues>({
   className,
 }: SelectProps<T>) {
   const [open, setOpen] = useState(false);
+  const [hovered, setHovered] = useState(false);
   const [position, setPosition] = useState<TriggerPosition>({ x: 0, y: 0, width: 0, height: 0 });
   const triggerRef = useRef<View>(null);
 
@@ -57,6 +60,13 @@ export default function Select<T extends FieldValues>({
       });
     }
   }, [disabled]);
+
+  const getBorderColor = (hasError: boolean) => {
+    if (hasError) return '#ef4444';
+    if (open) return '#2563eb';
+    if (hovered && !disabled) return 'rgba(59, 130, 246, 0.5)';
+    return 'rgba(255, 255, 255, 0.15)';
+  };
 
   return (
     <Controller
@@ -76,10 +86,15 @@ export default function Select<T extends FieldValues>({
             <View ref={triggerRef} collapsable={false}>
               <Pressable
                 onPress={handleOpen}
-                className={clsx(
-                  'bg-white/5 border rounded-xl px-4 py-3 flex-row items-center justify-between',
-                  error ? 'border-red-500' : 'border-white/15',
-                )}
+                onHoverIn={() => setHovered(true)}
+                onHoverOut={() => setHovered(false)}
+                className="bg-white/5 border rounded-xl px-4 py-3 flex-row items-center justify-between"
+                style={[
+                  { borderColor: getBorderColor(!!error) },
+                  webStyles,
+                  disabled && Platform.OS === 'web' ? { cursor: 'not-allowed' } : {},
+                ]}
+                disabled={disabled}
               >
                 <Typography
                   variant="body"
@@ -118,15 +133,26 @@ export default function Select<T extends FieldValues>({
                               onChange(option.value);
                               setOpen(false);
                             }}
-                            className={clsx(
-                              'flex-row items-center justify-between px-4 py-3',
-                              isSelected && 'bg-white/5',
-                            )}
+                            className="flex-row items-center justify-between px-4 py-3"
+                            style={webStyles}
                           >
-                            <Typography variant="body" className="text-neutral-300">
-                              {option.label}
-                            </Typography>
-                            {isSelected && <MaterialIcons name="check" size={20} color="#2563eb" />}
+                            {({ hovered: itemHovered }: { hovered: boolean }) => (
+                              <View
+                                className="flex-row items-center justify-between flex-1"
+                                style={
+                                  itemHovered
+                                    ? { backgroundColor: 'rgba(255,255,255,0.05)' }
+                                    : undefined
+                                }
+                              >
+                                <Typography variant="body" className="text-neutral-300">
+                                  {option.label}
+                                </Typography>
+                                {isSelected && (
+                                  <MaterialIcons name="check" size={20} color="#2563eb" />
+                                )}
+                              </View>
+                            )}
                           </Pressable>
                         </React.Fragment>
                       );
