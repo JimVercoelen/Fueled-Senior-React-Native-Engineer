@@ -14,6 +14,8 @@ export const Colors = {
 } as const;
 
 export const Gradients = {
+  primary: ['#2563eb', '#06b6d4'] as const,
+  danger: ['#ef4444', '#f97316'] as const,
   primaryButton: {
     colors: ['#2563eb', '#06b6d4'] as const,
     start: { x: 0, y: 0 },

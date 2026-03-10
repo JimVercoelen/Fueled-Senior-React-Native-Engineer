@@ -17,7 +17,9 @@
     "@expo-google-fonts/inter": "^0.4.2",
     "@expo-google-fonts/orbitron": "^0.4.2",
     "@expo/vector-icons": "^15.0.2",
+    "@hookform/resolvers": "^5.2.2",
     "@supabase/supabase-js": "^2.99.0",
+    "clsx": "^2.1.1",
     "expo": "~55.0.5",
     "expo-font": "~55.0.4",
     "expo-linear-gradient": "~55.0.8",
@@ -28,10 +30,12 @@
     "nativewind": "^4.2.2",
     "react": "19.2.0",
     "react-dom": "19.2.0",
+    "react-hook-form": "^7.71.2",
     "react-native": "0.83.2",
     "react-native-reanimated": "4.2.1",
     "react-native-safe-area-context": "~5.6.2",
-    "react-native-web": "^0.21.0"
+    "react-native-web": "^0.21.0",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@testing-library/jest-native": "^5.4.3",
