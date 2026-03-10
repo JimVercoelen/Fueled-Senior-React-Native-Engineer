@@ -7,9 +7,9 @@
 
 ### Authentication
 
-- [ ] **AUTH-01**: User can log in via magic link (email input -> link sent -> auto-redirect)
-- [ ] **AUTH-02**: User session persists across browser refreshes
-- [ ] **AUTH-03**: User can log out from any screen
+- [x] **AUTH-01**: User can log in via magic link (email input -> link sent -> auto-redirect)
+- [x] **AUTH-02**: User session persists across browser refreshes
+- [x] **AUTH-03**: User can log out from any screen
 - [ ] **AUTH-04**: Unauthenticated users are redirected to login (protected routes)
 
 ### Dashboard
@@ -99,9 +99,9 @@
 
 | Requirement | Phase   | Status   |
 | ----------- | ------- | -------- |
-| AUTH-01     | Phase 3 | Pending  |
-| AUTH-02     | Phase 3 | Pending  |
-| AUTH-03     | Phase 3 | Pending  |
+| AUTH-01     | Phase 3 | Complete |
+| AUTH-02     | Phase 3 | Complete |
+| AUTH-03     | Phase 3 | Complete |
 | AUTH-04     | Phase 3 | Pending  |
 | DASH-01     | Phase 4 | Pending  |
 | DASH-02     | Phase 4 | Pending  |
