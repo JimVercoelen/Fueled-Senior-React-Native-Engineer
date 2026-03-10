@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { ScrollView, View, Pressable, Text } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 import { Typography, Button, Card, Badge, Avatar, Divider, Table } from '../../src/components/ui';
 import { List, Tabs, Accordion, AccordionItem, Dropdown } from '../../src/components/layout';
 import {
@@ -10,6 +13,39 @@ import {
   SkeletonLine,
   SkeletonCard,
 } from '../../src/components/feedback';
+import { TextField, Select, MultiSelect, Toggle, Checkbox } from '../../src/components/forms';
+
+// ===== Form Controls demo data =====
+
+const ROLE_OPTIONS = [
+  { value: 'designer', label: 'Designer' },
+  { value: 'developer', label: 'Developer' },
+  { value: 'manager', label: 'Manager' },
+  { value: 'product-owner', label: 'Product Owner' },
+  { value: 'qa', label: 'QA' },
+];
+
+const SKILL_OPTIONS = [
+  { value: 'react', label: 'React' },
+  { value: 'typescript', label: 'TypeScript' },
+  { value: 'nodejs', label: 'Node.js' },
+  { value: 'graphql', label: 'GraphQL' },
+  { value: 'python', label: 'Python' },
+  { value: 'rust', label: 'Rust' },
+  { value: 'go', label: 'Go' },
+  { value: 'kotlin', label: 'Kotlin' },
+];
+
+const demoSchema = z.object({
+  name: z.string().min(2, 'Name must be at least 2 characters'),
+  email: z.string().email('Invalid email address'),
+  role: z.string().min(1, 'Please select a role'),
+  skills: z.array(z.string()).min(1, 'Select at least one skill'),
+  notifications: z.boolean(),
+  terms: z.boolean().refine((v) => v === true, 'You must accept the terms'),
+});
+
+type DemoForm = z.infer<typeof demoSchema>;
 
 function CodeSnippet({ code }: { code: string }) {
   const [open, setOpen] = useState(false);
@@ -459,8 +495,285 @@ export default function ComponentsScreen() {
         />
       </SubSection>
 
+      {/* ===== FORM CONTROLS SECTION ===== */}
+      <SectionHeading>Form Controls</SectionHeading>
+
+      <FormControlsSection />
+
       {/* Bottom spacing */}
       <View className="h-20" />
     </ScrollView>
+  );
+}
+
+// ===== Form Controls Section =====
+
+function TextFieldDemos() {
+  const { control, setValue, setError } = useForm({
+    defaultValues: {
+      textDefault: '',
+      textFilled: 'Jane Smith',
+      textError: 'bad',
+      textDisabled: 'Cannot edit',
+      textMultiline: '',
+    },
+  });
+
+  // Set an error for the error demo
+  React.useEffect(() => {
+    setError('textError', { message: 'This field has a validation error' });
+  }, [setError]);
+
+  return (
+    <SubSection label="TextField">
+      <View className="gap-4">
+        <TextField
+          control={control}
+          name="textDefault"
+          label="Default"
+          placeholder="Enter your name"
+          helperText="This is a helper text"
+        />
+        <TextField
+          control={control}
+          name="textFilled"
+          label="Filled"
+          placeholder="Enter your name"
+        />
+        <TextField
+          control={control}
+          name="textError"
+          label="Error State"
+          placeholder="Enter value"
+        />
+        <TextField control={control} name="textDisabled" label="Disabled" disabled />
+        <TextField
+          control={control}
+          name="textMultiline"
+          label="Multiline"
+          placeholder="Write a longer message..."
+          multiline
+          numberOfLines={3}
+        />
+      </View>
+      <CodeSnippet
+        code={`<TextField\n  control={control}\n  name="email"\n  label="Email"\n  placeholder="john@example.com"\n/>`}
+      />
+    </SubSection>
+  );
+}
+
+function SelectDemos() {
+  const { control, setValue, setError } = useForm({
+    defaultValues: {
+      selectDefault: '',
+      selectPrefilled: 'developer',
+      selectError: '',
+    },
+  });
+
+  React.useEffect(() => {
+    setError('selectError', { message: 'Please select a role' });
+  }, [setError]);
+
+  return (
+    <SubSection label="Select">
+      <View className="gap-4">
+        <Select
+          control={control}
+          name="selectDefault"
+          label="Role"
+          placeholder="Choose a role"
+          options={ROLE_OPTIONS}
+        />
+        <Select
+          control={control}
+          name="selectPrefilled"
+          label="Pre-selected"
+          options={ROLE_OPTIONS}
+        />
+        <Select
+          control={control}
+          name="selectError"
+          label="Error State"
+          placeholder="Choose a role"
+          options={ROLE_OPTIONS}
+        />
+      </View>
+      <CodeSnippet
+        code={`<Select\n  control={control}\n  name="role"\n  label="Role"\n  options={[\n    { value: 'designer', label: 'Designer' },\n    { value: 'developer', label: 'Developer' },\n  ]}\n/>`}
+      />
+    </SubSection>
+  );
+}
+
+function MultiSelectDemos() {
+  const { control } = useForm({
+    defaultValues: {
+      multiDefault: [],
+      multiPrefilled: ['react', 'typescript', 'nodejs'],
+    },
+  });
+
+  return (
+    <SubSection label="MultiSelect">
+      <View className="gap-4">
+        <MultiSelect
+          control={control}
+          name="multiDefault"
+          label="Skills"
+          placeholder="Select your skills"
+          options={SKILL_OPTIONS}
+        />
+        <MultiSelect
+          control={control}
+          name="multiPrefilled"
+          label="Pre-selected (remove chips to test)"
+          options={SKILL_OPTIONS}
+        />
+      </View>
+      <CodeSnippet
+        code={`<MultiSelect\n  control={control}\n  name="skills"\n  label="Skills"\n  options={[\n    { value: 'react', label: 'React' },\n    { value: 'typescript', label: 'TypeScript' },\n  ]}\n/>`}
+      />
+    </SubSection>
+  );
+}
+
+function ToggleDemos() {
+  const { control } = useForm({
+    defaultValues: {
+      emailNotifications: false,
+      darkMode: true,
+    },
+  });
+
+  return (
+    <SubSection label="Toggle">
+      <View className="gap-4">
+        <Toggle
+          control={control}
+          name="emailNotifications"
+          label="Email Notifications"
+          helperText="Receive email updates about your account"
+        />
+        <Toggle
+          control={control}
+          name="darkMode"
+          label="Dark Mode"
+          helperText="Use dark color scheme throughout the app"
+        />
+      </View>
+      <CodeSnippet
+        code={`<Toggle\n  control={control}\n  name="notifications"\n  label="Email Notifications"\n/>`}
+      />
+    </SubSection>
+  );
+}
+
+function CheckboxDemos() {
+  const { control } = useForm({
+    defaultValues: {
+      terms: false,
+      newsletter: true,
+    },
+  });
+
+  return (
+    <SubSection label="Checkbox">
+      <View className="gap-4">
+        <Checkbox control={control} name="terms" label="I accept the terms and conditions" />
+        <Checkbox control={control} name="newsletter" label="Subscribe to newsletter" />
+      </View>
+      <CodeSnippet
+        code={`<Checkbox\n  control={control}\n  name="terms"\n  label="I accept the terms and conditions"\n/>`}
+      />
+    </SubSection>
+  );
+}
+
+function MiniFormDemo() {
+  const [submitted, setSubmitted] = useState(false);
+
+  const { control, handleSubmit, reset } = useForm<DemoForm>({
+    resolver: zodResolver(demoSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      role: '',
+      skills: [],
+      notifications: false,
+      terms: false,
+    },
+  });
+
+  const onSubmit = (_data: DemoForm) => {
+    setSubmitted(true);
+  };
+
+  return (
+    <SubSection label="Mini Form Demo">
+      <View className="bg-white/5 border border-white/15 rounded-2xl p-4 gap-4">
+        <Typography variant="caption" className="text-white/40">
+          Complete form with zod validation -- submit to see error states
+        </Typography>
+
+        <TextField control={control} name="name" label="Full Name" placeholder="John Doe" />
+        <TextField control={control} name="email" label="Email" placeholder="john@example.com" />
+        <Select
+          control={control}
+          name="role"
+          label="Role"
+          placeholder="Select your role"
+          options={ROLE_OPTIONS}
+        />
+        <MultiSelect
+          control={control}
+          name="skills"
+          label="Skills"
+          placeholder="Select your skills"
+          options={SKILL_OPTIONS}
+        />
+        <Toggle control={control} name="notifications" label="Email Notifications" />
+        <Checkbox control={control} name="terms" label="I accept the terms and conditions" />
+
+        <View className="flex-row gap-3 mt-2">
+          <Button variant="primary" label="Submit" onPress={handleSubmit(onSubmit)} />
+          <Button
+            variant="outline"
+            label="Reset"
+            onPress={() => {
+              reset();
+              setSubmitted(false);
+            }}
+          />
+        </View>
+
+        {submitted && (
+          <Alert
+            type="success"
+            title="Success"
+            message="Form submitted successfully!"
+            visible={submitted}
+            onDismiss={() => setSubmitted(false)}
+          />
+        )}
+      </View>
+      <CodeSnippet
+        code={`const schema = z.object({\n  name: z.string().min(2),\n  email: z.string().email(),\n  role: z.string().min(1),\n  skills: z.array(z.string()).min(1),\n  terms: z.boolean().refine(v => v === true),\n});\n\nconst { control, handleSubmit } = useForm({\n  resolver: zodResolver(schema),\n});\n\n<TextField control={control} name="name" label="Name" />\n<Select control={control} name="role" options={roles} />\n<Button label="Submit" onPress={handleSubmit(onSubmit)} />`}
+      />
+    </SubSection>
+  );
+}
+
+function FormControlsSection() {
+  return (
+    <View>
+      <TextFieldDemos />
+      <SelectDemos />
+      <MultiSelectDemos />
+      <ToggleDemos />
+      <CheckboxDemos />
+      <MiniFormDemo />
+    </View>
   );
 }
