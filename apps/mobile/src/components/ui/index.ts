@@ -4,3 +4,4 @@ export { default as Typography } from './Typography';
 export { default as Badge } from './Badge';
 export { default as Avatar } from './Avatar';
 export { default as Divider } from './Divider';
+export { default as Table } from './Table';
