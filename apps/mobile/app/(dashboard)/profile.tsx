@@ -13,7 +13,7 @@ export default function ProfileScreen() {
       style={{ backgroundColor: 'transparent' }}
     >
       <View className="bg-white/5 border border-white/15 rounded-xl p-5">
-        <View className="flex-row items-center mb-4">
+        <View className="flex-row items-center">
           <View className="w-12 h-12 rounded-full bg-white/10 items-center justify-center mr-4">
             <MaterialIcons name="person" size={20} color={Colors.textSecondary} />
           </View>
