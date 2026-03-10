@@ -42,8 +42,8 @@
 - [x] **COMP-07**: Modal component (used by STAT-03 provider)
 - [x] **COMP-08**: Toast/Alert component (used by STAT-02 provider)
 - [x] **COMP-09**: TextField with label, error state, helper text -- integrated with react-hook-form
-- [ ] **COMP-10**: Select (single-select dropdown) -- integrated with react-hook-form
-- [ ] **COMP-11**: MultiSelect with chips/tags -- integrated with react-hook-form
+- [x] **COMP-10**: Select (single-select dropdown) -- integrated with react-hook-form
+- [x] **COMP-11**: MultiSelect with chips/tags -- integrated with react-hook-form
 - [x] **COMP-12**: Toggle switch and Checkbox with labels -- integrated with react-hook-form
 - [x] **COMP-13**: Dropdown/Menu (popover with action items)
 - [x] **COMP-14**: Tabs (tabbed content switching)
@@ -122,8 +122,8 @@
 | COMP-07     | Phase 2 | Complete |
 | COMP-08     | Phase 2 | Complete |
 | COMP-09     | Phase 2 | Complete |
-| COMP-10     | Phase 2 | Pending  |
-| COMP-11     | Phase 2 | Pending  |
+| COMP-10     | Phase 2 | Complete |
+| COMP-11     | Phase 2 | Complete |
 | COMP-12     | Phase 2 | Complete |
 | COMP-13     | Phase 2 | Complete |
 | COMP-14     | Phase 2 | Complete |
