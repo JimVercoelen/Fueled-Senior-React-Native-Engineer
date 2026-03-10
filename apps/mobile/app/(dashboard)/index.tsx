@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import {
   View,
   Pressable,
   ScrollView,
+  ScrollView as RNScrollView,
   ImageBackground,
   ImageSourcePropType,
   Platform,
@@ -11,7 +12,7 @@ import { useRouter } from 'expo-router';
 import { MaterialIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
-import { Typography } from '@/components';
+import { Typography, ScrollToTop } from '@/components';
 import { useSession } from '@/contexts/auth';
 
 type DemoCard = {
@@ -23,6 +24,21 @@ type DemoCard = {
 };
 
 const DEMO_CARDS: DemoCard[] = [
+  {
+    title: 'About Me',
+    subtitle:
+      'Meet the engineer behind this showcase. 8+ years of full stack experience across TypeScript, React, Node.js, and Python.',
+    tags: ['Cover Letter', 'Contact', 'Portfolio'],
+    route: '/(dashboard)/about-me',
+    image: require('../../assets/images/cards/about.jpg'),
+  },
+  {
+    title: 'About This App',
+    subtitle: 'Fueled requirements checklist and tech stack rationale. See what was built and why.',
+    tags: ['Requirements', 'Tech Stack', 'Checklist'],
+    route: '/(dashboard)/about-app',
+    image: require('../../assets/images/cards/about.jpg'),
+  },
   {
     title: 'Data Fetching',
     subtitle:
@@ -45,23 +61,9 @@ const DEMO_CARDS: DemoCard[] = [
     route: '/(dashboard)/components',
     image: require('../../assets/images/cards/component-library.jpg'),
   },
-  {
-    title: 'About Me',
-    subtitle: 'Author introduction, cover letter, tech expertise, and contact links.',
-    tags: ['Author', 'Portfolio', 'Contact'],
-    route: '/(dashboard)/about-me',
-    image: require('../../assets/images/cards/about.jpg'),
-  },
-  {
-    title: 'About App',
-    subtitle: 'Fueled requirements checklist and tech stack rationale.',
-    tags: ['Requirements', 'Tech Stack', 'Checklist'],
-    route: '/(dashboard)/about-app',
-    image: require('../../assets/images/cards/about.jpg'),
-  },
 ];
 
-function DashboardCard({ card }: { card: DemoCard }) {
+function DashboardCard({ card, index }: { card: DemoCard; index: number }) {
   const router = useRouter();
   const scale = useSharedValue(1);
   const imageScale = useSharedValue(1);
@@ -122,6 +124,22 @@ function DashboardCard({ card }: { card: DemoCard }) {
           locations={[0, 0.4, 1]}
           style={{ flex: 1, borderRadius: 16, justifyContent: 'flex-end', padding: 24 }}
         >
+          <View className="flex-row items-center mb-3">
+            <View
+              style={{
+                width: 28,
+                height: 28,
+                borderRadius: 14,
+                backgroundColor: 'rgba(255,255,255,0.2)',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Typography variant="caption" className="text-white font-semibold">
+                {index + 1}
+              </Typography>
+            </View>
+          </View>
           <Typography variant="h2" className="mb-2">
             {card.title}
           </Typography>
@@ -156,24 +174,33 @@ function DashboardCard({ card }: { card: DemoCard }) {
 
 export default function DashboardScreen() {
   const { session } = useSession();
+  const scrollRef = useRef<RNScrollView>(null);
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
   return (
-    <ScrollView
-      className="flex-1"
-      contentContainerClassName="p-4 pb-8 max-w-3xl mx-auto w-full gap-4"
-      style={{ backgroundColor: 'transparent' }}
-    >
-      <View className="mb-2">
-        <Typography variant="h2">Welcome back</Typography>
-        {session?.user?.email && (
-          <Typography variant="body" className="text-white/60 mt-1">
-            {session.user.email}
-          </Typography>
-        )}
-      </View>
-      {DEMO_CARDS.map((card) => (
-        <DashboardCard key={card.route} card={card} />
-      ))}
-    </ScrollView>
+    <View className="flex-1">
+      <ScrollView
+        ref={scrollRef}
+        onScroll={(e) => setShowScrollTop(e.nativeEvent.contentOffset.y > 300)}
+        scrollEventThrottle={16}
+        className="flex-1"
+        contentContainerClassName="p-4 pb-8 max-w-3xl mx-auto w-full gap-4"
+        style={{ backgroundColor: 'transparent' }}
+      >
+        <View className="mb-2">
+          <Typography variant="h2">Welcome back</Typography>
+          {session?.user?.email && (
+            <Typography variant="body" className="text-white/60 mt-1">
+              {session.user.email}
+            </Typography>
+          )}
+        </View>
+        {DEMO_CARDS.map((card, index) => (
+          <DashboardCard key={card.route} card={card} index={index} />
+        ))}
+      </ScrollView>
+
+      <ScrollToTop scrollRef={scrollRef} visible={showScrollTop} />
+    </View>
   );
 }
