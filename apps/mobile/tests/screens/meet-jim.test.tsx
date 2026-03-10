@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
 import { Linking } from 'react-native';
-import AboutMeScreen from '../../app/(dashboard)/about-me';
+import AboutMeScreen from '../../app/(dashboard)/meet-jim';
 
 const openURLSpy = jest.spyOn(Linking, 'openURL').mockResolvedValue(true as never);
 

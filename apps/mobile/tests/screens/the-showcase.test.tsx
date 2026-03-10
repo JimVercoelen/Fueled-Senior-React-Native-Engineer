@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react-native';
-import AboutAppScreen from '../../app/(dashboard)/about-app';
+import AboutAppScreen from '../../app/(dashboard)/the-showcase';
 
 function renderAboutApp() {
   return render(<AboutAppScreen />);

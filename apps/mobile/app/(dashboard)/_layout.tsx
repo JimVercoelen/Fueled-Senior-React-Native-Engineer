@@ -22,8 +22,8 @@ function getScreenTitle(pathname: string): string | null {
     'data-fetching': 'Data Fetching',
     'state-management': 'State Management',
     components: 'Components',
-    'about-me': 'Meet Jim',
-    'about-app': 'The Showcase',
+    'meet-jim': 'Meet Jim',
+    'the-showcase': 'The Showcase',
     profile: 'Profile',
   };
 
@@ -81,15 +81,15 @@ function DisclaimerBanner() {
   return (
     <View style={{ backgroundColor: '#dc2626', overflow: 'hidden', paddingVertical: 10 }}>
       <Animated.View style={[{ flexDirection: 'row' }, animatedStyle]}>
-        <Text style={textStyle} onLayout={onTextLayout} numberOfLines={1}>
+        <Text style={[textStyle, { flexShrink: 0 }]} onLayout={onTextLayout}>
           {DISCLAIMER_TEXT}
           {spacer}
         </Text>
-        <Text style={textStyle} numberOfLines={1}>
+        <Text style={[textStyle, { flexShrink: 0 }]}>
           {DISCLAIMER_TEXT}
           {spacer}
         </Text>
-        <Text style={textStyle} numberOfLines={1}>
+        <Text style={[textStyle, { flexShrink: 0 }]}>
           {DISCLAIMER_TEXT}
           {spacer}
         </Text>
@@ -194,8 +194,8 @@ export default function DashboardLayout() {
         <Stack.Screen name="data-fetching" />
         <Stack.Screen name="state-management" />
         <Stack.Screen name="components" />
-        <Stack.Screen name="about-me" />
-        <Stack.Screen name="about-app" />
+        <Stack.Screen name="meet-jim" />
+        <Stack.Screen name="the-showcase" />
       </Stack>
     </View>
   );

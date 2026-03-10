@@ -29,14 +29,14 @@ const DEMO_CARDS: DemoCard[] = [
     subtitle:
       'Meet the engineer behind this showcase. 8+ years of full stack experience across TypeScript, React, Node.js, and Python.',
     tags: ['Cover Letter', 'Contact', 'Portfolio'],
-    route: '/(dashboard)/about-me',
+    route: '/(dashboard)/meet-jim',
     image: require('../../assets/images/cards/meet-jim.jpg'),
   },
   {
     title: 'The Showcase',
     subtitle: 'Fueled requirements checklist and tech stack rationale. See what was built and why.',
     tags: ['Requirements', 'Tech Stack', 'Checklist'],
-    route: '/(dashboard)/about-app',
+    route: '/(dashboard)/the-showcase',
     image: require('../../assets/images/cards/the-showcase.jpg'),
   },
   {
