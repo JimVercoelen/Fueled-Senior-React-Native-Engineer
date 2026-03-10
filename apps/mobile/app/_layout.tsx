@@ -7,8 +7,31 @@ import * as SplashScreen from 'expo-splash-screen';
 import { Stack } from 'expo-router';
 import { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
+import { AuthProvider, useSession } from '../src/contexts/auth';
 
 SplashScreen.preventAutoHideAsync();
+
+function RootNavigator() {
+  const { session, isLoading } = useSession();
+
+  if (isLoading) return null;
+
+  return (
+    <Stack
+      screenOptions={{
+        headerShown: false,
+        contentStyle: { backgroundColor: '#000000' },
+      }}
+    >
+      <Stack.Protected guard={!!session}>
+        <Stack.Screen name="(dashboard)" />
+      </Stack.Protected>
+      <Stack.Protected guard={!session}>
+        <Stack.Screen name="(auth)" />
+      </Stack.Protected>
+    </Stack>
+  );
+}
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
@@ -29,15 +52,9 @@ export default function RootLayout() {
   return (
     <>
       <StatusBar style="light" />
-      <Stack
-        screenOptions={{
-          headerShown: false,
-          contentStyle: { backgroundColor: '#000000' },
-        }}
-      >
-        <Stack.Screen name="(dashboard)" />
-        <Stack.Screen name="(auth)" />
-      </Stack>
+      <AuthProvider>
+        <RootNavigator />
+      </AuthProvider>
     </>
   );
 }
