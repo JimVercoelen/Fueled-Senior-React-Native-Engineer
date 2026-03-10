@@ -38,7 +38,7 @@ function useDocumentTitle(screenTitle: string | null) {
 }
 
 const DISCLAIMER_TEXT =
-  "DISCLAIMER: This app was built under time constraints as a showcase. Just login using your email and check out the app! It should cover all parts you'd expect from a React (Native) developer.";
+  "DISCLAIMER: This app was built under time constraints as a showcase. Feel free to explore the app! It should cover all parts you'd expect from a React (Native) developer.";
 
 function DisclaimerBanner() {
   const translateX = useSharedValue(0);
