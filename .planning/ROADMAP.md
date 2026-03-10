@@ -117,8 +117,8 @@ Plans:
 
 Plans:
 
-- [ ] 05-01-PLAN.md -- Install TanStack Query, QueryClient config, database types, Supabase migration (items table + RLS + trigger), Toast context, Modal context, provider wiring
-- [ ] 05-02-PLAN.md -- UX polish: Meet Jim count-up animation, Showcase accordion overflow fix, tech stack subtitle wrapping
+- [x] 05-01-PLAN.md -- Install TanStack Query, QueryClient config, database types, Supabase migration (items table + RLS + trigger), Toast context, Modal context, provider wiring
+- [x] 05-02-PLAN.md -- UX polish: Meet Jim count-up animation, Showcase accordion overflow fix, tech stack subtitle wrapping
 - [ ] 05-03-PLAN.md -- Data fetching hooks (useItems, CRUD mutations), full Data Fetching screen with search/filter/pagination/CRUD
 - [ ] 05-04-PLAN.md -- State Management cache viewer screen, component playground toast/modal interactive demos
 
