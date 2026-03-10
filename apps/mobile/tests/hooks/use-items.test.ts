@@ -234,9 +234,12 @@ describe('useDebouncedValue', () => {
   });
 
   it('debounces value changes', () => {
-    const { result, rerender } = renderHook(({ value }) => useDebouncedValue(value, 300), {
-      initialProps: { value: 'hello' },
-    });
+    const { result, rerender } = renderHook(
+      ({ value }: { value: string }) => useDebouncedValue(value, 300),
+      {
+        initialProps: { value: 'hello' },
+      },
+    );
 
     expect(result.current).toBe('hello');
 
@@ -253,9 +256,12 @@ describe('useDebouncedValue', () => {
   });
 
   it('resets timer on rapid changes', () => {
-    const { result, rerender } = renderHook(({ value }) => useDebouncedValue(value, 300), {
-      initialProps: { value: 'a' },
-    });
+    const { result, rerender } = renderHook(
+      ({ value }: { value: string }) => useDebouncedValue(value, 300),
+      {
+        initialProps: { value: 'a' },
+      },
+    );
 
     rerender({ value: 'ab' });
     act(() => {
