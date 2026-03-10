@@ -36,7 +36,6 @@ key-files:
       apps/mobile/src/contexts/auth.tsx,
       apps/mobile/.env.example,
       infra/supabase/config.toml,
-      infra/supabase/package.json,
       infra/supabase/.env.example,
     ]
   modified:
@@ -73,7 +72,7 @@ completed: 2026-03-10
 - **Duration:** 3 min
 - **Started:** 2026-03-10T10:50:34Z
 - **Completed:** 2026-03-10T10:53:05Z
-- **Tasks:** 1 (of 2; checkpoint pending)
+- **Tasks:** 2/2
 - **Files modified:** 12
 
 ## Accomplishments
@@ -90,7 +89,7 @@ completed: 2026-03-10
 Each task was committed atomically:
 
 1. **Task 1: Create Supabase client, auth context, and wire auth flow** - `a026b2b` (feat)
-2. **Task 2: Verify complete Phase 1 foundation end-to-end** - checkpoint:human-verify (pending)
+2. **Task 2: Verify complete Phase 1 foundation end-to-end** - checkpoint:human-verify (approved)
 
 ## Files Created/Modified
 
@@ -103,7 +102,6 @@ Each task was committed atomically:
 - `apps/mobile/app.json` - expo-sqlite plugin added automatically
 - `apps/mobile/package.json` - @supabase/supabase-js and expo-sqlite dependencies
 - `infra/supabase/config.toml` - Supabase CLI config with auth enabled and email magic link
-- `infra/supabase/package.json` - Workspace member package
 - `infra/supabase/.env.example` - Template for Supabase project secrets
 
 ## Decisions Made
@@ -135,13 +133,14 @@ None.
 - Auth foundation complete with Supabase client, context, and route protection
 - Phase 2 (Component Library) can proceed -- it depends only on Phase 1 foundation
 - Phase 3 (Authentication) will extend this auth context with session persistence refinements
-- Checkpoint Task 2 pending -- user needs to verify end-to-end magic link flow
+- All Phase 1 success criteria verified by user: app runs, NativeWind renders, navigation works, magic link auth works end-to-end
 
 ## Self-Check: PASSED
 
-- All 6 created files verified present on disk
+- All 5 created files verified present on disk (infra/supabase/package.json removed during monorepo flatten refactor, expected)
 - All 5 modified files verified present on disk
 - Task 1 commit (a026b2b) verified in git log
+- Task 2 checkpoint approved by user
 
 ---
 

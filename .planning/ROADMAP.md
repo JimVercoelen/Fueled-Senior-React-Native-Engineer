@@ -13,7 +13,7 @@ This roadmap delivers a React Native showcase app where every screen proves a Fu
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Project Foundation** - Expo monorepo scaffolding, basic Supabase cloud setup with auth enabled, NativeWind, Expo Router, .gitignore
+- [x] **Phase 1: Project Foundation** - Expo monorepo scaffolding, basic Supabase cloud setup with auth enabled, NativeWind, Expo Router, .gitignore
 - [ ] **Phase 2: Component Library** - All reusable UI components with react-hook-form integration for form controls, and MUI-style live playground screen built alongside components
 - [ ] **Phase 3: Authentication** - Magic link login, session persistence, logout, protected routes
 - [ ] **Phase 4: Dashboard + About** - Navigation hub with rich cards, persistent header, about screen with checklist and cover letter
@@ -38,8 +38,8 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 Plans:
 
-- [ ] 01-01-PLAN.md -- Scaffold monorepo, install deps, configure NativeWind/Metro/Babel/Tailwind, ESLint/Prettier/Husky, navigation skeleton with placeholder screens
-- [ ] 01-02-PLAN.md -- Supabase cloud integration, auth context, magic link login flow, route protection
+- [x] 01-01-PLAN.md -- Scaffold monorepo, install deps, configure NativeWind/Metro/Babel/Tailwind, ESLint/Prettier/Husky, navigation skeleton with placeholder screens
+- [x] 01-02-PLAN.md -- Supabase cloud integration, auth context, magic link login flow, route protection
 
 ### Phase 2: Component Library
 
@@ -148,7 +148,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 
 | Phase                               | Plans Complete | Status      | Completed |
 | ----------------------------------- | -------------- | ----------- | --------- |
-| 1. Project Foundation               | 1/2            | In Progress | -         |
+| 1. Project Foundation               | 2/2            | Complete    | 2026-03-10 |
 | 2. Component Library                | 0/3            | Not started | -         |
 | 3. Authentication                   | 0/2            | Not started | -         |
 | 4. Dashboard + About                | 0/2            | Not started | -         |
