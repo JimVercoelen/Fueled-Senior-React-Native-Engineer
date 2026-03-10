@@ -7,7 +7,11 @@ import { Stack } from 'expo-router';
 import { ThemeProvider, DarkTheme } from '@react-navigation/native';
 import { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from '@/lib/query-client';
 import { AuthProvider, useSession } from '@/contexts/auth';
+import { ToastProvider } from '@/contexts/toast';
+import { ModalProvider } from '@/contexts/modal';
 
 const AppTheme = {
   ...DarkTheme,
@@ -61,7 +65,13 @@ export default function RootLayout() {
     <ThemeProvider value={AppTheme}>
       <StatusBar style="light" />
       <AuthProvider>
-        <RootNavigator />
+        <QueryClientProvider client={queryClient}>
+          <ToastProvider>
+            <ModalProvider>
+              <RootNavigator />
+            </ModalProvider>
+          </ToastProvider>
+        </QueryClientProvider>
       </AuthProvider>
     </ThemeProvider>
   );
