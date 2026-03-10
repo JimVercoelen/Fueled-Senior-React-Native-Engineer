@@ -37,8 +37,8 @@
 - [x] **COMP-02**: Card component with header, body, footer slots
 - [x] **COMP-03**: Typography components (headings, body, caption, label) with consistent theming
 - [x] **COMP-04**: Badge and Avatar components
-- [ ] **COMP-05**: Table component
-- [ ] **COMP-06**: List component
+- [x] **COMP-05**: Table component
+- [x] **COMP-06**: List component
 - [ ] **COMP-07**: Modal component (used by STAT-03 provider)
 - [ ] **COMP-08**: Toast/Alert component (used by STAT-02 provider)
 - [x] **COMP-09**: TextField with label, error state, helper text -- integrated with react-hook-form
@@ -46,9 +46,9 @@
 - [ ] **COMP-11**: MultiSelect with chips/tags -- integrated with react-hook-form
 - [x] **COMP-12**: Toggle switch and Checkbox with labels -- integrated with react-hook-form
 - [ ] **COMP-13**: Dropdown/Menu (popover with action items)
-- [ ] **COMP-14**: Tabs (tabbed content switching)
-- [ ] **COMP-15**: Accordion (collapsible sections)
-- [ ] **COMP-16**: Skeleton loader component
+- [x] **COMP-14**: Tabs (tabbed content switching)
+- [x] **COMP-15**: Accordion (collapsible sections)
+- [x] **COMP-16**: Skeleton loader component
 - [x] **COMP-17**: MUI-style live playground screen at app/(dashboard)/components showing all components grouped by section with variants -- built incrementally alongside components
 
 ### About
@@ -117,8 +117,8 @@
 | COMP-02     | Phase 2 | Complete |
 | COMP-03     | Phase 2 | Complete |
 | COMP-04     | Phase 2 | Complete |
-| COMP-05     | Phase 2 | Pending  |
-| COMP-06     | Phase 2 | Pending  |
+| COMP-05     | Phase 2 | Complete |
+| COMP-06     | Phase 2 | Complete |
 | COMP-07     | Phase 2 | Pending  |
 | COMP-08     | Phase 2 | Pending  |
 | COMP-09     | Phase 2 | Complete |
@@ -126,9 +126,9 @@
 | COMP-11     | Phase 2 | Pending  |
 | COMP-12     | Phase 2 | Complete |
 | COMP-13     | Phase 2 | Pending  |
-| COMP-14     | Phase 2 | Pending  |
-| COMP-15     | Phase 2 | Pending  |
-| COMP-16     | Phase 2 | Pending  |
+| COMP-14     | Phase 2 | Complete |
+| COMP-15     | Phase 2 | Complete |
+| COMP-16     | Phase 2 | Complete |
 | COMP-17     | Phase 2 | Complete |
 | ABUT-01     | Phase 4 | Pending  |
 | ABUT-02     | Phase 4 | Pending  |
