@@ -4,16 +4,34 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Typography, Button, Card, Badge, Avatar, Divider, Table } from '../../src/components/ui';
-import { List, Tabs, Accordion, AccordionItem, Dropdown } from '../../src/components/layout';
 import {
+  // Core UI
+  Typography,
+  Button,
+  Card,
+  Badge,
+  Avatar,
+  Divider,
+  Table,
+  // Form Controls
+  TextField,
+  Select,
+  MultiSelect,
+  Toggle,
+  Checkbox,
+  // Feedback
   Modal,
   ModalContent,
   Alert,
   SkeletonLine,
   SkeletonCard,
-} from '../../src/components/feedback';
-import { TextField, Select, MultiSelect, Toggle, Checkbox } from '../../src/components/forms';
+  // Layout
+  List,
+  Tabs,
+  Accordion,
+  AccordionItem,
+  Dropdown,
+} from '../../src/components';
 
 // ===== Form Controls demo data =====
 
@@ -56,13 +74,13 @@ function CodeSnippet({ code }: { code: string }) {
         <MaterialIcons
           name={open ? 'expand-less' : 'code'}
           size={16}
-          color="rgba(255,255,255,0.4)"
+          color="rgba(255,255,255,0.3)"
         />
-        <Text className="text-white/40 text-xs font-body">{open ? 'Hide code' : 'Show code'}</Text>
+        <Text className="text-white/30 text-xs font-body">{open ? 'Hide Code' : 'Show Code'}</Text>
       </Pressable>
       {open && (
         <View className="bg-white/5 rounded-xl p-3 mt-2">
-          <Text className="text-neutral-400 text-xs" style={{ fontFamily: 'monospace' }}>
+          <Text className="text-neutral-400 text-xs font-body" style={{ fontFamily: 'monospace' }}>
             {code}
           </Text>
         </View>
@@ -71,11 +89,14 @@ function CodeSnippet({ code }: { code: string }) {
   );
 }
 
-function SectionHeading({ children, first }: { children: string; first?: boolean }) {
+function SectionHeading({ children }: { children: string }) {
   return (
-    <Typography variant="h2" className={first ? 'mt-4 mb-4' : 'mt-8 mb-4'}>
-      {children}
-    </Typography>
+    <View className="mt-10 mb-4">
+      <Divider />
+      <Typography variant="h2" className="mt-4">
+        {children}
+      </Typography>
+    </View>
   );
 }
 
@@ -95,13 +116,18 @@ export default function ComponentsScreen() {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
-    <ScrollView className="flex-1 bg-black px-4 py-6">
+    <ScrollView
+      className="flex-1 bg-black"
+      contentContainerClassName="px-4 py-6 pb-20 max-w-4xl mx-auto w-full"
+    >
       <Typography variant="h1">Component Library</Typography>
-      <Typography variant="body" className="mt-2 mb-2">
-        Interactive playground for all UI components and their variants.
+      <Typography variant="body" className="text-neutral-400 mt-2 mb-6">
+        Interactive playground showcasing all UI components. Built with NativeWind, Reanimated, and
+        react-hook-form.
       </Typography>
 
-      <SectionHeading first>Core UI</SectionHeading>
+      {/* ===== CORE UI SECTION ===== */}
+      <Typography variant="h2">Core UI</Typography>
 
       {/* Typography */}
       <SubSection label="Typography">
@@ -257,148 +283,10 @@ export default function ComponentsScreen() {
         <CodeSnippet code={`<Divider />\n<Divider className="my-4" />`} />
       </SubSection>
 
-      {/* ===== LAYOUT SECTION ===== */}
-      <SectionHeading>Layout</SectionHeading>
+      {/* ===== FORM CONTROLS SECTION ===== */}
+      <SectionHeading>Form Controls</SectionHeading>
 
-      {/* Table */}
-      <SubSection label="Table">
-        <Table
-          headers={['Name', 'Role', 'Status']}
-          rows={[
-            ['Alice Johnson', 'Engineer', <Badge key="s1" type="success" label="Active" />],
-            ['Bob Smith', 'Designer', <Badge key="s2" type="info" label="Remote" />],
-            ['Carol White', 'PM', <Badge key="s3" type="warning" label="Away" />],
-            ['Dave Brown', 'QA', <Badge key="s4" type="error" label="Offline" />],
-          ]}
-        />
-        <CodeSnippet
-          code={`<Table\n  headers={['Name', 'Role', 'Status']}\n  rows={[\n    ['Alice', 'Engineer', <Badge type="success" label="Active" />],\n    ['Bob', 'Designer', <Badge type="info" label="Remote" />],\n  ]}\n/>`}
-        />
-      </SubSection>
-
-      {/* List */}
-      <SubSection label="List">
-        <View className="border border-white/15 rounded-2xl overflow-hidden">
-          <List
-            items={[
-              { id: '1', content: <Typography variant="body">Dashboard overview</Typography> },
-              { id: '2', content: <Typography variant="body">User management</Typography> },
-              { id: '3', content: <Typography variant="body">Analytics reports</Typography> },
-              { id: '4', content: <Typography variant="body">System settings</Typography> },
-              { id: '5', content: <Typography variant="body">Notifications</Typography> },
-            ]}
-            onItemPress={(id) => console.log('Pressed item:', id)}
-          />
-        </View>
-        <CodeSnippet
-          code={`<List\n  items={[\n    { id: '1', content: <Typography>Item one</Typography> },\n    { id: '2', content: <Typography>Item two</Typography> },\n  ]}\n  onItemPress={(id) => console.log(id)}\n  divider\n/>`}
-        />
-      </SubSection>
-
-      {/* Tabs */}
-      <SubSection label="Tabs">
-        <View className="border border-white/15 rounded-2xl overflow-hidden">
-          <Tabs
-            tabs={[
-              { key: 'overview', label: 'Overview' },
-              { key: 'details', label: 'Details' },
-              { key: 'settings', label: 'Settings' },
-            ]}
-            activeTab={activeTab}
-            onTabChange={setActiveTab}
-          />
-          <View className="p-4">
-            {activeTab === 'overview' && (
-              <Typography variant="body">
-                Overview content: A high-level summary of your project status and key metrics.
-              </Typography>
-            )}
-            {activeTab === 'details' && (
-              <Typography variant="body">
-                Details content: In-depth information about individual items, logs, and history.
-              </Typography>
-            )}
-            {activeTab === 'settings' && (
-              <Typography variant="body">
-                Settings content: Configure preferences, notifications, and account options.
-              </Typography>
-            )}
-          </View>
-        </View>
-        <CodeSnippet
-          code={`<Tabs\n  tabs={[\n    { key: 'overview', label: 'Overview' },\n    { key: 'details', label: 'Details' },\n  ]}\n  activeTab={activeTab}\n  onTabChange={setActiveTab}\n/>`}
-        />
-      </SubSection>
-
-      {/* Accordion */}
-      <SubSection label="Accordion">
-        <Accordion>
-          <AccordionItem title="Getting Started" defaultOpen>
-            <Typography variant="body">
-              Welcome to the component library. This section covers setup instructions, project
-              structure, and initial configuration steps to get you up and running quickly.
-            </Typography>
-          </AccordionItem>
-          <AccordionItem title="API Reference">
-            <Typography variant="body">
-              Detailed documentation for all component props, methods, and events. Each component
-              follows consistent patterns for styling and interaction.
-            </Typography>
-          </AccordionItem>
-          <AccordionItem title="Advanced Usage">
-            <Typography variant="body">
-              Learn about composition patterns, custom theming, animation integration, and
-              performance optimization techniques for complex UIs.
-            </Typography>
-          </AccordionItem>
-        </Accordion>
-        <CodeSnippet
-          code={`<Accordion>\n  <AccordionItem title="Section" defaultOpen>\n    <Typography variant="body">Content</Typography>\n  </AccordionItem>\n</Accordion>`}
-        />
-      </SubSection>
-
-      {/* Skeleton */}
-      <SubSection label="Skeleton">
-        <View className="gap-4">
-          <View className="gap-3">
-            <Typography variant="caption" className="text-white/40">
-              SkeletonLine widths
-            </Typography>
-            <SkeletonLine width="100%" />
-            <SkeletonLine width="75%" />
-            <SkeletonLine width="50%" />
-          </View>
-
-          <View>
-            <Typography variant="caption" className="text-white/40 mb-3">
-              SkeletonCard
-            </Typography>
-            <SkeletonCard lines={3} />
-          </View>
-
-          <View>
-            <Typography variant="caption" className="text-white/40 mb-3">
-              Skeleton vs Loaded
-            </Typography>
-            <View className="flex-row gap-3">
-              <View className="flex-1">
-                <SkeletonCard lines={3} />
-              </View>
-              <View className="flex-1">
-                <Card>
-                  <Typography variant="body" className="text-white">
-                    Loaded content
-                  </Typography>
-                  <Typography variant="caption" className="mt-1">
-                    Data has finished loading and is now visible to the user.
-                  </Typography>
-                </Card>
-              </View>
-            </View>
-          </View>
-        </View>
-        <CodeSnippet code={`<SkeletonLine width="75%" />\n<SkeletonCard lines={3} />`} />
-      </SubSection>
+      <FormControlsSection />
 
       {/* ===== FEEDBACK SECTION ===== */}
       <SectionHeading>Feedback</SectionHeading>
@@ -471,6 +359,87 @@ export default function ComponentsScreen() {
         />
       </SubSection>
 
+      {/* Skeleton */}
+      <SubSection label="Skeleton">
+        <View className="gap-4">
+          <View className="gap-3">
+            <Typography variant="caption" className="text-white/40">
+              SkeletonLine widths
+            </Typography>
+            <SkeletonLine width="100%" />
+            <SkeletonLine width="75%" />
+            <SkeletonLine width="50%" />
+          </View>
+
+          <View>
+            <Typography variant="caption" className="text-white/40 mb-3">
+              SkeletonCard
+            </Typography>
+            <SkeletonCard lines={3} />
+          </View>
+
+          <View>
+            <Typography variant="caption" className="text-white/40 mb-3">
+              Skeleton vs Loaded
+            </Typography>
+            <View className="flex-row gap-3">
+              <View className="flex-1">
+                <SkeletonCard lines={3} />
+              </View>
+              <View className="flex-1">
+                <Card>
+                  <Typography variant="body" className="text-white">
+                    Loaded content
+                  </Typography>
+                  <Typography variant="caption" className="mt-1">
+                    Data has finished loading and is now visible to the user.
+                  </Typography>
+                </Card>
+              </View>
+            </View>
+          </View>
+        </View>
+        <CodeSnippet code={`<SkeletonLine width="75%" />\n<SkeletonCard lines={3} />`} />
+      </SubSection>
+
+      {/* ===== LAYOUT SECTION ===== */}
+      <SectionHeading>Layout</SectionHeading>
+
+      {/* Table */}
+      <SubSection label="Table">
+        <Table
+          headers={['Name', 'Role', 'Status']}
+          rows={[
+            ['Alice Johnson', 'Engineer', <Badge key="s1" type="success" label="Active" />],
+            ['Bob Smith', 'Designer', <Badge key="s2" type="info" label="Remote" />],
+            ['Carol White', 'PM', <Badge key="s3" type="warning" label="Away" />],
+            ['Dave Brown', 'QA', <Badge key="s4" type="error" label="Offline" />],
+          ]}
+        />
+        <CodeSnippet
+          code={`<Table\n  headers={['Name', 'Role', 'Status']}\n  rows={[\n    ['Alice', 'Engineer', <Badge type="success" label="Active" />],\n    ['Bob', 'Designer', <Badge type="info" label="Remote" />],\n  ]}\n/>`}
+        />
+      </SubSection>
+
+      {/* List */}
+      <SubSection label="List">
+        <View className="border border-white/15 rounded-2xl overflow-hidden">
+          <List
+            items={[
+              { id: '1', content: <Typography variant="body">Dashboard overview</Typography> },
+              { id: '2', content: <Typography variant="body">User management</Typography> },
+              { id: '3', content: <Typography variant="body">Analytics reports</Typography> },
+              { id: '4', content: <Typography variant="body">System settings</Typography> },
+              { id: '5', content: <Typography variant="body">Notifications</Typography> },
+            ]}
+            onItemPress={(id) => console.log('Pressed item:', id)}
+          />
+        </View>
+        <CodeSnippet
+          code={`<List\n  items={[\n    { id: '1', content: <Typography>Item one</Typography> },\n    { id: '2', content: <Typography>Item two</Typography> },\n  ]}\n  onItemPress={(id) => console.log(id)}\n  divider\n/>`}
+        />
+      </SubSection>
+
       {/* Dropdown */}
       <SubSection label="Dropdown">
         <Dropdown
@@ -495,13 +464,67 @@ export default function ComponentsScreen() {
         />
       </SubSection>
 
-      {/* ===== FORM CONTROLS SECTION ===== */}
-      <SectionHeading>Form Controls</SectionHeading>
+      {/* Tabs */}
+      <SubSection label="Tabs">
+        <View className="border border-white/15 rounded-2xl overflow-hidden">
+          <Tabs
+            tabs={[
+              { key: 'overview', label: 'Overview' },
+              { key: 'details', label: 'Details' },
+              { key: 'settings', label: 'Settings' },
+            ]}
+            activeTab={activeTab}
+            onTabChange={setActiveTab}
+          />
+          <View className="p-4">
+            {activeTab === 'overview' && (
+              <Typography variant="body">
+                Overview content: A high-level summary of your project status and key metrics.
+              </Typography>
+            )}
+            {activeTab === 'details' && (
+              <Typography variant="body">
+                Details content: In-depth information about individual items, logs, and history.
+              </Typography>
+            )}
+            {activeTab === 'settings' && (
+              <Typography variant="body">
+                Settings content: Configure preferences, notifications, and account options.
+              </Typography>
+            )}
+          </View>
+        </View>
+        <CodeSnippet
+          code={`<Tabs\n  tabs={[\n    { key: 'overview', label: 'Overview' },\n    { key: 'details', label: 'Details' },\n  ]}\n  activeTab={activeTab}\n  onTabChange={setActiveTab}\n/>`}
+        />
+      </SubSection>
 
-      <FormControlsSection />
-
-      {/* Bottom spacing */}
-      <View className="h-20" />
+      {/* Accordion */}
+      <SubSection label="Accordion">
+        <Accordion>
+          <AccordionItem title="Getting Started" defaultOpen>
+            <Typography variant="body">
+              Welcome to the component library. This section covers setup instructions, project
+              structure, and initial configuration steps to get you up and running quickly.
+            </Typography>
+          </AccordionItem>
+          <AccordionItem title="API Reference">
+            <Typography variant="body">
+              Detailed documentation for all component props, methods, and events. Each component
+              follows consistent patterns for styling and interaction.
+            </Typography>
+          </AccordionItem>
+          <AccordionItem title="Advanced Usage">
+            <Typography variant="body">
+              Learn about composition patterns, custom theming, animation integration, and
+              performance optimization techniques for complex UIs.
+            </Typography>
+          </AccordionItem>
+        </Accordion>
+        <CodeSnippet
+          code={`<Accordion>\n  <AccordionItem title="Section" defaultOpen>\n    <Typography variant="body">Content</Typography>\n  </AccordionItem>\n</Accordion>`}
+        />
+      </SubSection>
     </ScrollView>
   );
 }
@@ -509,7 +532,7 @@ export default function ComponentsScreen() {
 // ===== Form Controls Section =====
 
 function TextFieldDemos() {
-  const { control, setValue, setError } = useForm({
+  const { control, setError } = useForm({
     defaultValues: {
       textDefault: '',
       textFilled: 'Jane Smith',
@@ -564,7 +587,7 @@ function TextFieldDemos() {
 }
 
 function SelectDemos() {
-  const { control, setValue, setError } = useForm({
+  const { control, setError } = useForm({
     defaultValues: {
       selectDefault: '',
       selectPrefilled: 'developer',
