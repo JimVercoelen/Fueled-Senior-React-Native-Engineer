@@ -53,10 +53,11 @@ Plans:
 3. The playground screen at `app/(dashboard)/components` is built alongside the components (not after), so each component can be visually verified as it is developed
 4. The playground screen displays all components grouped by section (Core UI, Form Controls, Feedback, Layout) in an MUI-style interactive layout where users can toggle component variants
 5. Components use consistent NativeWind theming and are visually polished on both mobile and desktop viewport widths
-   **Plans**: 5 plans
+   **Plans**: 6 plans
 
 Plans:
 
+- [ ] 02-00-PLAN.md -- Wave 0: Install test infrastructure (jest-expo, @testing-library/react-native), create jest.config.js, shared test setup, stub test files
 - [ ] 02-01-PLAN.md -- Install deps, core UI components (Typography, Button, Card, Badge, Avatar, Divider) + playground Core UI section
 - [ ] 02-02-PLAN.md -- Data display + layout components (Table, List, Tabs, Accordion, Skeleton) + playground Layout section
 - [ ] 02-03-PLAN.md -- Feedback components (Modal, Alert/Toast, Dropdown) + playground Feedback section
@@ -151,7 +152,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 | Phase                               | Plans Complete | Status      | Completed |
 | ----------------------------------- | -------------- | ----------- | --------- |
 | 1. Project Foundation               | 2/2            | Complete    | 2026-03-10 |
-| 2. Component Library                | 0/5            | Not started | -         |
+| 2. Component Library                | 0/6            | Not started | -         |
 | 3. Authentication                   | 0/2            | Not started | -         |
 | 4. Dashboard + About                | 0/2            | Not started | -         |
 | 5. Data Fetching + State Management | 0/3            | Not started | -         |
