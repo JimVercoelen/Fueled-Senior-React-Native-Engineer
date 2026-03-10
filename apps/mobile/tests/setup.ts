@@ -1,8 +1,27 @@
-// Mock react-native-reanimated
+// Mock react-native-reanimated (inline mock to avoid native module init)
 jest.mock('react-native-reanimated', () => {
-  const Reanimated = require('react-native-reanimated/mock');
-  Reanimated.default.call = () => {};
-  return Reanimated;
+  const { View } = require('react-native');
+  return {
+    __esModule: true,
+    default: {
+      call: () => {},
+      createAnimatedComponent: (component: any) => component,
+      addWhitelistedNativeProps: () => {},
+      addWhitelistedUIProps: () => {},
+      View,
+    },
+    useSharedValue: (initial: any) => ({ value: initial }),
+    useAnimatedStyle: (fn: () => any) => fn(),
+    withTiming: (value: any) => value,
+    withRepeat: (value: any) => value,
+    withSequence: (...values: any[]) => values[0],
+    Easing: { inOut: () => (t: any) => t, ease: (t: any) => t },
+    interpolateColor: (_v: any, _i: any, o: any) => o[0],
+    FadeIn: { duration: () => ({ delay: () => ({}) }) },
+    FadeOut: { duration: () => ({ delay: () => ({}) }) },
+    Layout: {},
+    createAnimatedComponent: (component: any) => component,
+  };
 });
 
 // Mock expo-linear-gradient
@@ -20,6 +39,15 @@ jest.mock('@expo/vector-icons', () => {
     MaterialIcons: Text,
   };
 });
+
+// Mock expo-router
+jest.mock('expo-router', () => ({
+  useRouter: () => ({ push: jest.fn(), back: jest.fn(), replace: jest.fn() }),
+  usePathname: () => '/',
+  Stack: {
+    Screen: () => null,
+  },
+}));
 
 // Silence console warnings in tests
 const originalWarn = console.warn;
