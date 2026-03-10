@@ -1,45 +1,46 @@
-import { View, Pressable, ScrollView } from 'react-native';
+import { View, Pressable, ScrollView, ImageBackground, ImageSourcePropType } from 'react-native';
 import { useRouter } from 'expo-router';
 import { MaterialIcons } from '@expo/vector-icons';
-import { Colors } from '@/constants/colors';
+import { LinearGradient } from 'expo-linear-gradient';
 import { Typography } from '@/components';
 
 type DemoCard = {
   title: string;
   subtitle: string;
-  icon: React.ComponentProps<typeof MaterialIcons>['name'];
+  tags: string[];
   route: string;
-  accent: string;
+  image: ImageSourcePropType;
 };
 
 const DEMO_CARDS: DemoCard[] = [
   {
     title: 'Data Fetching',
-    subtitle: 'TanStack Query, pagination, mutations',
-    icon: 'cloud-download',
+    subtitle:
+      'TanStack Query, pagination, search, filter, and mutations with real API integration.',
+    tags: ['TanStack Query', 'API', 'Pagination'],
     route: '/(dashboard)/data-fetching',
-    accent: 'rgba(110, 91, 255, 0.15)',
+    image: require('../../../assets/images/cards/data-fetching.jpg'),
   },
   {
     title: 'State Management',
-    subtitle: 'Cache viewer, toasts, modals',
-    icon: 'storage',
+    subtitle: 'Cache viewer, toast notifications, and modal system powered by Context API.',
+    tags: ['Context API', 'Cache', 'Toasts'],
     route: '/(dashboard)/state-management',
-    accent: 'rgba(77, 56, 236, 0.15)',
+    image: require('../../../assets/images/cards/state-management.jpg'),
   },
   {
     title: 'Component Library',
-    subtitle: 'Interactive playground',
-    icon: 'widgets',
+    subtitle: 'Interactive playground showcasing all UI components with live demos.',
+    tags: ['NativeWind', 'Reanimated', 'Forms'],
     route: '/(dashboard)/components',
-    accent: 'rgba(139, 127, 255, 0.15)',
+    image: require('../../../assets/images/cards/component-library.jpg'),
   },
   {
     title: 'About',
-    subtitle: 'Requirements checklist, author info',
-    icon: 'info-outline',
+    subtitle: 'Fueled requirements checklist, author section, and cover letter.',
+    tags: ['Requirements', 'Author', 'Portfolio'],
     route: '/(dashboard)/about',
-    accent: 'rgba(110, 91, 255, 0.10)',
+    image: require('../../../assets/images/cards/about.jpg'),
   },
 ];
 
@@ -49,42 +50,56 @@ export default function DashboardScreen() {
   return (
     <ScrollView
       className="flex-1 bg-black"
-      contentContainerClassName="p-4 pb-8 max-w-3xl mx-auto w-full"
+      contentContainerClassName="p-4 pb-8 max-w-3xl mx-auto w-full gap-4"
     >
-      <View className="flex-row flex-wrap gap-4">
-        {DEMO_CARDS.map((card) => (
-          <Pressable
-            key={card.route}
-            onPress={() => router.push(card.route as never)}
-            className="bg-white/5 border border-white/10 rounded-2xl p-5 active:opacity-70"
-            style={{ flexBasis: '48%', flexGrow: 1, minWidth: 280 }}
+      {DEMO_CARDS.map((card) => (
+        <Pressable
+          key={card.route}
+          onPress={() => router.push(card.route as never)}
+          className="rounded-2xl overflow-hidden active:opacity-90"
+          style={{ height: 320 }}
+        >
+          <ImageBackground
+            source={card.image}
+            style={{ flex: 1 }}
+            imageStyle={{ borderRadius: 16 }}
+            resizeMode="cover"
           >
-            <View
-              className="w-12 h-12 rounded-xl items-center justify-center mb-4"
-              style={{ backgroundColor: card.accent }}
+            <LinearGradient
+              colors={['transparent', 'rgba(0,0,0,0.3)', 'rgba(0,0,0,0.85)']}
+              locations={[0, 0.4, 1]}
+              style={{ flex: 1, borderRadius: 16, justifyContent: 'flex-end', padding: 24 }}
             >
-              <MaterialIcons name={card.icon} size={24} color={Colors.primary} />
-            </View>
-            <Typography variant="h3" className="mb-1">
-              {card.title}
-            </Typography>
-            <Typography variant="caption" className="mb-3">
-              {card.subtitle}
-            </Typography>
-            <View className="flex-row items-center">
-              <Typography variant="caption" className="text-primary-500">
-                Explore
+              <Typography variant="h2" className="mb-2">
+                {card.title}
               </Typography>
-              <MaterialIcons
-                name="arrow-forward"
-                size={14}
-                color={Colors.primary}
-                style={{ marginLeft: 4 }}
-              />
-            </View>
-          </Pressable>
-        ))}
-      </View>
+              <Typography variant="body" className="text-white/80 mb-4">
+                {card.subtitle}
+              </Typography>
+              <View className="flex-row items-center mb-4">
+                <Typography variant="body" className="text-white/90">
+                  Explore
+                </Typography>
+                <MaterialIcons
+                  name="arrow-forward"
+                  size={16}
+                  color="rgba(255,255,255,0.9)"
+                  style={{ marginLeft: 6 }}
+                />
+              </View>
+              <View className="flex-row flex-wrap gap-2">
+                {card.tags.map((tag) => (
+                  <View key={tag} className="border border-white/30 rounded-full px-3 py-1">
+                    <Typography variant="caption" className="text-white/70">
+                      {tag}
+                    </Typography>
+                  </View>
+                ))}
+              </View>
+            </LinearGradient>
+          </ImageBackground>
+        </Pressable>
+      ))}
     </ScrollView>
   );
 }
