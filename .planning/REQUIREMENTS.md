@@ -20,10 +20,10 @@
 
 ### Data Fetching
 
-- [ ] **DATA-01**: Paginated list from public API with infinite scroll or page controls
-- [ ] **DATA-02**: Search input with debounced queries + filter dropdowns showing query invalidation
-- [ ] **DATA-03**: Create/update/delete mutations via Supabase with optimistic updates + cache invalidation
-- [ ] **DATA-04**: Loading states (skeleton loaders), error boundaries, and retry buttons
+- [x] **DATA-01**: Paginated list from public API with infinite scroll or page controls
+- [x] **DATA-02**: Search input with debounced queries + filter dropdowns showing query invalidation
+- [x] **DATA-03**: Create/update/delete mutations via Supabase with optimistic updates + cache invalidation
+- [x] **DATA-04**: Loading states (skeleton loaders), error boundaries, and retry buttons
 
 ### State Management
 
@@ -106,10 +106,10 @@
 | DASH-01     | Phase 4 | Complete |
 | DASH-02     | Phase 4 | Complete |
 | DASH-03     | Phase 4 | Complete |
-| DATA-01     | Phase 5 | Pending  |
-| DATA-02     | Phase 5 | Pending  |
-| DATA-03     | Phase 5 | Pending  |
-| DATA-04     | Phase 5 | Pending  |
+| DATA-01     | Phase 5 | Complete |
+| DATA-02     | Phase 5 | Complete |
+| DATA-03     | Phase 5 | Complete |
+| DATA-04     | Phase 5 | Complete |
 | STAT-01     | Phase 5 | Pending  |
 | STAT-02     | Phase 5 | Complete |
 | STAT-03     | Phase 5 | Complete |
