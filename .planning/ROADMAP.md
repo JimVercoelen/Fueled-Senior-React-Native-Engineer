@@ -31,11 +31,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Expo Router navigates between at least two placeholder routes (auth group and dashboard group)
   4. Supabase cloud project exists with auth enabled; magic link login works with default Supabase email in dev
   5. .gitignore correctly excludes node_modules, .env files, and .claude while including .planning
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 01-01: TBD
-- [ ] 01-02: TBD
+- [ ] 01-01-PLAN.md -- Scaffold monorepo, install deps, configure NativeWind/Metro/Babel/Tailwind, ESLint/Prettier/Husky, navigation skeleton with placeholder screens
+- [ ] 01-02-PLAN.md -- Supabase cloud integration, auth context, magic link login flow, route protection
 
 ### Phase 2: Component Library
 **Goal**: A complete set of reusable, styled UI components -- with form controls integrated with react-hook-form -- and an interactive playground screen at `app/(dashboard)/components` built incrementally alongside the components so every component can be visually verified during development
@@ -128,7 +128,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Project Foundation | 0/2 | Not started | - |
+| 1. Project Foundation | 0/2 | Planning complete | - |
 | 2. Component Library | 0/3 | Not started | - |
 | 3. Authentication | 0/2 | Not started | - |
 | 4. Dashboard + About | 0/2 | Not started | - |
