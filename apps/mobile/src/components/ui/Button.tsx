@@ -159,19 +159,21 @@ export default function Button({
   );
 
   return (
-    <Animated.View style={animatedStyle} className={className}>
-      <Pressable
-        onPress={isDisabled ? undefined : onPress}
-        onPressIn={isDisabled ? undefined : handlePressIn}
-        onPressOut={isDisabled ? undefined : handlePressOut}
-        onHoverIn={() => setHovered(true)}
-        onHoverOut={() => setHovered(false)}
-        className={clsx(isDisabled && 'opacity-40')}
-        disabled={isDisabled}
-        style={[webStyles, isDisabled && Platform.OS === 'web' ? { cursor: 'not-allowed' } : {}]}
-      >
-        {variant === 'contained' ? renderContainedButton() : renderStyledButton()}
-      </Pressable>
-    </Animated.View>
+    <View className={className}>
+      <Animated.View style={animatedStyle}>
+        <Pressable
+          onPress={isDisabled ? undefined : onPress}
+          onPressIn={isDisabled ? undefined : handlePressIn}
+          onPressOut={isDisabled ? undefined : handlePressOut}
+          onHoverIn={() => setHovered(true)}
+          onHoverOut={() => setHovered(false)}
+          className={clsx(isDisabled && 'opacity-40')}
+          disabled={isDisabled}
+          style={[webStyles, isDisabled && Platform.OS === 'web' ? { cursor: 'not-allowed' } : {}]}
+        >
+          {variant === 'contained' ? renderContainedButton() : renderStyledButton()}
+        </Pressable>
+      </Animated.View>
+    </View>
   );
 }

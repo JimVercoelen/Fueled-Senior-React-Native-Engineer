@@ -4,9 +4,19 @@ import { useFonts } from 'expo-font';
 import { Inter_400Regular, Inter_500Medium, Inter_600SemiBold } from '@expo-google-fonts/inter';
 import * as SplashScreen from 'expo-splash-screen';
 import { Stack } from 'expo-router';
+import { ThemeProvider, DarkTheme } from '@react-navigation/native';
 import { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { AuthProvider, useSession } from '@/contexts/auth';
+
+const AppTheme = {
+  ...DarkTheme,
+  colors: {
+    ...DarkTheme.colors,
+    background: 'transparent',
+    card: '#000000',
+  },
+};
 
 SplashScreen.preventAutoHideAsync();
 
@@ -19,7 +29,7 @@ function RootNavigator() {
     <Stack
       screenOptions={{
         headerShown: false,
-        contentStyle: { backgroundColor: '#000000' },
+        contentStyle: { backgroundColor: 'transparent' },
       }}
     >
       <Stack.Protected guard={!!session}>
@@ -48,11 +58,11 @@ export default function RootLayout() {
   if (!fontsLoaded) return null;
 
   return (
-    <>
+    <ThemeProvider value={AppTheme}>
       <StatusBar style="light" />
       <AuthProvider>
         <RootNavigator />
       </AuthProvider>
-    </>
+    </ThemeProvider>
   );
 }

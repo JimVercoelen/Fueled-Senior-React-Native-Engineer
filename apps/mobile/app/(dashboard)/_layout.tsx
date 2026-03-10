@@ -1,7 +1,17 @@
+import { useEffect } from 'react';
 import { View, Text, Image, Pressable } from 'react-native';
 import { Stack, usePathname, useRouter } from 'expo-router';
 import { MaterialIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withRepeat,
+  withSequence,
+  withTiming,
+  Easing,
+  interpolateColor,
+} from 'react-native-reanimated';
 import { Colors } from '@/constants/colors';
 
 function getScreenTitle(pathname: string): string | null {
@@ -69,15 +79,46 @@ function DashboardHeader() {
   );
 }
 
-export default function DashboardLayout() {
+function AnimatedBackground() {
+  const progress = useSharedValue(0);
+
+  useEffect(() => {
+    progress.value = withRepeat(
+      withSequence(
+        withTiming(1, { duration: 6000, easing: Easing.inOut(Easing.ease) }),
+        withTiming(0, { duration: 6000, easing: Easing.inOut(Easing.ease) }),
+      ),
+      -1,
+    );
+  }, [progress]);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    backgroundColor: interpolateColor(
+      progress.value,
+      [0, 0.5, 1],
+      ['#000000', '#1a0d3a', '#000000'],
+    ),
+  }));
+
   return (
-    <View className="flex-1">
+    <Animated.View
+      style={[{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }, animatedStyle]}
+    >
       <LinearGradient
-        colors={['#000000', '#0d0820', '#000000']}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
+        colors={['#3d2a7a', '#1a0e3a', 'transparent']}
+        locations={[0, 0.3, 0.55]}
+        start={{ x: 0.5, y: 0 }}
+        end={{ x: 0.5, y: 1 }}
         style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
       />
+    </Animated.View>
+  );
+}
+
+export default function DashboardLayout() {
+  return (
+    <View className="flex-1" style={{ backgroundColor: '#000000' }}>
+      <AnimatedBackground />
       <DashboardHeader />
       <Stack
         screenOptions={{

@@ -96,47 +96,51 @@ function DashboardCard({ card }: { card: DemoCard }) {
         className="rounded-2xl overflow-hidden"
         style={[{ height: 320 }, Platform.OS === 'web' ? { cursor: 'pointer' } : {}]}
       >
-        <Animated.View style={[{ flex: 1 }, imageStyle]}>
+        {/* Background image layer — scales on hover */}
+        <Animated.View
+          style={[{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }, imageStyle]}
+        >
           <ImageBackground
             source={card.image}
             style={{ flex: 1 }}
             imageStyle={{ borderRadius: 16 }}
             resizeMode="cover"
-          >
-            <LinearGradient
-              colors={['transparent', 'rgba(0,0,0,0.3)', 'rgba(0,0,0,0.85)']}
-              locations={[0, 0.4, 1]}
-              style={{ flex: 1, borderRadius: 16, justifyContent: 'flex-end', padding: 24 }}
-            >
-              <Typography variant="h2" className="mb-2">
-                {card.title}
-              </Typography>
-              <Typography variant="body" className="text-white/80 mb-4">
-                {card.subtitle}
-              </Typography>
-              <View className="flex-row items-center mb-4">
-                <Typography variant="body" className="text-white/90">
-                  Explore
-                </Typography>
-                <MaterialIcons
-                  name="arrow-forward"
-                  size={16}
-                  color="rgba(255,255,255,0.9)"
-                  style={{ marginLeft: 6 }}
-                />
-              </View>
-              <View className="flex-row flex-wrap gap-2">
-                {card.tags.map((tag) => (
-                  <View key={tag} className="border border-white/30 rounded-full px-3 py-1">
-                    <Typography variant="caption" className="text-white/70">
-                      {tag}
-                    </Typography>
-                  </View>
-                ))}
-              </View>
-            </LinearGradient>
-          </ImageBackground>
+          />
         </Animated.View>
+
+        {/* Content layer — stays static */}
+        <LinearGradient
+          colors={['transparent', 'rgba(0,0,0,0.3)', 'rgba(0,0,0,0.85)']}
+          locations={[0, 0.4, 1]}
+          style={{ flex: 1, borderRadius: 16, justifyContent: 'flex-end', padding: 24 }}
+        >
+          <Typography variant="h2" className="mb-2">
+            {card.title}
+          </Typography>
+          <Typography variant="body" className="text-white/80 mb-4">
+            {card.subtitle}
+          </Typography>
+          <View className="flex-row items-center mb-4">
+            <Typography variant="body" className="text-white/90">
+              Explore
+            </Typography>
+            <MaterialIcons
+              name="arrow-forward"
+              size={16}
+              color="rgba(255,255,255,0.9)"
+              style={{ marginLeft: 6 }}
+            />
+          </View>
+          <View className="flex-row flex-wrap gap-2">
+            {card.tags.map((tag) => (
+              <View key={tag} className="border border-white/30 rounded-full px-3 py-1">
+                <Typography variant="caption" className="text-white/70">
+                  {tag}
+                </Typography>
+              </View>
+            ))}
+          </View>
+        </LinearGradient>
       </Pressable>
     </Animated.View>
   );

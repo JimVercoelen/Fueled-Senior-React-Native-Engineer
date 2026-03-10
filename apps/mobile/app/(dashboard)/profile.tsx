@@ -31,7 +31,7 @@ export default function ProfileScreen() {
       <View className="flex-1" />
 
       <Button
-        variant="outlined"
+        // variant="outlined"
         color="error"
         label="Sign Out"
         icon="logout"
