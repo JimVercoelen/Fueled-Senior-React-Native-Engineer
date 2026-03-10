@@ -53,10 +53,10 @@
 
 ### About
 
-- [ ] **ABUT-01**: Visual checklist mapping each Fueled requirement to where it's demonstrated
-- [ ] **ABUT-02**: Author section with mini cover letter
-- [ ] **ABUT-03**: Tech stack list with rationale for each choice
-- [ ] **ABUT-04**: Links to GitHub, portfolio, and email
+- [x] **ABUT-01**: Visual checklist mapping each Fueled requirement to where it's demonstrated
+- [x] **ABUT-02**: Author section with mini cover letter
+- [x] **ABUT-03**: Tech stack list with rationale for each choice
+- [x] **ABUT-04**: Links to GitHub, portfolio, and email
 
 ### Infrastructure
 
@@ -130,10 +130,10 @@
 | COMP-15     | Phase 2 | Complete |
 | COMP-16     | Phase 2 | Complete |
 | COMP-17     | Phase 2 | Complete |
-| ABUT-01     | Phase 4 | Pending  |
-| ABUT-02     | Phase 4 | Pending  |
-| ABUT-03     | Phase 4 | Pending  |
-| ABUT-04     | Phase 4 | Pending  |
+| ABUT-01     | Phase 4 | Complete |
+| ABUT-02     | Phase 4 | Complete |
+| ABUT-03     | Phase 4 | Complete |
+| ABUT-04     | Phase 4 | Complete |
 | INFR-01     | Phase 1 | Complete |
 | INFR-02     | Phase 6 | Pending  |
 | INFR-03     | Phase 6 | Pending  |
