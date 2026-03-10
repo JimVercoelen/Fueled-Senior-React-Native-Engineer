@@ -1,27 +1,47 @@
-import { useState } from 'react';
-import { View, Text, TextInput, Pressable, ActivityIndicator } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import { Gradients, Colors } from '../../src/constants/colors';
+import { useState, useEffect } from 'react';
+import { View } from 'react-native';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import TextField from '../../src/components/forms/TextField';
+import Button from '../../src/components/ui/Button';
+import Alert from '../../src/components/feedback/Alert';
+import Typography from '../../src/components/ui/Typography';
 import { useSession } from '../../src/contexts/auth';
+
+const loginSchema = z.object({
+  email: z.string().min(1, 'Email is required').email('Please enter a valid email address'),
+});
+
+type LoginForm = z.infer<typeof loginSchema>;
 
 export default function LoginScreen() {
   const { signIn } = useSession();
-  const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSignIn = async () => {
-    if (!email.trim()) {
-      setErrorMessage('Please enter your email address');
-      return;
-    }
+  const { control, handleSubmit, watch } = useForm<LoginForm>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: { email: '' },
+  });
 
+  // Clear feedback messages when email changes
+  const emailValue = watch('email');
+  useEffect(() => {
+    if (successMessage || errorMessage) {
+      setSuccessMessage('');
+      setErrorMessage('');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [emailValue]);
+
+  const onSubmit = async (data: LoginForm) => {
     setIsSubmitting(true);
     setErrorMessage('');
     setSuccessMessage('');
 
-    const { error } = await signIn(email.trim());
+    const { error } = await signIn(data.email.trim());
 
     setIsSubmitting(false);
 
@@ -34,87 +54,44 @@ export default function LoginScreen() {
 
   return (
     <View className="flex-1 bg-black items-center justify-center px-6">
-      <Text
-        className="text-white text-3xl tracking-widest mb-10 text-center uppercase"
-        style={{ fontFamily: 'Orbitron_600SemiBold' }}
-      >
+      <Typography variant="h1" className="text-3xl tracking-widest mb-10 text-center">
         FUELED.SHOWCASE
-      </Text>
+      </Typography>
 
       <View className="w-full max-w-sm bg-white/5 border border-white/15 rounded-2xl p-6">
-        <Text
-          className="text-white text-lg mb-6 text-center"
-          style={{ fontFamily: 'Inter_500Medium' }}
-        >
+        <Typography variant="body" className="text-white text-lg mb-6 text-center">
           Sign in with magic link
-        </Text>
+        </Typography>
 
-        <TextInput
-          className="w-full h-12 bg-white/10 border border-white/15 rounded-lg mb-4 px-4 text-white"
-          style={{ fontFamily: 'Inter_400Regular' }}
+        <TextField
+          control={control}
+          name="email"
+          label="Email"
           placeholder="email@example.com"
-          placeholderTextColor={Colors.textSecondary}
-          value={email}
-          onChangeText={(text) => {
-            setEmail(text);
-            setErrorMessage('');
-            setSuccessMessage('');
-          }}
           keyboardType="email-address"
           autoCapitalize="none"
           autoComplete="email"
-          editable={!isSubmitting}
+          disabled={isSubmitting}
+          className="mb-4"
         />
 
-        <Pressable
-          className="w-full overflow-hidden rounded-lg"
-          onPress={handleSignIn}
-          disabled={isSubmitting}
-          style={{ opacity: isSubmitting ? 0.7 : 1 }}
-        >
-          <LinearGradient
-            colors={[...Gradients.primaryButton.colors]}
-            start={Gradients.primaryButton.start}
-            end={Gradients.primaryButton.end}
-            className="h-12 items-center justify-center flex-row"
-          >
-            {isSubmitting ? (
-              <>
-                <ActivityIndicator color="#ffffff" size="small" style={{ marginRight: 8 }} />
-                <Text
-                  className="text-white text-sm tracking-widest uppercase"
-                  style={{ fontFamily: 'Orbitron_600SemiBold' }}
-                >
-                  SENDING...
-                </Text>
-              </>
-            ) : (
-              <Text
-                className="text-white text-sm tracking-widest uppercase"
-                style={{ fontFamily: 'Orbitron_600SemiBold' }}
-              >
-                SEND MAGIC LINK
-              </Text>
-            )}
-          </LinearGradient>
-        </Pressable>
+        <Button
+          variant="contained"
+          label={isSubmitting ? 'SENDING...' : 'SEND MAGIC LINK'}
+          loading={isSubmitting}
+          onPress={handleSubmit(onSubmit)}
+        />
 
         {successMessage ? (
-          <Text
-            className="mt-4 text-center text-sm"
-            style={{ fontFamily: 'Inter_500Medium', color: Colors.accent }}
-          >
-            {successMessage}
-          </Text>
+          <View className="mt-4">
+            <Alert type="success" message={successMessage} visible={!!successMessage} />
+          </View>
         ) : null}
 
         {errorMessage ? (
-          <Text
-            className="mt-4 text-center text-sm"
-            style={{ fontFamily: 'Inter_500Medium', color: Colors.danger }}
-          >
-            {errorMessage}
-          </Text>
+          <View className="mt-4">
+            <Alert type="error" message={errorMessage} visible={!!errorMessage} />
+          </View>
         ) : null}
       </View>
     </View>

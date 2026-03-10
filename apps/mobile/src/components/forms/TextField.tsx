@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextInput, Platform } from 'react-native';
+import { TextInput, Platform, type TextInputProps } from 'react-native';
 import { Controller, Control, FieldPath, FieldValues } from 'react-hook-form';
 import clsx from 'clsx';
 import Field from './Field';
@@ -14,6 +14,9 @@ interface TextFieldProps<T extends FieldValues> {
   secureTextEntry?: boolean;
   multiline?: boolean;
   numberOfLines?: number;
+  keyboardType?: TextInputProps['keyboardType'];
+  autoCapitalize?: TextInputProps['autoCapitalize'];
+  autoComplete?: TextInputProps['autoComplete'];
   className?: string;
 }
 
@@ -29,6 +32,9 @@ export default function TextField<T extends FieldValues>({
   secureTextEntry,
   multiline,
   numberOfLines,
+  keyboardType,
+  autoCapitalize,
+  autoComplete,
   className,
 }: TextFieldProps<T>) {
   const [focused, setFocused] = useState(false);
@@ -80,6 +86,9 @@ export default function TextField<T extends FieldValues>({
             secureTextEntry={secureTextEntry}
             multiline={multiline}
             numberOfLines={numberOfLines}
+            keyboardType={keyboardType}
+            autoCapitalize={autoCapitalize}
+            autoComplete={autoComplete}
           />
         </Field>
       )}
