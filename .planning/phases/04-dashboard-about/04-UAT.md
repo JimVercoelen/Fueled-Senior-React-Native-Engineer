@@ -55,7 +55,7 @@ severity: minor
 
 total: 7
 passed: 1
-issues: 5
+issues: 7
 pending: 0
 skipped: 1
 
@@ -98,5 +98,21 @@ skipped: 1
   reason: "User reported: Links should be LinkedIn, Portfolio, Email — not GitHub"
   severity: minor
   test: 7
+  artifacts: []
+  missing: []
+
+- truth: "GitHub link points to correct repository URL"
+  status: failed
+  reason: "User reported: GitHub URL should be https://github.com/JimVercoelen/Fueled-Senior-React-Native-Engineer"
+  severity: minor
+  test: 7
+  artifacts: []
+  missing: []
+
+- truth: "Red disclaimer banner visible above header on all pages with animated text"
+  status: failed
+  reason: "User requested: Add red banner above header on all pages with animated scrolling text — DISCLAIMER about time constraints, inviting reviewer to sign in and explore the flow"
+  severity: major
+  test: 0
   artifacts: []
   missing: []
