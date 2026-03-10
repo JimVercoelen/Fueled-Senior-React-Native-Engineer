@@ -1,6 +1,8 @@
 import { View, Text } from 'react-native';
 import { Stack, usePathname } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSession } from '../../src/contexts/auth';
+import Button from '../../src/components/ui/Button';
 
 function getScreenTitle(pathname: string): string | null {
   const segments = pathname.split('/').filter(Boolean);
@@ -20,6 +22,7 @@ function DashboardHeader() {
   const pathname = usePathname();
   const insets = useSafeAreaInsets();
   const screenTitle = getScreenTitle(pathname);
+  const { signOut } = useSession();
 
   return (
     <View
@@ -46,6 +49,15 @@ function DashboardHeader() {
             </Text>
           </>
         )}
+        <View className="flex-1" />
+        <Button
+          variant="text"
+          size="sm"
+          color="error"
+          icon="logout"
+          label="Sign Out"
+          onPress={signOut}
+        />
       </View>
     </View>
   );
