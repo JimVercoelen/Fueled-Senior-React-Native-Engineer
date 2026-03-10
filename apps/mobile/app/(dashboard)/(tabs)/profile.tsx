@@ -8,11 +8,7 @@ export default function ProfileScreen() {
   const { session, signOut } = useSession();
 
   return (
-    <View className="flex-1 bg-black px-4 pt-4">
-      <Typography variant="h1" className="mb-6 text-center">
-        Profile
-      </Typography>
-
+    <View className="flex-1 bg-black px-4 pt-4 max-w-3xl mx-auto w-full">
       <View className="bg-white/5 border border-white/15 rounded-xl p-5">
         <View className="flex-row items-center mb-4">
           <View className="w-12 h-12 rounded-full bg-white/10 items-center justify-center mr-4">

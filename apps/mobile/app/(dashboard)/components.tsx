@@ -116,7 +116,7 @@ export default function ComponentsScreen() {
   return (
     <ScrollView
       className="flex-1 bg-black"
-      contentContainerClassName="px-4 py-6 pb-20 max-w-4xl mx-auto w-full"
+      contentContainerClassName="px-4 py-6 pb-20 max-w-3xl mx-auto w-full"
     >
       <Typography variant="h1">Component Library</Typography>
       <Typography variant="body" className="text-neutral-400 mt-2 mb-6">

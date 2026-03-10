@@ -124,6 +124,8 @@ export default function LoginScreen() {
           autoCapitalize="none"
           autoComplete="email"
           disabled={isSubmitting}
+          returnKeyType="send"
+          onSubmitEditing={handleSubmit(onSubmit)}
           className="mb-4"
         />
 

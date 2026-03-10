@@ -1,8 +1,6 @@
 import { View, Text, Image } from 'react-native';
 import { Stack, usePathname } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useSession } from '@/contexts/auth';
-import { Button } from '@/components';
 
 function getScreenTitle(pathname: string): string | null {
   const segments = pathname.split('/').filter(Boolean);
@@ -18,18 +16,25 @@ function getScreenTitle(pathname: string): string | null {
   return titleMap[last] || null;
 }
 
+function useDocumentTitle(screenTitle: string | null) {
+  const title = screenTitle ? `${screenTitle} | Fueled` : 'Fueled';
+  if (typeof document !== 'undefined') {
+    document.title = title;
+  }
+}
+
 function DashboardHeader() {
   const pathname = usePathname();
   const insets = useSafeAreaInsets();
   const screenTitle = getScreenTitle(pathname);
-  const { signOut } = useSession();
+  useDocumentTitle(screenTitle);
 
   return (
     <View
       style={{ paddingTop: insets.top }}
       className="bg-black border-b border-white/15 px-4 pb-3"
     >
-      <View className="flex-row items-center h-11">
+      <View className="flex-row items-center h-11 max-w-3xl mx-auto w-full">
         <Image
           source={require('../../assets/images/fueled-logo.png')}
           style={{ width: 100, height: 19 }}
@@ -38,7 +43,7 @@ function DashboardHeader() {
         {screenTitle && (
           <>
             <Text
-              className="text-white/50 text-base mx-2"
+              className="text-white/50 text-base mx-3"
               style={{ fontFamily: 'Inter_400Regular' }}
             >
               /
@@ -48,15 +53,6 @@ function DashboardHeader() {
             </Text>
           </>
         )}
-        <View className="flex-1" />
-        <Button
-          variant="text"
-          size="sm"
-          color="error"
-          icon="logout"
-          label="Sign Out"
-          onPress={signOut}
-        />
       </View>
     </View>
   );

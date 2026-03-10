@@ -17,6 +17,8 @@ interface TextFieldProps<T extends FieldValues> {
   keyboardType?: TextInputProps['keyboardType'];
   autoCapitalize?: TextInputProps['autoCapitalize'];
   autoComplete?: TextInputProps['autoComplete'];
+  returnKeyType?: TextInputProps['returnKeyType'];
+  onSubmitEditing?: () => void;
   className?: string;
 }
 
@@ -35,6 +37,8 @@ export default function TextField<T extends FieldValues>({
   keyboardType,
   autoCapitalize,
   autoComplete,
+  returnKeyType,
+  onSubmitEditing,
   className,
 }: TextFieldProps<T>) {
   const [focused, setFocused] = useState(false);
@@ -89,6 +93,8 @@ export default function TextField<T extends FieldValues>({
             keyboardType={keyboardType}
             autoCapitalize={autoCapitalize}
             autoComplete={autoComplete}
+            returnKeyType={returnKeyType}
+            onSubmitEditing={onSubmitEditing}
           />
         </Field>
       )}

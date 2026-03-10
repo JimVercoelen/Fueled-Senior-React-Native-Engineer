@@ -32,7 +32,7 @@ export default function Card({ header, children, footer, className, onPress }: C
     >
       {header && <View className="px-4 pt-4">{header}</View>}
       <View className="px-4 py-3">{children}</View>
-      {footer && <View className="px-4 pb-4 border-t border-white/10">{footer}</View>}
+      {footer && <View className="px-4 py-3 border-t border-white/10">{footer}</View>}
     </View>
   );
 
