@@ -2,8 +2,14 @@ import React, { useState } from 'react';
 import { ScrollView, View, Pressable, Text } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Typography, Button, Card, Badge, Avatar, Divider, Table } from '../../src/components/ui';
-import { List, Tabs, Accordion, AccordionItem } from '../../src/components/layout';
-import { SkeletonLine, SkeletonCard } from '../../src/components/feedback';
+import { List, Tabs, Accordion, AccordionItem, Dropdown } from '../../src/components/layout';
+import {
+  Modal,
+  ModalContent,
+  Alert,
+  SkeletonLine,
+  SkeletonCard,
+} from '../../src/components/feedback';
 
 function CodeSnippet({ code }: { code: string }) {
   const [open, setOpen] = useState(false);
@@ -50,6 +56,7 @@ function SubSection({ label, children }: { label: string; children: React.ReactN
 
 export default function ComponentsScreen() {
   const [activeTab, setActiveTab] = useState('overview');
+  const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <ScrollView className="flex-1 bg-black px-4 py-6">
@@ -355,6 +362,101 @@ export default function ComponentsScreen() {
           </View>
         </View>
         <CodeSnippet code={`<SkeletonLine width="75%" />\n<SkeletonCard lines={3} />`} />
+      </SubSection>
+
+      {/* ===== FEEDBACK SECTION ===== */}
+      <SectionHeading>Feedback</SectionHeading>
+
+      {/* Modal */}
+      <SubSection label="Modal">
+        <View className="gap-4">
+          <Button
+            variant="outline"
+            label="Open Modal"
+            icon="open-in-new"
+            onPress={() => setModalVisible(true)}
+          />
+          <Modal visible={modalVisible} onClose={() => setModalVisible(false)}>
+            <ModalContent
+              title="Demo Modal"
+              onClose={() => setModalVisible(false)}
+              footer={
+                <View className="flex-row justify-end gap-3">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    label="Cancel"
+                    onPress={() => setModalVisible(false)}
+                  />
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    label="Confirm"
+                    onPress={() => setModalVisible(false)}
+                  />
+                </View>
+              }
+            >
+              <Typography variant="body">
+                This modal demonstrates the centered overlay with a semi-transparent backdrop. Tap
+                the backdrop or the close icon to dismiss.
+              </Typography>
+            </ModalContent>
+          </Modal>
+        </View>
+        <CodeSnippet
+          code={`<Modal visible={visible} onClose={() => setVisible(false)}>\n  <ModalContent\n    title="Dialog"\n    onClose={() => setVisible(false)}\n    footer={<Button label="OK" onPress={close} />}\n  >\n    <Typography>Modal body content</Typography>\n  </ModalContent>\n</Modal>`}
+        />
+      </SubSection>
+
+      {/* Alert */}
+      <SubSection label="Alert">
+        <View className="gap-3">
+          <Alert
+            type="success"
+            title="Success"
+            message="Your changes have been saved successfully."
+          />
+          <Alert
+            type="info"
+            title="Information"
+            message="A new version is available. Update to get the latest features."
+          />
+          <Alert type="warning" title="Warning" message="Your session will expire in 5 minutes." />
+          <Alert
+            type="error"
+            title="Error"
+            message="Failed to connect to the server. Please try again later."
+            onDismiss={() => {}}
+          />
+        </View>
+        <CodeSnippet
+          code={`<Alert type="success" title="Saved" message="Changes saved." />\n<Alert type="error" message="Something went wrong." onDismiss={dismiss} />\n<Alert type="warning" visible={show} message="Session expiring." />`}
+        />
+      </SubSection>
+
+      {/* Dropdown */}
+      <SubSection label="Dropdown">
+        <Dropdown
+          trigger={
+            <Button variant="secondary" label="Actions" icon="more-vert" onPress={() => {}} />
+          }
+          items={[
+            { key: 'edit', label: 'Edit', icon: 'edit', onPress: () => {} },
+            { key: 'duplicate', label: 'Duplicate', icon: 'content-copy', onPress: () => {} },
+            { key: 'share', label: 'Share', icon: 'share', onPress: () => {} },
+            {
+              key: 'delete',
+              label: 'Delete',
+              icon: 'delete',
+              onPress: () => {},
+              destructive: true,
+            },
+          ]}
+        />
+        <CodeSnippet
+          code={`<Dropdown\n  trigger={<Button label="Actions" icon="more-vert" />}\n  items={[\n    { key: 'edit', label: 'Edit', icon: 'edit', onPress: handleEdit },\n    { key: 'delete', label: 'Delete', icon: 'delete', onPress: handleDelete, destructive: true },\n  ]}\n/>`}
+        />
       </SubSection>
 
       {/* Bottom spacing */}
