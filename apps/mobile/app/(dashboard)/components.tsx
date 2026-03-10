@@ -4,6 +4,8 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { useToast } from '@/contexts/toast';
+import { useModal } from '@/contexts/modal';
 import {
   // Core UI
   Typography,
@@ -455,6 +457,12 @@ export default function ComponentsScreen() {
         />
       </SubSection>
 
+      {/* Toast System */}
+      <ToastDemoSection />
+
+      {/* Modal System */}
+      <ModalDemoSection />
+
       {/* ===== LAYOUT SECTION ===== */}
       <SectionHeading>Layout</SectionHeading>
 
@@ -840,5 +848,120 @@ function FormControlsSection() {
       <CheckboxDemos />
       <MiniFormDemo />
     </View>
+  );
+}
+
+// ===== Toast Demo Section =====
+
+function ToastDemoSection() {
+  const { showToast } = useToast();
+
+  return (
+    <SubSection label="Toast System">
+      <Typography variant="body" className="text-neutral-400 mb-4">
+        Global toast notifications via Context API. Toasts auto-dismiss after 4 seconds.
+      </Typography>
+      <View className="flex-row flex-wrap gap-3">
+        <Button
+          variant="contained"
+          label="Success Toast"
+          onPress={() =>
+            showToast({
+              type: 'success',
+              title: 'Success',
+              message: 'Operation completed successfully!',
+            })
+          }
+        />
+        <Button
+          variant="contained"
+          label="Error Toast"
+          onPress={() =>
+            showToast({
+              type: 'error',
+              title: 'Error',
+              message: 'Oops! Something went wrong. Please try again.',
+            })
+          }
+        />
+        <Button
+          variant="outlined"
+          label="Warning Toast"
+          onPress={() =>
+            showToast({
+              type: 'warning',
+              title: 'Warning',
+              message: 'This action may have unintended consequences.',
+            })
+          }
+        />
+        <Button
+          variant="outlined"
+          label="Info Toast"
+          onPress={() =>
+            showToast({
+              type: 'info',
+              title: 'Info',
+              message: 'Here is some helpful information.',
+            })
+          }
+        />
+      </View>
+      <CodeSnippet
+        code={`const { showToast } = useToast();\n\nshowToast({\n  type: 'success',\n  title: 'Success',\n  message: 'Operation completed!',\n});`}
+      />
+    </SubSection>
+  );
+}
+
+// ===== Modal Demo Section =====
+
+function ModalDemoSection() {
+  const { showModal } = useModal();
+  const { showToast } = useToast();
+
+  return (
+    <SubSection label="Modal System">
+      <Typography variant="body" className="text-neutral-400 mb-4">
+        Global modal management via Context API. Supports confirmation and generic modals.
+      </Typography>
+      <View className="flex-row flex-wrap gap-3">
+        <Button
+          variant="contained"
+          label="Confirmation Modal"
+          onPress={() =>
+            showModal({
+              type: 'confirmation',
+              title: 'Delete Item?',
+              content: (
+                <Typography variant="body" className="text-white/70">
+                  Are you sure you want to delete this item? This action cannot be undone.
+                </Typography>
+              ),
+              onConfirm: () => showToast({ type: 'success', message: 'Item deleted (demo)!' }),
+              onCancel: () => showToast({ type: 'info', message: 'Cancelled (demo).' }),
+            })
+          }
+        />
+        <Button
+          variant="outlined"
+          label="Info Modal"
+          onPress={() =>
+            showModal({
+              type: 'generic',
+              title: 'About This App',
+              content: (
+                <Typography variant="body" className="text-white/70">
+                  This is a generic modal for displaying information. It has a single Close button.
+                </Typography>
+              ),
+            })
+          }
+        />
+      </View>
+      <CodeSnippet
+        code={`const { showModal } = useModal();\n\nshowModal({\n  type: 'confirmation',\n  title: 'Delete?',\n  content: <Text>Are you sure?</Text>,\n  onConfirm: () => { /* handle */ },\n});`}
+      />
+    </SubSection>
   );
 }

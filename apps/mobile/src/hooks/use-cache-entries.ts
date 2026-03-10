@@ -2,7 +2,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 
 export interface CacheEntry {
-  queryKey: unknown[];
+  queryKey: readonly unknown[];
   status: string;
   dataUpdatedAt: number;
   data: unknown;
