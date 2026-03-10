@@ -11,13 +11,13 @@ interface TypographyProps extends Omit<TextProps, 'className'> {
 }
 
 const variantClasses: Record<TypographyVariant, string> = {
-  h1: 'text-2xl font-heading uppercase tracking-wider text-white',
-  h2: 'text-xl font-heading uppercase tracking-wider text-white',
-  h3: 'text-lg font-heading uppercase tracking-wide text-white',
+  h1: 'text-2xl font-heading tracking-tight text-white',
+  h2: 'text-xl font-heading tracking-tight text-white',
+  h3: 'text-lg font-heading text-white',
   body: 'text-base font-body text-neutral-300',
   caption: 'text-sm font-body text-neutral-400',
   label: 'text-sm font-body-semibold text-neutral-300 uppercase tracking-wider',
-  button: 'text-base font-heading uppercase tracking-wider',
+  button: 'text-base font-body-semibold uppercase tracking-wider',
 };
 
 export default function Typography({

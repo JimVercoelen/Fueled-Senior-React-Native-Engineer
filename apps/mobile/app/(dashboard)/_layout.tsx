@@ -1,8 +1,8 @@
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import { Stack, usePathname } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useSession } from '../../src/contexts/auth';
-import Button from '../../src/components/ui/Button';
+import { useSession } from '@/contexts/auth';
+import { Button } from '@/components';
 
 function getScreenTitle(pathname: string): string | null {
   const segments = pathname.split('/').filter(Boolean);
@@ -30,12 +30,11 @@ function DashboardHeader() {
       className="bg-black border-b border-white/15 px-4 pb-3"
     >
       <View className="flex-row items-center h-11">
-        <Text
-          className="text-white text-base tracking-widest uppercase"
-          style={{ fontFamily: 'Orbitron_600SemiBold' }}
-        >
-          FUELED.SHOWCASE
-        </Text>
+        <Image
+          source={require('../../assets/images/fueled-logo.png')}
+          style={{ width: 100, height: 19 }}
+          resizeMode="contain"
+        />
         {screenTitle && (
           <>
             <Text

@@ -98,7 +98,9 @@ Recent decisions affecting current work:
 
 ### Pending Todos
 
-None yet.
+- **Modal/Toast ContextAPI**: Move modal show/hide handling to ContextAPI. Create Toast component also managed via ContextAPI. Not currently used — planned for a later phase when screens need global feedback (e.g. data-fetching, state-management screens).
+- **TanStack Query**: Integrate TanStack Query for server state management. Auth currently uses raw Supabase calls. TanStack should be applied when data-fetching phase begins (Phase 4+).
+- **Zod → Yup migration**: Completed during Phase 3 checkpoint. All validation now uses Yup. Zod removed from deps.
 
 ### Blockers/Concerns
 

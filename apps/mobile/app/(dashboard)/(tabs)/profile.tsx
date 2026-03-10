@@ -1,9 +1,8 @@
 import { View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { Colors } from '../../../src/constants/colors';
-import { useSession } from '../../../src/contexts/auth';
-import Button from '../../../src/components/ui/Button';
-import Typography from '../../../src/components/ui/Typography';
+import { Colors } from '@/constants/colors';
+import { useSession } from '@/contexts/auth';
+import { Button, Typography } from '@/components';
 
 export default function ProfileScreen() {
   const { session, signOut } = useSession();

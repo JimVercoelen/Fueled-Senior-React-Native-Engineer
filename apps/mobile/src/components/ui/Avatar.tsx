@@ -74,7 +74,7 @@ export default function Avatar({ name, imageUri, size = 'md', className }: Avata
           style={{
             color: '#ffffff',
             fontSize,
-            fontFamily: 'Orbitron_600SemiBold',
+            fontFamily: 'Inter_600SemiBold',
             textAlign: 'center',
           }}
         >

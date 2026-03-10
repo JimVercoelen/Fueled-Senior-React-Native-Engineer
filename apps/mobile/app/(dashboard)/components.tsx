@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { ScrollView, View, Pressable, Text } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import {
   // Core UI
   Typography,
@@ -29,7 +29,7 @@ import {
   Accordion,
   AccordionItem,
   Dropdown,
-} from '../../src/components';
+} from '@/components';
 
 // ===== Form Controls demo data =====
 
@@ -52,16 +52,16 @@ const SKILL_OPTIONS = [
   { value: 'kotlin', label: 'Kotlin' },
 ];
 
-const demoSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Invalid email address'),
-  role: z.string().min(1, 'Please select a role'),
-  skills: z.array(z.string()).min(1, 'Select at least one skill'),
-  notifications: z.boolean(),
-  terms: z.boolean().refine((v) => v === true, 'You must accept the terms'),
+const demoSchema = yup.object({
+  name: yup.string().required().min(2, 'Name must be at least 2 characters'),
+  email: yup.string().required().email('Invalid email address'),
+  role: yup.string().required('Please select a role').min(1, 'Please select a role'),
+  skills: yup.array().of(yup.string().required()).min(1, 'Select at least one skill').required(),
+  notifications: yup.boolean().required(),
+  terms: yup.boolean().oneOf([true], 'You must accept the terms').required(),
 });
 
-type DemoForm = z.infer<typeof demoSchema>;
+type DemoForm = yup.InferType<typeof demoSchema>;
 
 function CodeSnippet({ code }: { code: string }) {
   const [open, setOpen] = useState(false);
@@ -759,7 +759,7 @@ function MiniFormDemo() {
   const [submitted, setSubmitted] = useState(false);
 
   const { control, handleSubmit, reset } = useForm<DemoForm>({
-    resolver: zodResolver(demoSchema),
+    resolver: yupResolver(demoSchema),
     defaultValues: {
       name: '',
       email: '',
@@ -778,7 +778,7 @@ function MiniFormDemo() {
     <SubSection label="Demo">
       <View className="bg-white/5 border border-white/15 rounded-2xl p-4 gap-4">
         <Typography variant="caption" className="text-white/40">
-          Complete form with zod validation -- submit to see error states
+          Complete form with yup validation -- submit to see error states
         </Typography>
 
         <TextField control={control} name="name" label="Full Name" placeholder="John Doe" />
@@ -823,7 +823,7 @@ function MiniFormDemo() {
         )}
       </View>
       <CodeSnippet
-        code={`const schema = z.object({\n  name: z.string().min(2),\n  email: z.string().email(),\n  role: z.string().min(1),\n  skills: z.array(z.string()).min(1),\n  terms: z.boolean().refine(v => v === true),\n});\n\nconst { control, handleSubmit } = useForm({\n  resolver: zodResolver(schema),\n});\n\n<TextField control={control} name="name" label="Name" />\n<Select control={control} name="role" options={roles} />\n<Button label="Submit" onPress={handleSubmit(onSubmit)} />`}
+        code={`const schema = yup.object({\n  name: yup.string().required().min(2),\n  email: yup.string().required().email(),\n  role: yup.string().required(),\n  skills: yup.array().of(yup.string()).min(1),\n  terms: yup.boolean().oneOf([true]),\n});\n\nconst { control, handleSubmit } = useForm({\n  resolver: yupResolver(schema),\n});\n\n<TextField control={control} name="name" label="Name" />\n<Select control={control} name="role" options={roles} />\n<Button label="Submit" onPress={handleSubmit(onSubmit)} />`}
       />
     </SubSection>
   );

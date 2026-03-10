@@ -5,7 +5,7 @@ export default function AboutScreen() {
     <View className="flex-1 bg-black items-center justify-center px-6">
       <Text
         className="text-white text-2xl tracking-wider uppercase mb-3 text-center"
-        style={{ fontFamily: 'Orbitron_600SemiBold' }}
+        style={{ fontFamily: 'Inter_600SemiBold' }}
       >
         About
       </Text>

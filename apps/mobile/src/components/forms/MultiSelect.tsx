@@ -65,7 +65,7 @@ export default function MultiSelect<T extends FieldValues>({
 
   const getBorderColor = (hasError: boolean) => {
     if (hasError) return '#ef4444';
-    if (open) return '#2563eb';
+    if (open) return '#6E5BFF';
     if (hovered && !disabled) return 'rgba(59, 130, 246, 0.5)';
     return 'rgba(255, 255, 255, 0.15)';
   };

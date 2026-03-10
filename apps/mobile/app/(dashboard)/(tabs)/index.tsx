@@ -1,7 +1,7 @@
 import { View, Text, Pressable, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Colors } from '../../../src/constants/colors';
+import { Colors } from '@/constants/colors';
 
 type DemoCard = {
   title: string;
@@ -44,7 +44,7 @@ export default function DashboardScreen() {
     <ScrollView className="flex-1 bg-black" contentContainerClassName="p-4 pb-8">
       <Text
         className="text-white text-2xl tracking-wider uppercase mb-6 text-center"
-        style={{ fontFamily: 'Orbitron_600SemiBold' }}
+        style={{ fontFamily: 'Inter_600SemiBold' }}
       >
         Dashboard
       </Text>
@@ -62,7 +62,7 @@ export default function DashboardScreen() {
             <View className="flex-1">
               <Text
                 className="text-white text-base tracking-wide uppercase mb-1"
-                style={{ fontFamily: 'Orbitron_600SemiBold' }}
+                style={{ fontFamily: 'Inter_600SemiBold' }}
               >
                 {card.title}
               </Text>

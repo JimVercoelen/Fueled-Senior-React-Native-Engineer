@@ -46,10 +46,10 @@ const colorMap: Record<
   ButtonColor,
   { gradient: readonly [string, string]; solid: string; text: string }
 > = {
-  primary: { gradient: ['#2563eb', '#06b6d4'], solid: '#2563eb', text: '#3b82f6' },
-  secondary: { gradient: ['#7c3aed', '#8b5cf6'], solid: '#7c3aed', text: '#8b5cf6' },
-  success: { gradient: ['#16a34a', '#22c55e'], solid: '#16a34a', text: '#22c55e' },
-  error: { gradient: ['#ef4444', '#f97316'], solid: '#ef4444', text: '#ef4444' },
+  primary: { gradient: ['#6652FF', '#000000'], solid: '#6E5BFF', text: '#8b7fff' },
+  secondary: { gradient: ['#6E5BFF', '#4d38ec'], solid: '#4d38ec', text: '#8b7fff' },
+  success: { gradient: ['#008831', '#22c55e'], solid: '#008831', text: '#22c55e' },
+  error: { gradient: ['#c70000', '#f97316'], solid: '#c70000', text: '#ef4444' },
 };
 
 const webStyles =
