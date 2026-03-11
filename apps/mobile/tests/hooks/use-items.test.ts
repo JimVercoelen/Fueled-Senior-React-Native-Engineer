@@ -28,6 +28,7 @@ function createWrapper() {
 describe('useItems', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    mockSupabase.lastFrom = null;
   });
 
   it('calls supabase.from("items").select with correct params', async () => {
@@ -67,8 +68,7 @@ describe('useItems', () => {
 
     await waitFor(() => expect(result.current.isPending).toBe(false));
 
-    // The chainable mock tracks ilike calls
-    const fromResult = mockSupabase.from.mock.results[0]?.value;
+    const fromResult = mockSupabase.lastFrom;
     const selectResult = fromResult?.select.mock.results[0]?.value;
     expect(selectResult?.ilike).toHaveBeenCalledWith('title', '%test%');
   });
@@ -90,7 +90,7 @@ describe('useItems', () => {
 
     await waitFor(() => expect(result.current.isPending).toBe(false));
 
-    const fromResult = mockSupabase.from.mock.results[0]?.value;
+    const fromResult = mockSupabase.lastFrom;
     const selectResult = fromResult?.select.mock.results[0]?.value;
     expect(selectResult?.eq).toHaveBeenCalledWith('category', 'frontend');
   });
@@ -112,7 +112,7 @@ describe('useItems', () => {
 
     await waitFor(() => expect(result.current.isPending).toBe(false));
 
-    const fromResult = mockSupabase.from.mock.results[0]?.value;
+    const fromResult = mockSupabase.lastFrom;
     const selectResult = fromResult?.select.mock.results[0]?.value;
     expect(selectResult?.eq).toHaveBeenCalledWith('priority', 'high');
   });
@@ -144,6 +144,7 @@ describe('useItems', () => {
 describe('useCreateItem', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    mockSupabase.lastFrom = null;
   });
 
   it('calls supabase insert with the provided input', async () => {
@@ -163,20 +164,24 @@ describe('useCreateItem', () => {
 
     await waitFor(() => expect(result.current.isIdle || result.current.isSuccess).toBe(true));
 
-    const fromResult = mockSupabase.from.mock.results[0]?.value;
-    expect(fromResult?.insert).toHaveBeenCalledWith({
-      title: 'New Task',
-      description: 'Test description',
-      category: 'frontend',
-      priority: 'high',
-      status: 'active',
-    });
+    expect(mockSupabase.from).toHaveBeenCalledWith('items');
+    expect(mockSupabase.lastFrom.insert).toHaveBeenCalledWith(
+      expect.objectContaining({
+        title: 'New Task',
+        description: 'Test description',
+        category: 'frontend',
+        priority: 'high',
+        status: 'active',
+        user_id: 'test-user-id',
+      }),
+    );
   });
 });
 
 describe('useUpdateItem', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    mockSupabase.lastFrom = null;
   });
 
   it('calls supabase update with the provided input', async () => {
@@ -193,14 +198,15 @@ describe('useUpdateItem', () => {
 
     await waitFor(() => expect(result.current.isIdle || result.current.isSuccess).toBe(true));
 
-    const fromResult = mockSupabase.from.mock.results[0]?.value;
-    expect(fromResult?.update).toHaveBeenCalledWith({ title: 'Updated Task' });
+    expect(mockSupabase.from).toHaveBeenCalledWith('items');
+    expect(mockSupabase.lastFrom.update).toHaveBeenCalledWith({ title: 'Updated Task' });
   });
 });
 
 describe('useDeleteItem', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    mockSupabase.lastFrom = null;
   });
 
   it('calls supabase delete with the correct id', async () => {
@@ -214,8 +220,8 @@ describe('useDeleteItem', () => {
 
     await waitFor(() => expect(result.current.isIdle || result.current.isSuccess).toBe(true));
 
-    const fromResult = mockSupabase.from.mock.results[0]?.value;
-    expect(fromResult?.delete).toHaveBeenCalled();
+    expect(mockSupabase.from).toHaveBeenCalledWith('items');
+    expect(mockSupabase.lastFrom.delete).toHaveBeenCalled();
   });
 });
 
