@@ -69,7 +69,7 @@
 
 ### Testing
 
-- [ ] **TEST-01**: Unit tests for reusable UI components (rendering, variants, interactions)
+- [x] **TEST-01**: Unit tests for reusable UI components (rendering, variants, interactions)
 - [x] **TEST-02**: Tests for custom hooks (TanStack Query hooks, context hooks)
 - [x] **TEST-03**: Test fixtures and mocks (Supabase mock, test data)
 
@@ -140,7 +140,7 @@
 | INFR-04     | Phase 6 | Pending  |
 | INFR-05     | Phase 1 | Complete |
 | INFR-06     | Phase 6 | Pending  |
-| TEST-01     | Phase 6 | Pending  |
+| TEST-01     | Phase 6 | Complete |
 | TEST-02     | Phase 6 | Complete |
 | TEST-03     | Phase 6 | Complete |
 
