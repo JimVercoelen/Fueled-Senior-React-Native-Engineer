@@ -41,6 +41,9 @@ jobs:
     needs: [lint, test]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: infra/supabase
     steps:
       - uses: actions/checkout@v4
       - uses: supabase/setup-cli@v1
