@@ -17,21 +17,28 @@ function createChainable(result = { data: [], error: null, count: 0 }) {
 export const mockSupabase = {
   auth: {
     getSession: jest.fn().mockResolvedValue({ data: { session: null } }),
+    getUser: jest.fn().mockResolvedValue({ data: { user: { id: 'test-user-id' } } }),
     signInWithOtp: jest.fn().mockResolvedValue({ error: null }),
     signOut: jest.fn().mockResolvedValue({ error: null }),
     onAuthStateChange: jest.fn().mockReturnValue({
       data: { subscription: { unsubscribe: jest.fn() } },
     }),
   },
-  from: jest.fn(() => {
-    const chainable = createChainable();
-    return {
-      select: jest.fn().mockReturnValue(chainable),
-      insert: jest.fn().mockReturnValue(chainable),
-      update: jest.fn().mockReturnValue(chainable),
-      delete: jest.fn().mockReturnValue(chainable),
-    };
-  }),
+  from: Object.assign(
+    jest.fn(() => {
+      const chainable = createChainable();
+      const tableApi = {
+        select: jest.fn().mockReturnValue(chainable),
+        insert: jest.fn().mockReturnValue(chainable),
+        update: jest.fn().mockReturnValue(chainable),
+        delete: jest.fn().mockReturnValue(chainable),
+      };
+      mockSupabase.lastFrom = tableApi;
+      return tableApi;
+    }),
+    { lastFrom: null as any },
+  ),
+  lastFrom: null as any,
 };
 
 export function createMockSession(overrides?: Partial<Session>): Session {
