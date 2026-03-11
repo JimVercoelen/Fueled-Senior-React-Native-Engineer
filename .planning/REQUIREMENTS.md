@@ -61,11 +61,11 @@
 ### Infrastructure
 
 - [x] **INFR-01**: Supabase cloud project with auth enabled (magic link works with default Supabase email in dev)
-- [ ] **INFR-02**: Expo web build deployed on Vercel
-- [ ] **INFR-03**: GitHub Actions CI/CD -- lint + test + build on push, deploy on merge to master (tests must pass)
-- [ ] **INFR-04**: 3 READMEs (root, apps/mobile, infra/supabase)
+- [x] **INFR-02**: Expo web build deployed on Vercel
+- [x] **INFR-03**: GitHub Actions CI/CD -- lint + test + build on push, deploy on merge to master (tests must pass)
+- [x] **INFR-04**: 3 READMEs (root, apps/mobile, infra/supabase)
 - [x] **INFR-05**: Proper .gitignore (include .planning, exclude .claude, node_modules, env files)
-- [ ] **INFR-06**: Resend custom email domain configured for production (info@vecotech.io sender address)
+- [x] **INFR-06**: Resend custom email domain configured for production (info@vecotech.io sender address)
 
 ### Testing
 
@@ -135,11 +135,11 @@
 | ABUT-03     | Phase 4 | Complete |
 | ABUT-04     | Phase 4 | Complete |
 | INFR-01     | Phase 1 | Complete |
-| INFR-02     | Phase 6 | Pending  |
-| INFR-03     | Phase 6 | Pending  |
-| INFR-04     | Phase 6 | Pending  |
+| INFR-02     | Phase 6 | Complete |
+| INFR-03     | Phase 6 | Complete |
+| INFR-04     | Phase 6 | Complete |
 | INFR-05     | Phase 1 | Complete |
-| INFR-06     | Phase 6 | Pending  |
+| INFR-06     | Phase 6 | Complete |
 | TEST-01     | Phase 6 | Complete |
 | TEST-02     | Phase 6 | Complete |
 | TEST-03     | Phase 6 | Complete |
