@@ -136,13 +136,13 @@ Plans:
 5. The app is live and accessible at a Vercel URL -- a reviewer can click the link and use the full app
 6. Three READMEs exist (root overview, apps/mobile setup guide, infra/supabase guide) with clear setup and architecture documentation
 7. Final audit of package.json dependencies (used vs unused), .gitignore files (no duplication, correct scope), and READMEs (accurate after all phases)
-  **Plans**: TBD
+  **Plans**: 3 plans
 
 Plans:
 
-- 06-01: TBD
-- 06-02: TBD
-- 06-03: TBD
+- [ ] 06-01-PLAN.md -- Fix Supabase mock, create test fixtures + form wrapper, fix mutation tests, add useCacheEntries test
+- [ ] 06-02-PLAN.md -- Implement all 33 todo test stubs (Button, Card, Badge, Typography, TextField, Toggle, Components screen)
+- [ ] 06-03-PLAN.md -- GitHub Actions CI/CD, Vercel config, comprehensive READMEs, Resend SMTP documentation
 
 ## Progress
 
